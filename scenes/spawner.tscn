@@ -3,13 +3,22 @@
 [ext_resource type="Script" uid="uid://c8nqqe0sx30lu" path="res://scripts/generation/Spawner.cs" id="1_cmhla"]
 [ext_resource type="PackedScene" uid="uid://bd47imoeup3ax" path="res://scenes/Objects/Tree1.tscn" id="2_4wbs5"]
 [ext_resource type="PackedScene" uid="uid://canpkcgnyuoy" path="res://scenes/Objects/Tree2.tscn" id="3_30a77"]
+[ext_resource type="PackedScene" uid="uid://df52mi53qme7w" path="res://scenes/Objects/TreePine.tscn" id="3_cmhla"]
 [ext_resource type="PackedScene" uid="uid://c3actfht73mhd" path="res://scenes/Objects/Tree3.tscn" id="4_p5s3f"]
 [ext_resource type="PackedScene" uid="uid://dc41yrltbmxym" path="res://scenes/Objects/Mushroom.tscn" id="5_e3f8v"]
 [ext_resource type="Material" uid="uid://urnf3rkwq2qx" path="res://materials/path-dither.tres" id="6_4wbs5"]
 [ext_resource type="PackedScene" uid="uid://bry7ltlh57tk1" path="res://scenes/Objects/Grass.tscn" id="6_30a77"]
+[ext_resource type="PackedScene" uid="uid://bwp23qjlm43es" path="res://scenes/Objects/TreeRed.tscn" id="6_e3f8v"]
+[ext_resource type="PackedScene" uid="uid://dfsgp7erf6p3g" path="res://scenes/Objects/TreeYellow.tscn" id="7_3rx28"]
+[ext_resource type="PackedScene" uid="uid://b0s2okfiw8440" path="res://scenes/Objects/Rock.tscn" id="8_3rx28"]
+[ext_resource type="PackedScene" uid="uid://cpi4r3xpmf6if" path="res://scenes/Objects/Mushroom2.tscn" id="10_ou6h7"]
+[ext_resource type="PackedScene" uid="uid://c7ti5b3fh723n" path="res://scenes/Objects/Crystal1.tscn" id="11_ruep2"]
+[ext_resource type="PackedScene" uid="uid://dswhx4a1v2576" path="res://scenes/Objects/Crystal2.tscn" id="12_usijh"]
+[ext_resource type="PackedScene" uid="uid://cug3vrs4hiy7a" path="res://scenes/Objects/Crystal3.tscn" id="13_3quiw"]
+[ext_resource type="PackedScene" uid="uid://cs7bk0ue6jsvj" path="res://scenes/Objects/Well.tscn" id="14_ruep2"]
 
 [node name="Spawner" type="Node3D" unique_id=566857934]
 script = ExtResource("1_cmhla")
-singleObjects = Array[PackedScene]([ExtResource("2_4wbs5"), ExtResource("3_30a77"), ExtResource("4_p5s3f"), ExtResource("5_e3f8v")])
+singleObjects = Array[PackedScene]([ExtResource("2_4wbs5"), ExtResource("3_cmhla"), ExtResource("8_3rx28"), ExtResource("3_30a77"), ExtResource("4_p5s3f"), ExtResource("6_e3f8v"), ExtResource("7_3rx28"), ExtResource("5_e3f8v"), ExtResource("10_ou6h7"), ExtResource("11_ruep2"), ExtResource("12_usijh"), ExtResource("13_3quiw"), ExtResource("14_ruep2")])
 grassObject = ExtResource("6_30a77")
 PathDitherMaterial = ExtResource("6_4wbs5")

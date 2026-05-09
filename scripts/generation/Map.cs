@@ -150,18 +150,16 @@ public class Map
             }
         }
 
-        const int significantObjectCount = 15;
-        for (var i = 0; i < significantObjectCount; i++)
+        for (var i = 0; i < _sparseObjects.Length; i++)
         {
-            const int signficantObjectKindAmount = 10;
-            for (var j = 0; j < signficantObjectKindAmount; j++)
+            var sparseObjectType = _sparseObjects[i];
+            for (var j = 0; j < sparseObjectType.count; j++)
             {
                 var randomIndex = random.Next() % candidateObjectPositions.Count;
                 var selectedPosition = candidateObjectPositions[randomIndex];
                 candidateObjectPositions.RemoveAt(randomIndex);
 
-                var selectedObjectType = _sparseObjects[random.Next() % _sparseObjects.Length];
-                singleObjects.Add(new SingleObject(selectedPosition, selectedObjectType.ObjectID));
+                singleObjects.Add(new SingleObject(selectedPosition, sparseObjectType.ObjectID));
             }
         }
 
@@ -226,22 +224,25 @@ public class Map
     }
 
     private record DenseObjectDefinition(int ObjectID);
-    private record SparseObjectDefinition(int ObjectID);
+    private record SparseObjectDefinition(int ObjectID, int count);
     private record LongObjectDefinition(int ObjectID);
 
     private static readonly DenseObjectDefinition[] _denseObjects = [
         new(0), // Tree1
-        new(1), // Tree2
-        new(2), // Tree3
-        /*new(4), // Bush
-        new(5), // BushWithFlowers*/
+        new(1), // TreePine
+        new(2), // Rock
         ];
     private static readonly SparseObjectDefinition[] _sparseObjects = [
-        new(3), // Mushroom
-        new(6), // Crystal1
-        new(7), // Crystal2
-        new(8), // Crystal3
-        new(9), // Mushroom2
+        new(3, 6), // Tree2
+        new(4, 6), // Tree3
+        new(5, 6), // TreeRed
+        new(6, 6), // TreeYellow
+        new(7, 15), // Mushroom
+        new(8, 15), // Mushroom2
+        new(9, 12), // Crystal1
+        new(10, 12), // Crystal2
+        new(11, 12), // Crystal3
+        new(12, 3), // Well
         ];
     private static readonly LongObjectDefinition[] _longObjects = [
         new(0),
