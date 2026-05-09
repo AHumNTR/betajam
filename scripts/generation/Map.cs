@@ -72,7 +72,8 @@ public class Map
 
                 if (!overlappedOnce)
                 {
-                    singleObjects.Add(new SingleObject(pos, random.Next() % 11));
+                    var selectedObjectType = _denseObjects[random.Next() % _denseObjects.Length];
+                    singleObjects.Add(new SingleObject(pos, selectedObjectType.ObjectID));
                 }
             }
         }
@@ -103,7 +104,8 @@ public class Map
                 var selectedPosition = candidateObjectPositions[randomIndex];
                 candidateObjectPositions.RemoveAt(randomIndex);
 
-                singleObjects.Add(new SingleObject(selectedPosition, 3));
+                var selectedObjectType = _sparseObjects[random.Next() % _sparseObjects.Length];
+                singleObjects.Add(new SingleObject(selectedPosition, selectedObjectType.ObjectID));
             }
         }
 
@@ -118,9 +120,12 @@ public class Map
             var newP2 = triangle.P2 + (triangle.P2 - center).Normalized();
             var newP3 = triangle.P3 + (triangle.P3 - center).Normalized();
 
-            longObjects.Add(new LongObject(newP1, newP2, random.Next() % 3));
-            longObjects.Add(new LongObject(newP1, newP3, random.Next() % 3));
-            longObjects.Add(new LongObject(newP2, newP3, random.Next() % 3));
+            var selectedObjectType0 = _longObjects[random.Next() % _longObjects.Length];
+            var selectedObjectType1 = _longObjects[random.Next() % _longObjects.Length];
+            var selectedObjectType2 = _longObjects[random.Next() % _longObjects.Length];
+            longObjects.Add(new LongObject(newP1, newP2, selectedObjectType0.ObjectID));
+            longObjects.Add(new LongObject(newP1, newP3, selectedObjectType1.ObjectID));
+            longObjects.Add(new LongObject(newP2, newP3, selectedObjectType2.ObjectID));
         }
 
         map.RestrictedTriangles = restrictTriangles;
@@ -163,6 +168,21 @@ public class Map
             return (thickness * thickness > numerator / diffLenSqr);
         }
     }
+
+
+    private record DenseObjectDefinition(int ObjectID);
+    private record SparseObjectDefinition(int ObjectID);
+    private record LongObjectDefinition(int ObjectID);
+
+    private static readonly DenseObjectDefinition[] _denseObjects = [
+        new(0),
+        ];
+    private static readonly SparseObjectDefinition[] _sparseObjects = [
+        new(0),
+        ];
+    private static readonly LongObjectDefinition[] _longObjects = [
+        new(0),
+        ];
 
     public class SingleObject
     {
