@@ -15,15 +15,15 @@
 [ext_resource type="PackedScene" uid="uid://kukf4bcaf233" path="res://scenes/ObjectsIcons/Crystal2.tscn" id="11_iq58l"]
 [ext_resource type="PackedScene" uid="uid://bcv2m1d2anoi5" path="res://scenes/ObjectsIcons/Crystal3.tscn" id="12_pfmqr"]
 [ext_resource type="PackedScene" uid="uid://ddmskcmsnhynv" path="res://scenes/ObjectsIcons/Mushroom2.tscn" id="13_5rwvw"]
-[ext_resource type="PackedScene" uid="uid://cs7bk0ue6jsvj" path="res://scenes/Objects/Well.tscn" id="16_s6fll"]
+[ext_resource type="PackedScene" uid="uid://cyge0kllk6m6o" path="res://scenes/ObjectsIcons/Well.tscn" id="16_op04c"]
 [ext_resource type="Material" uid="uid://bjxnd0el8qamh" path="res://materials/path-dotted.tres" id="17_op04c"]
 [ext_resource type="Material" uid="uid://vx1tegotaekp" path="res://materials/map-background.tres" id="17_xxjsi"]
 [ext_resource type="Material" uid="uid://dnuw830256au" path="res://materials/pitch-black.tres" id="18_2h434"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2h434"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iq58l"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_op04c"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_pfmqr"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_iq58l"]
 
@@ -40,11 +40,11 @@ ZoomSpeed = 15.0
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("1_er4uf")]
 transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 0, 0)
 visible = false
-material_override = SubResource("StandardMaterial3D_2h434")
-mesh = SubResource("ImmediateMesh_op04c")
+material_override = SubResource("StandardMaterial3D_iq58l")
+mesh = SubResource("ImmediateMesh_pfmqr")
 
 [node name="Spawner" parent="." unique_id=566857934 instance=ExtResource("3_wikxs")]
-singleObjects = Array[PackedScene]([ExtResource("4_mvot7"), ExtResource("5_60j6u"), ExtResource("6_60j6u"), ExtResource("5_jylts"), ExtResource("8_2h434"), ExtResource("9_op04c"), ExtResource("10_iq58l"), ExtResource("7_s6fll"), ExtResource("13_5rwvw"), ExtResource("10_op04c"), ExtResource("11_iq58l"), ExtResource("12_pfmqr"), ExtResource("16_s6fll")])
+singleObjects = Array[PackedScene]([ExtResource("4_mvot7"), ExtResource("5_60j6u"), ExtResource("6_60j6u"), ExtResource("5_jylts"), ExtResource("8_2h434"), ExtResource("9_op04c"), ExtResource("10_iq58l"), ExtResource("7_s6fll"), ExtResource("13_5rwvw"), ExtResource("10_op04c"), ExtResource("11_iq58l"), ExtResource("12_pfmqr"), ExtResource("16_op04c")])
 bilboard = 1
 PathDitherMaterial = ExtResource("17_op04c")
 

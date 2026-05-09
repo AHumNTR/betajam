@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c40n4e61o5oi1"]
 
-[ext_resource type="Texture2D" uid="uid://drdi7ehuk370n" path="res://textures/TreePine.png" id="1_p4xc1"]
+[ext_resource type="Texture2D" uid="uid://bp1rft2rhrn1n" path="res://textures/Icons/IMG_2315.png" id="1_p4xc1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7ofop"]
 height = 3.5134888

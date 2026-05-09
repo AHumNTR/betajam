@@ -1,18 +1,18 @@
-[gd_scene format=3 uid="uid://c8uw2ybv6gcmv"]
+[gd_scene format=3 uid="uid://cyge0kllk6m6o"]
 
-[ext_resource type="Texture2D" uid="uid://bvbymnkl5kjhm" path="res://textures/Icons/IMG_2312.png" id="1_6b11t"]
+[ext_resource type="Texture2D" uid="uid://yevi2a4pcx3u" path="res://textures/Icons/IMG_2316.png" id="1_0leki"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ehce0"]
 height = 1.3366089
-radius = 0.73828125
+radius = 0.7548828
 
 [node name="SingleObject" type="StaticBody3D" unique_id=234590250]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1052088263]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6754564, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66668516, 0)
 shape = SubResource("CylinderShape3D_ehce0")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=611015191]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.47483253, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.45077372, 0)
 billboard = 2
-texture = ExtResource("1_6b11t")
+texture = ExtResource("1_0leki")
