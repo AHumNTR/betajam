@@ -1,11 +1,15 @@
-[gd_scene format=3 uid="uid://drvfgc8s2n3x8"]
+[gd_scene format=3 uid="uid://cv62t0q00e3b4"]
 
 [ext_resource type="Script" uid="uid://baxwx1pttgckw" path="res://scripts/UI/MainMenu.cs" id="1_yqorp"]
 [ext_resource type="Texture2D" uid="uid://cp48u2c4uoa73" path="res://textures/Mushroom.png" id="2_2wh52"]
-[ext_resource type="Texture2D" uid="uid://dcy45bx6vpaqk" path="res://textures/FloorGrass.png" id="2_ucygd"]
 [ext_resource type="Texture2D" uid="uid://qrk4iku47u1g" path="res://textures/Mushroom2.png" id="3_ow34m"]
+[ext_resource type="Texture2D" uid="uid://bdaihe4lskrgi" path="res://textures/Tree2.png" id="4_826wr"]
+[ext_resource type="Material" uid="uid://kk2hk0qaha2o" path="res://materials/world-floor.tres" id="4_ow34m"]
+[ext_resource type="Texture2D" uid="uid://cvaenkuan4a6r" path="res://textures/Tree3.png" id="5_ucygd"]
 
-[node name="MainMenu" type="Control" unique_id=427978892]
+[sub_resource type="QuadMesh" id="QuadMesh_l72w3"]
+
+[node name="MainMenu" type="Control" unique_id=427978892 node_paths=PackedStringArray("RoleDescriptionLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yqorp")
+RoleDescriptionLabel = NodePath("RoleDescriptionLabel")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1149964642]
 layout_mode = 1
@@ -29,7 +34,26 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 30
-text = "GAMENAMEPLACEHOLDER"
+text = "The Lost and The Guide"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoleDescriptionLabel" type="RichTextLabel" parent="." unique_id=31256650]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -499.0
+offset_top = 83.0
+offset_right = 500.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -48,7 +72,7 @@ offset_bottom = -69.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-text = "Start"
+text = "Play As The Explorer"
 
 [node name="Map Button" type="Button" parent="." unique_id=1185449033]
 layout_mode = 1
@@ -64,7 +88,7 @@ offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-text = "Map"
+text = "Play As The Guide Fairy"
 
 [node name="SeedEdit" type="LineEdit" parent="." unique_id=499421793]
 layout_mode = 1
@@ -82,6 +106,7 @@ theme_override_font_sizes/font_size = 53
 placeholder_text = "Seed"
 alignment = 1
 emoji_menu_enabled = false
+virtual_keyboard_type = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SeedEdit" unique_id=1268625916]
 layout_mode = 1
@@ -94,7 +119,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="sprites" type="Node3D" parent="." unique_id=1555804092]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.5350981, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.8730607, -0.5350981, -0.6676302)
 
 [node name="Sprite3D" type="Sprite3D" parent="sprites" unique_id=108013543]
 transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 3.4716759, -0.33476895, 0.55433047)
@@ -206,14 +231,32 @@ transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 4.43044, -0.
 billboard = 1
 texture = ExtResource("2_2wh52")
 
+[node name="Sprite3D23" type="Sprite3D" parent="sprites" unique_id=2018841239]
+transform = Transform3D(0.49999988, 0, 0, 0, 0.49999988, 0, 0, 0, 0.49999988, 13.002679, 1.2015327, 5.8211045)
+billboard = 1
+texture = ExtResource("4_826wr")
+
+[node name="Sprite3D24" type="Sprite3D" parent="sprites" unique_id=839046226]
+transform = Transform3D(0.29999992, 0, 0, 0, 0.29999992, 0, 0, 0, 0.29999992, 7.2006197, 0.9863336, 11.570931)
+billboard = 1
+texture = ExtResource("5_ucygd")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=355073490]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.337385, 3.480506, 2.781604)
-projection = 1
+transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.70710677, 0.70710677, -0.7071068, -0.5, 0.5, 6.207239, 1.4855813, 5.3812532)
 size = 8.453
 
-[node name="Ground" type="Sprite3D" parent="." unique_id=730575467]
-transform = Transform3D(0.99999994, 0, 0, 0, -4.371139e-08, 0.99999994, 0, -0.99999994, -4.371139e-08, 3.337385, -0.8857951, 2.7816038)
-texture = ExtResource("2_ucygd")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=490055873]
+transform = Transform3D(30.000002, 0, 0, 0, -1.3113417e-06, 30.000002, 0, -30.000002, -1.3113417e-06, -6.88514, -0.9885152, -6.9342446)
+mesh = SubResource("QuadMesh_l72w3")
+surface_material_override/0 = ExtResource("4_ow34m")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=730880663]
+transform = Transform3D(1, 0, 0, 0, 0.14565139, 0.98933595, 0, -0.98933595, 0.14565139, 0, 0, 0)
+
+[connection signal="mouse_entered" from="StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="mouse_exited" from="StartButton" to="." method="_on_any_button_mouse_exited"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="Map Button" to="." method="_on_map_button_mouse_entered"]
+[connection signal="mouse_exited" from="Map Button" to="." method="_on_any_button_mouse_exited"]
+[connection signal="pressed" from="Map Button" to="." method="_on_map_button_pressed"]
 [connection signal="text_changed" from="SeedEdit" to="." method="_on_seed_edit_text_changed"]
