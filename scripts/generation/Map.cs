@@ -83,7 +83,7 @@ public class Map
         {
             var invLength = 1 / safeLine.End.DistanceTo(safeLine.Start);
 
-            for (var t = 0f; t < 1f; t += invLength)
+            for (var t = 0f; t < 1f; t += invLength * 2f)
             {
                 var offset = 1f * ((random.Next() % 2) * 2 - 1);
                 var diff = safeLine.End - safeLine.Start;
@@ -140,11 +140,11 @@ public class Map
         public bool Overlaps(Vector2 point, float thickness)
         {
             var diff = End - Start;
-            float x = (point - Start).Project(diff).Dot(diff);
-            var val2 = diff.LengthSquared();
-            if (x < 0 || x > val2) return false;
-            var val1 = Mathf.Pow(diff.Y * point.X - diff.X * point.Y + End.X * Start.Y - Start.X * End.Y, 2);
-            return (thickness * thickness > val1 / val2);
+            float projectionValue = (point - Start).Project(diff).Dot(diff);
+            var diffLenSqr = diff.LengthSquared();
+            if (projectionValue < 0 || projectionValue > diffLenSqr) return false;
+            var numerator = Mathf.Pow(diff.Y * point.X - diff.X * point.Y + End.X * Start.Y - Start.X * End.Y, 2);
+            return (thickness * thickness > numerator / diffLenSqr);
         }
     }
 
