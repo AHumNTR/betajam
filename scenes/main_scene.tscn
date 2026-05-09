@@ -31,7 +31,19 @@ shading_mode = 0
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_bcnxi"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_58gk3"]
+sky_top_color = Color(0.6680412, 0.25197867, 0.6435261, 1)
+sky_horizon_color = Color(0.47236073, 0.6821278, 0.8423017, 1)
+sky_energy_multiplier = 1.2
+ground_bottom_color = Color(0.15353057, 0.17960647, 0.18208808, 1)
+ground_horizon_color = Color(0.4454007, 0.6915227, 0.81961477, 1)
+
+[sub_resource type="Sky" id="Sky_to7gp"]
+sky_material = SubResource("ProceduralSkyMaterial_58gk3")
+
 [sub_resource type="Environment" id="Environment_bcnxi"]
+background_mode = 2
+sky = SubResource("Sky_to7gp")
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_7nt27"]
 
