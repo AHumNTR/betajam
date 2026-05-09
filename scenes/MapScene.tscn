@@ -3,11 +3,21 @@
 [ext_resource type="PackedScene" uid="uid://5io7dag3rn7n" path="res://scenes/visualiser.tscn" id="1_er4uf"]
 [ext_resource type="Script" uid="uid://xabhxir7pcia" path="res://scripts/Player/MapCamera.cs" id="1_y2hrc"]
 [ext_resource type="PackedScene" uid="uid://cj7tg1257jl31" path="res://scenes/spawner.tscn" id="3_wikxs"]
+[ext_resource type="PackedScene" uid="uid://bd47imoeup3ax" path="res://scenes/Objects/Tree1.tscn" id="4_mvot7"]
+[ext_resource type="PackedScene" uid="uid://canpkcgnyuoy" path="res://scenes/Objects/Tree2.tscn" id="5_jylts"]
+[ext_resource type="PackedScene" uid="uid://dqn76mihusr0k" path="res://scenes/Objects/Rock.tscn" id="6_60j6u"]
+[ext_resource type="PackedScene" uid="uid://dc41yrltbmxym" path="res://scenes/Objects/Mushroom.tscn" id="7_s6fll"]
+[ext_resource type="PackedScene" uid="uid://bqxtmwiq3ivo6" path="res://scenes/Objects/Bush.tscn" id="8_xxjsi"]
+[ext_resource type="PackedScene" uid="uid://cuc2hv013ugaf" path="res://scenes/Objects/BushWithFlowers.tscn" id="9_2h434"]
+[ext_resource type="PackedScene" uid="uid://dwtj4hyhto0g8" path="res://scenes/Objects/Crystal1.tscn" id="10_op04c"]
+[ext_resource type="PackedScene" uid="uid://dswhx4a1v2576" path="res://scenes/Objects/Crystal2.tscn" id="11_iq58l"]
+[ext_resource type="PackedScene" uid="uid://cug3vrs4hiy7a" path="res://scenes/Objects/Crystal3.tscn" id="12_pfmqr"]
+[ext_resource type="PackedScene" uid="uid://cpi4r3xpmf6if" path="res://scenes/Objects/Mushroom2.tscn" id="13_5rwvw"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1nvq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rx4pi"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_1ddn7"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_1e82v"]
 
 [node name="MapScene" type="Node3D" unique_id=1830204928]
 
@@ -24,8 +34,9 @@ MaxSize = 1000.0
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("1_er4uf")]
 transform = Transform3D(-2.7347633e-09, 0.998041, 0.06256409, 4.3625757e-08, 0.06256409, -0.998041, -1, 0, -4.371139e-08, 0, 0, 0)
 visible = false
-material_override = SubResource("StandardMaterial3D_j1nvq")
-mesh = SubResource("ImmediateMesh_1ddn7")
+material_override = SubResource("StandardMaterial3D_rx4pi")
+mesh = SubResource("ImmediateMesh_1e82v")
 
 [node name="Spawner" parent="." unique_id=566857934 instance=ExtResource("3_wikxs")]
+singleObjects = Array[PackedScene]([ExtResource("4_mvot7"), ExtResource("5_jylts"), ExtResource("6_60j6u"), ExtResource("7_s6fll"), ExtResource("8_xxjsi"), ExtResource("9_2h434"), ExtResource("10_op04c"), ExtResource("11_iq58l"), ExtResource("12_pfmqr"), ExtResource("13_5rwvw")])
 bilboard = 1

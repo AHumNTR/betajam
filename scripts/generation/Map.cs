@@ -74,7 +74,7 @@ public class Map
 
                 if (!overlappedOnce)
                 {
-                    singleObjects.Add(new SingleObject(pos, random.Next() % 5));
+                    singleObjects.Add(new SingleObject(pos, random.Next() % 11));
                 }
             }
         }
