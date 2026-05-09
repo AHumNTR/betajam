@@ -185,13 +185,35 @@ public class Map
         map.RestrictedTriangles = restrictTriangles;
 
         // Add Objectives
-        const int objectiveCount = 5;
-        List<Objective> objectives = new(objectiveCount);
-        for (var i = 0; i < objectiveCount; i++)
+        List<Objective> objectives = new();
+        foreach (var line in safeLines)
         {
-            var selectedSafeLine = safeLines[random.Next() % safeLines.Count];
-            var selectedPosition = selectedSafeLine.Start + (selectedSafeLine.End - selectedSafeLine.Start) * random.NextSingle();
-            objectives.Add(new Objective(selectedPosition));
+            var randomPosition = line.Start.Lerp(line.End, random.NextSingle());
+            var isOverlapped = false;
+            foreach (var otherObjective in objectives)
+            {
+                if (otherObjective.Position.DistanceSquaredTo(randomPosition) < 9f)
+                {
+                    isOverlapped = true;
+                }
+            }
+
+            if (!isOverlapped)
+            {
+                objectives.Add(new Objective(randomPosition));
+            }
+        }
+
+        const int maxHarmlessObjectiveCount = 5;
+        var addedHarmlessObjectiveCount = 0;
+        while (addedHarmlessObjectiveCount < maxHarmlessObjectiveCount)
+        {
+            var randomObjective = objectives[random.Next() % objectives.Count];
+            if (!randomObjective.Harmless)
+            {
+                randomObjective.Harmless = true;
+                addedHarmlessObjectiveCount++;
+            }
         }
         map.Objectives = objectives;
 
@@ -237,8 +259,8 @@ public class Map
         new(4, 12), // Tree3
         new(5, 12), // TreeRed
         new(6, 12), // TreeYellow
-        new(7, 25), // Mushroom
-        new(8, 25), // Mushroom2
+        //new(7, 25), // Mushroom
+        //new(8, 25), // Mushroom2
         new(9,  20), // Crystal1
         new(10, 20), // Crystal2
         new(11, 20), // Crystal3
@@ -278,10 +300,12 @@ public class Map
     {
         public Vector2 Position;
         public int ObjectType;
+        public bool Harmless;
 
         public Objective(Vector2 position)
         {
             Position = position;
+            Harmless = false;
         }
     }
 
