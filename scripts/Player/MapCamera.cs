@@ -40,23 +40,24 @@ public partial class MapCamera : Camera3D
 			GlobalPosition -= new Vector3(drift.X, 0, drift.Z);
 		}
 
+		var sizeRatio = Size / MaxSize;
 
 		if (@event is InputEventMouseButton mouseEvent)
 		{
 			if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
 			{
-				if (Size <= ZoomSpeed)
+				if (Size <= ZoomSpeed * sizeRatio)
 				{
 					Size = MinSize;
 				}
 				else
 				{
-					Size -= ZoomSpeed;
+					Size -= ZoomSpeed * sizeRatio;
 				}
 			}
 			else if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
 			{
-				Size += ZoomSpeed;
+				Size += ZoomSpeed * sizeRatio;
 			}
 
 		}
