@@ -76,6 +76,37 @@ public class Map
                 }
             }
         }
+
+        // Add Single Objects Along the Safe Lines
+        List<Vector2> candidateObjectPositions = new();
+        foreach (var safeLine in safeLines)
+        {
+            var invLength = 1 / safeLine.End.DistanceTo(safeLine.Start);
+
+            for (var t = 0f; t < 1f; t += invLength)
+            {
+                var offset = 1f * ((random.Next() % 2) * 2 - 1);
+                var diff = safeLine.End - safeLine.Start;
+                var spawnPosition = safeLine.Start + diff * t;
+                spawnPosition += diff.Orthogonal().Normalized() * offset;
+                candidateObjectPositions.Add(spawnPosition);
+            }
+        }
+
+        const int significantObjectCount = 15;
+        for (var i = 0; i < significantObjectCount; i++)
+        {
+            const int signficantObjectKindAmount = 10;
+            for (var j = 0; j < signficantObjectKindAmount; j++)
+            {
+                var randomIndex = random.Next() % candidateObjectPositions.Count;
+                var selectedPosition = candidateObjectPositions[randomIndex];
+                candidateObjectPositions.RemoveAt(randomIndex);
+
+                singleObjects.Add(new SingleObject(selectedPosition));
+            }
+        }
+
         map.SingleObjects = singleObjects;
 
         // Add Objectives
@@ -109,9 +140,9 @@ public class Map
         public bool Overlaps(Vector2 point, float thickness)
         {
             var diff = End - Start;
-            float x=(point -  Start).Project(diff).Dot(diff);
+            float x = (point - Start).Project(diff).Dot(diff);
             var val2 = diff.LengthSquared();
-            if(x<0 || x>val2)return false;
+            if (x < 0 || x > val2) return false;
             var val1 = Mathf.Pow(diff.Y * point.X - diff.X * point.Y + End.X * Start.Y - Start.X * End.Y, 2);
             return (thickness * thickness > val1 / val2);
         }
