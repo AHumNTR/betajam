@@ -1,5 +1,47 @@
 [gd_scene format=3 uid="uid://dlap2yyye0gto"]
 
+[ext_resource type="Script" uid="uid://b8nw850oh8vk8" path="res://scripts/Player.cs" id="1_w2twt"]
+[ext_resource type="Texture2D" uid="uid://ys4t1llnl1ht" path="res://icon.svg" id="2_pw63i"]
+[ext_resource type="Script" uid="uid://cp6i17sx4f2c3" path="res://scripts/Player/Compass.cs" id="3_7ykc4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ykc4"]
+
 [node name="MainScene" type="Node3D" unique_id=1061094929]
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=17495642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3541285, 0)
+script = ExtResource("1_w2twt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=675736983]
+shape = SubResource("CapsuleShape3D_pw63i")
+
+[node name="Camera3D" type="Camera3D" parent="player" unique_id=871754816]
+
+[node name="Compass" type="Sprite3D" parent="player" unique_id=1108458534]
+transform = Transform3D(0.48, 0, 0, 0, -2.0981464e-08, 0.48000008, 0, -0.47999993, -2.0981469e-08, -0.5681751, -0.80461323, -0.55436885)
+texture = ExtResource("2_pw63i")
+
+[node name="arrowBase" type="Node3D" parent="player/Compass" unique_id=1801319309]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0)
+script = ExtResource("3_7ykc4")
+
+[node name="arrow" type="Sprite3D" parent="player/Compass/arrowBase" unique_id=194079833]
+transform = Transform3D(-2.185568e-08, -0.49999967, 2.1855694e-08, 0, -2.185568e-08, -0.5, 0.49999967, -2.185568e-08, 9.553427e-16, 0, 0.018475652, 0)
+modulate = Color(0.5147154, 4.793823e-05, 0.43245617, 1)
+texture = ExtResource("2_pw63i")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1545465834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5533142, -2.22301, -6.0608826)
+use_collision = true
+size = Vector3(17.907166, 1, 20.861755)
+
+[node name="Collectable" type="StaticBody3D" parent="." unique_id=1020910888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7097101, -3.5677876)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collectable" unique_id=902298713]
+shape = SubResource("BoxShape3D_7ykc4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=487306256]
+transform = Transform3D(1, 0, 0, 0, 0.27857205, 0.9604153, 0, -0.9604153, 0.27857205, 0, 7.5507007, 0)
