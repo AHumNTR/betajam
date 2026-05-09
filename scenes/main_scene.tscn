@@ -26,10 +26,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6u1mn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58gk3"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_bcnxi"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_to7gp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_58gk3"]
 sky_top_color = Color(0.6680412, 0.25197867, 0.6435261, 1)
@@ -86,14 +86,15 @@ material = ExtResource("5_6u1mn")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=487306256]
 transform = Transform3D(1, 0, 0, 0, 0.27857205, 0.9604153, 0, -0.9604153, 0.27857205, 0, 7.5507007, 0)
 
-[node name="Spawner" parent="." unique_id=566857934 instance=ExtResource("4_gubc5")]
+[node name="Spawner" parent="." unique_id=566857934 node_paths=PackedStringArray("player") instance=ExtResource("4_gubc5")]
 singleObjects = Array[PackedScene]([ExtResource("5_c16ls"), ExtResource("6_18nlu"), ExtResource("8_e1cbu"), ExtResource("9_mngbo"), ExtResource("10_01n6w"), ExtResource("11_6u1mn"), ExtResource("12_bcnxi"), ExtResource("13_7nt27"), ExtResource("14_k6f3i"), ExtResource("15_xdqt8"), ExtResource("8_e1cbu")])
 bilboard = 2
+player = NodePath("../player")
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
 visible = false
-material_override = SubResource("StandardMaterial3D_6u1mn")
-mesh = SubResource("ImmediateMesh_bcnxi")
+material_override = SubResource("StandardMaterial3D_58gk3")
+mesh = SubResource("ImmediateMesh_to7gp")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1315559398]
 environment = SubResource("Environment_bcnxi")

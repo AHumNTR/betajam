@@ -14,11 +14,6 @@ public class Map
 
     public const float MAP_SIZE = 100f;
 
-    /*public void AddSingleObject(SingleObject obj)
-    {
-        SingleObjects.Add(obj);
-    }*/
-
     public static Map CreateMap(int seed)
     {
         var random = new Random(seed);
@@ -229,7 +224,6 @@ public class Map
             return (thickness * thickness > numerator / diffLenSqr);
         }
     }
-
 
     private record DenseObjectDefinition(int ObjectID);
     private record SparseObjectDefinition(int ObjectID);

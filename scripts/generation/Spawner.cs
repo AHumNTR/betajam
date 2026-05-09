@@ -14,6 +14,7 @@ public partial class Spawner : Node3D
 	[Export]
 	public BaseMaterial3D.BillboardModeEnum bilboard;
 	[Export] public Material PathDitherMaterial;
+	[Export] public Player player;
 	public override void _Ready()
 	{
 		// Since Godot uses right-hand coordinate system, we gotta take -Y for Z conversion!
@@ -53,6 +54,8 @@ public partial class Spawner : Node3D
 
 			}
 		}
+
+		player.Init(m.SafeLines);
 	}
 
 	/* private void FillLongObject(Map.LongObject)

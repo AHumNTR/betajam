@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Player : CharacterBody3D
 {
@@ -12,10 +13,21 @@ public partial class Player : CharacterBody3D
 	private float yaw = 0f;
 	private float _headBobCycleValue = 0f;
 	private float _stepSoundPlayCounter = 0f;
+	private List<Map.SafeLine> _dirtPaths;
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
 	public Node3D cam;
 	public AudioStreamPlayer3D audioPlayer;
+
+	public void Init(List<Map.SafeLine> dirtPaths)
+	{
+		_dirtPaths = dirtPaths;
+
+		var random = new RandomNumberGenerator();
+		var selectedPath = dirtPaths[random.RandiRange(0, dirtPaths.Count - 1)];
+		var centerPosition = 0.5f * (selectedPath.Start + selectedPath.End);
+		GlobalPosition = new Vector3(centerPosition.X, 0.1f, centerPosition.Y);
+	}
 
 	public override void _Ready()
 	{
@@ -133,7 +145,7 @@ public partial class Player : CharacterBody3D
 		{
 			GlobalPosition += new Vector3(Map.MAP_SIZE, 0, 0);
 		}
-		
+
 		if (GlobalPosition.Z > Map.MAP_SIZE / 2)
 		{
 			GlobalPosition -= new Vector3(0, 0, Map.MAP_SIZE);
@@ -149,12 +161,26 @@ public partial class Player : CharacterBody3D
 
 	private void PlayStepSound()
 	{
-		var selectedSoundPool = StepSoundsGrass;
+		var selectedSoundPool = IsOnDirtPath() ? StepSoundsDirt : StepSoundsGrass;
 
 		var random = new RandomNumberGenerator();
 		var selectedSoundIndex = random.RandiRange(0, selectedSoundPool.Length - 1);
 
 		audioPlayer.Stream = selectedSoundPool[selectedSoundIndex];
 		audioPlayer.Play();
+	}
+
+	private bool IsOnDirtPath()
+	{
+		var pos = new Vector2(GlobalPosition.X, -GlobalPosition.Z);
+
+		if (pos.X < 0) pos += new Vector2(Map.MAP_SIZE, 0);
+		if (pos.Y < 0) pos += new Vector2(0, Map.MAP_SIZE);
+		foreach (var path in _dirtPaths)
+		{
+			if (path.Overlaps(pos, 1f)) return true;
+		}
+
+		return false;
 	}
 }
