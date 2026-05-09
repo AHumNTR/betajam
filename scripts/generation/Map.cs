@@ -175,10 +175,18 @@ public class Map
     private record LongObjectDefinition(int ObjectID);
 
     private static readonly DenseObjectDefinition[] _denseObjects = [
-        new(0),
+        new(0), // Tree1
+        new(1), // Tree2
+        new(2), // Tree3
+        new(4), // Bush
+        new(5), // BushWithFlowers
         ];
     private static readonly SparseObjectDefinition[] _sparseObjects = [
-        new(0),
+        new(3), // Mushroom
+        new(6), // Crystal1
+        new(7), // Crystal2
+        new(8), // Crystal3
+        new(9), // Mushroom2
         ];
     private static readonly LongObjectDefinition[] _longObjects = [
         new(0),
