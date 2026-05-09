@@ -6,18 +6,24 @@ public partial class Player : CharacterBody3D
 	[Export] public float Sensitivity = 0.002f;
 	[Export] public float HeadBobVertical = 0.12f;
 	[Export] public float HeadBobHorizontal = 0.02f;
+	[Export] public AudioStream[] StepSoundsGrass;
+	[Export] public AudioStream[] StepSoundsDirt;
 
 	private float yaw = 0f;
 	private float _headBobCycleValue = 0f;
+	private float _stepSoundPlayCounter = 0f;
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
 	public Node3D cam;
+	public AudioStreamPlayer3D audioPlayer;
 
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		cam = (Node3D)GetNode("Camera3D");
+		audioPlayer = (AudioStreamPlayer3D)GetNode("AudioStreamPlayer3D");
 	}
+
 	public override void _Input(InputEvent @event)
 	{
 		if (@event is InputEventMouseMotion mouseMotion)
@@ -44,9 +50,10 @@ public partial class Player : CharacterBody3D
 
 		// Head Bob Cycle
 		var speed = Velocity.Length();
+		var headBobDelta = speed * (float)delta / Speed;
 		if (speed > 0.01f)
 		{
-			_headBobCycleValue += speed * (float)delta / Speed;
+			_headBobCycleValue += headBobDelta;
 			if (_headBobCycleValue > 1)
 			{
 				_headBobCycleValue -= 1f;
@@ -73,9 +80,15 @@ public partial class Player : CharacterBody3D
 			}
 		}
 
+		_stepSoundPlayCounter += headBobDelta;
+		if (_stepSoundPlayCounter > 0.5f)
+		{
+			_stepSoundPlayCounter = 0f;
+			PlayStepSound();
+		}
+
 		cam.Position = new Vector3(Mathf.Sin((_headBobCycleValue * 2f) * Mathf.Pi * 2) * HeadBobHorizontal, Mathf.Sin(_headBobCycleValue * Mathf.Pi * 2) * HeadBobVertical, 0);
 	}
-
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -132,5 +145,16 @@ public partial class Player : CharacterBody3D
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	private void PlayStepSound()
+	{
+		var selectedSoundPool = StepSoundsGrass;
+
+		var random = new RandomNumberGenerator();
+		var selectedSoundIndex = random.RandiRange(0, selectedSoundPool.Length - 1);
+
+		audioPlayer.Stream = selectedSoundPool[selectedSoundIndex];
+		audioPlayer.Play();
 	}
 }

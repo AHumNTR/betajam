@@ -1,13 +1,19 @@
 [gd_scene format=3 uid="uid://dlap2yyye0gto"]
 
 [ext_resource type="Script" uid="uid://b8nw850oh8vk8" path="res://scripts/Player.cs" id="1_w2twt"]
+[ext_resource type="AudioStream" uid="uid://bapcskrku0arh" path="res://sounds/step_grass1.ogg" id="2_58gk3"]
 [ext_resource type="Texture2D" uid="uid://bueuyseh2y8fm" path="res://textures/Compass.png" id="2_rt2n2"]
 [ext_resource type="Script" uid="uid://cp6i17sx4f2c3" path="res://scripts/Player/Compass.cs" id="3_7ykc4"]
+[ext_resource type="AudioStream" uid="uid://b00ekek018alm" path="res://sounds/step_grass2.ogg" id="3_to7gp"]
 [ext_resource type="Texture2D" uid="uid://dx0mheem8v8xt" path="res://textures/CompassArrow.png" id="4_c16ls"]
 [ext_resource type="PackedScene" uid="uid://bcvi6fpdb80dn" path="res://scenes/spawner.tscn" id="4_gubc5"]
+[ext_resource type="AudioStream" uid="uid://dl6vbrrv6hiul" path="res://sounds/step_grass3.ogg" id="4_u0fll"]
+[ext_resource type="AudioStream" uid="uid://bhwho4rctv0l6" path="res://sounds/step_dirt1.ogg" id="5_6p3nn"]
 [ext_resource type="Material" uid="uid://kk2hk0qaha2o" path="res://materials/world-floor.tres" id="5_6u1mn"]
 [ext_resource type="PackedScene" uid="uid://bd47imoeup3ax" path="res://scenes/Objects/Tree1.tscn" id="5_c16ls"]
 [ext_resource type="PackedScene" uid="uid://canpkcgnyuoy" path="res://scenes/Objects/Tree2.tscn" id="6_18nlu"]
+[ext_resource type="AudioStream" uid="uid://ofhvhwq5m3g" path="res://sounds/step_dirt2.ogg" id="6_k67gn"]
+[ext_resource type="AudioStream" uid="uid://cec4veu8v6f67" path="res://sounds/step_dirt3.ogg" id="7_k3g67"]
 [ext_resource type="PackedScene" uid="uid://5io7dag3rn7n" path="res://scenes/visualiser.tscn" id="8_18nlu"]
 [ext_resource type="PackedScene" uid="uid://c3actfht73mhd" path="res://scenes/Objects/Tree3.tscn" id="8_e1cbu"]
 [ext_resource type="PackedScene" uid="uid://dc41yrltbmxym" path="res://scenes/Objects/Mushroom.tscn" id="9_mngbo"]
@@ -20,10 +26,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcnxi"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6u1mn"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_7nt27"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_bcnxi"]
 
 [sub_resource type="Environment" id="Environment_bcnxi"]
 
@@ -36,6 +42,8 @@ shading_mode = 0
 [node name="player" type="CharacterBody3D" parent="." unique_id=17495642]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3541285, 0)
 script = ExtResource("1_w2twt")
+StepSoundsGrass = Array[AudioStream]([ExtResource("2_58gk3"), ExtResource("3_to7gp"), ExtResource("4_u0fll")])
+StepSoundsDirt = Array[AudioStream]([ExtResource("5_6p3nn"), ExtResource("6_k67gn"), ExtResource("7_k3g67")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=675736983]
 shape = SubResource("CapsuleShape3D_pw63i")
@@ -55,6 +63,8 @@ transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1
 modulate = Color(0.5147154, 4.793823e-05, 0.43245617, 1)
 texture = ExtResource("4_c16ls")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="player" unique_id=1478152015]
+
 [node name="Floor" type="CSGBox3D" parent="." unique_id=1545465834]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
@@ -70,8 +80,8 @@ bilboard = 2
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
 visible = false
-material_override = SubResource("StandardMaterial3D_bcnxi")
-mesh = SubResource("ImmediateMesh_7nt27")
+material_override = SubResource("StandardMaterial3D_6u1mn")
+mesh = SubResource("ImmediateMesh_bcnxi")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1315559398]
 environment = SubResource("Environment_bcnxi")
