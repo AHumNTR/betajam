@@ -50,6 +50,33 @@ public class Map
         // TODO: Generate more dense objects at some further radius away from safe line
         // TODO: (Maybe) Generate random rivers, add bridges where they meet safe lines
 
+        // Add Single Objects ???
+        const float objectLineDistance = 1f;
+        const int objectDimension = 30;
+        List<SingleObject> singleObjects = new();
+        for (var i = 0; i < objectDimension; i++)
+        {
+            for (var j = 0; j < objectDimension; j++)
+            {
+                var x = (random.NextSingle() * 2 - 1 + i * 2 - objectDimension) * MapSize / objectDimension;
+                var y = (random.NextSingle() * 2 - 1 + j * 2 - objectDimension) * MapSize / objectDimension;
+                var pos = new Vector2(x, y);
+                var overlappedOnce = false;
+                foreach (var safeLine in safeLines)
+                {
+                    if (safeLine.Overlaps(pos, objectLineDistance))
+                    {
+                        overlappedOnce = true;
+                    }
+                }
+
+                if (!overlappedOnce)
+                {
+                    singleObjects.Add(new SingleObject(pos));
+                }
+            }
+        }
+
         // Add Objectives
         const int objectiveCount = 5;
         List<Objective> objectives = new(objectiveCount);
@@ -60,7 +87,7 @@ public class Map
             objectives.Add(new Objective(selectedPosition));
         }
         map.Objectives = objectives;
-        
+
         return map;
     }
 
@@ -76,6 +103,14 @@ public class Map
         {
             Start = start;
             End = end;
+        }
+
+        public bool Overlaps(Vector2 point, float thickness)
+        {
+            var diff = End - Start;
+            var val1 = Mathf.Pow(diff.Y * point.X - diff.X * point.Y + End.X * Start.Y - Start.X * End.Y, 2);
+            var val2 = diff.LengthSquared();
+            return (thickness * thickness > val1 / val2);
         }
     }
 
