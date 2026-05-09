@@ -5,6 +5,7 @@ using Godot;
 public class Map
 {
     //public List<SingleObject> SingleObjects = new();
+    public List<Objective> Objectives;
     public List<SafeLine> SafeLines;    // TODO: Keep until testing
 
     private const float MapSize = 100f;
@@ -25,7 +26,7 @@ public class Map
         const int safePivotDimension = 10;
         List<Vector2> safePivots = new(safePivotDimension * safePivotDimension);
 
-        // Generate safe pivots
+        // Generate safe pivots and safe lines to ensure objectives are reachable
         for (var i = 0; i < safePivotDimension; i++)
         {
             for (var j = 0; j < safePivotDimension; j++)
@@ -44,12 +45,23 @@ public class Map
         }
 
         map.SafeLines = safeLines;
-        return map;
 
         // TODO: Generate sparse rare objects at some radius away from safe line
         // TODO: Generate more dense objects at some further radius away from safe line
         // TODO: (Maybe) Generate random rivers, add bridges where they meet safe lines
-        // TODO: Add objectives on map
+
+        // Add Objectives
+        const int objectiveCount = 5;
+        List<Objective> objectives = new(objectiveCount);
+        for (var i = 0; i < objectiveCount; i++)
+        {
+            var selectedSafeLine = safeLines[random.Next() % safeLines.Count];
+            var selectedPosition = selectedSafeLine.Start + (selectedSafeLine.End - selectedSafeLine.Start) * random.NextSingle();
+            objectives.Add(new Objective(selectedPosition));
+        }
+        map.Objectives = objectives;
+        
+        return map;
     }
 
     /// <summary>
@@ -72,6 +84,16 @@ public class Map
         public Vector2 Position;
 
         public SingleObject(Vector2 position)
+        {
+            Position = position;
+        }
+    }
+
+    public class Objective
+    {
+        public Vector2 Position;
+
+        public Objective(Vector2 position)
         {
             Position = position;
         }
