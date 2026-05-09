@@ -14,8 +14,6 @@ public partial class MapCamera : Camera3D
 
     private bool _isDragging = false;
 
-    
-
     public override void _UnhandledInput(InputEvent @event)
     {
         // Check for Mouse Button (Left Click to drag)

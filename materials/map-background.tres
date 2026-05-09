@@ -3,4 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://bwogptl8mgqv2" path="res://textures/MapBackground.png" id="1_0myll"]
 
 [resource]
+shading_mode = 0
 albedo_texture = ExtResource("1_0myll")
