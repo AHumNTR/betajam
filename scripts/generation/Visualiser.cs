@@ -1,43 +1,76 @@
 using Godot;
-using System;
 
+[Tool] // This allows the script to run in the editor
 public partial class Visualiser : MeshInstance3D
 {
-	// Called when the node enters the scene tree for the first time.
-	Map m;
+	private Map m;
+
+	[Export]
+	public float Thickness { get; set; } = 0.5f;
+
+	[Export]
+	public bool GenerateMap
+	{
+		get => false;
+		set
+		{
+			if (value) 
+			{
+				CreateNewMap();
+			}
+		}
+	}
+
 	public override void _Ready()
 	{
+		// Generate once on startup
+		CreateNewMap();
+	}
+
+	public void CreateNewMap()
+	{
+		// 1. Create/Refresh Map Data
+		// Assuming Map.CreateMap(0) handles its own randomness or logic
 		m = Map.CreateMap(0);
+
 		var immediateMesh = new ImmediateMesh();
 		this.Mesh = immediateMesh;
 
-		float thickness = 0.5f; // Adjust this for your desired width
+		// 2. Setup Material
 		var material = new StandardMaterial3D();
 		material.ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded;
+		material.AlbedoColor = new Color(1, 1, 1);
 		this.MaterialOverride = material;
 
+		// 3. Build Geometry
 		immediateMesh.SurfaceBegin(Mesh.PrimitiveType.Triangles);
 
 		foreach (Map.SafeLine s in m.SafeLines)
 		{
-		Vector3 start = new Vector3(s.Start.X, s.Start.Y, 0);
-		Vector3 end = new Vector3(s.End.X, s.End.Y, 0);
-		Vector3 dir = (end - start).Normalized();
-		Vector3 normal = new Vector3(-dir.Y, dir.X, 0) * (thickness / 2.0f);
-		Vector3 A = start + normal;
-		Vector3 B = start - normal;
-		Vector3 C = end + normal;
-		Vector3 D = end - normal;
-		immediateMesh.SurfaceAddVertex(A);
-		immediateMesh.SurfaceAddVertex(B);
-		immediateMesh.SurfaceAddVertex(C);
-		immediateMesh.SurfaceAddVertex(B);
-		immediateMesh.SurfaceAddVertex(D);
-		immediateMesh.SurfaceAddVertex(C);
+			Vector3 start = new Vector3(s.Start.X, s.Start.Y, 0);
+			Vector3 end = new Vector3(s.End.X, s.End.Y, 0);
+
+			Vector3 dir = (end - start).Normalized();
+			Vector3 normal = new Vector3(-dir.Y, dir.X, 0) * (Thickness / 2.0f);
+
+			Vector3 v0 = start + normal;
+			Vector3 v1 = start - normal;
+			Vector3 v2 = end + normal;
+			Vector3 v3 = end - normal;
+
+			// First Triangle
+			immediateMesh.SurfaceAddVertex(v0);
+			immediateMesh.SurfaceAddVertex(v1);
+			immediateMesh.SurfaceAddVertex(v2);
+
+			// Second Triangle
+			immediateMesh.SurfaceAddVertex(v1);
+			immediateMesh.SurfaceAddVertex(v3);
+			immediateMesh.SurfaceAddVertex(v2);
 		}
 
 		immediateMesh.SurfaceEnd();
+		
+		GD.Print("Map Generated!");
 	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 }
