@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://5io7dag3rn7n"]
+
+[ext_resource type="Script" uid="uid://bmu5c71rcmv3k" path="res://scripts/generation/Visualiser.cs" id="1_lgw6t"]
+
+[node name="Visualiser" type="MeshInstance3D" unique_id=1051115179]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+script = ExtResource("1_lgw6t")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=745405571]
+transform = Transform3D(0.29808834, -0.81219554, 0.50147957, 0.4150019, 0.5833853, 0.6981655, -0.8596027, -3.5502193e-08, 0.5109631, 9.963884, 0, 7.4603176)

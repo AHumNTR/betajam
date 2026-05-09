@@ -14,7 +14,7 @@ public class Map
         SingleObjects.Add(obj);
     }*/
 
-    public static void CreateMap(int seed, float newMapSize = 100f)
+    public static Map CreateMap(int seed, float newMapSize = 100f)
     {
         float MapSize = newMapSize; // TODO: REMOVE THIS WHEN DECIDED
 
@@ -30,7 +30,7 @@ public class Map
         {
             var x = (random.NextSingle() * 2 - 1) * MapSize;
             var y = (random.NextSingle() * 2 - 1) * MapSize;
-            safePivots[i] = new Vector2(x, y);
+            safePivots.Add( new Vector2(x, y));
         }
 
         List<SafeLine> safeLines = new();
@@ -77,6 +77,7 @@ public class Map
         }
 
         map.SafeLines = safeLines;
+        return map;
     }
 
     /// <summary>
