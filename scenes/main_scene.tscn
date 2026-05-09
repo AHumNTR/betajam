@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://ofhvhwq5m3g" path="res://sounds/step_dirt2.ogg" id="6_k67gn"]
 [ext_resource type="AudioStream" uid="uid://cec4veu8v6f67" path="res://sounds/step_dirt3.ogg" id="7_k3g67"]
 [ext_resource type="PackedScene" uid="uid://5io7dag3rn7n" path="res://scenes/visualiser.tscn" id="8_18nlu"]
+[ext_resource type="Material" uid="uid://s0v6ewgcb1qk" path="res://materials/world-confine.tres" id="16_01n6w"]
 [ext_resource type="Texture2D" uid="uid://ys4t1llnl1ht" path="res://icon.svg" id="24_to7gp"]
 [ext_resource type="Script" uid="uid://tbnh26h3nlou" path="res://scripts/Player/End.cs" id="24_u0fll"]
 
@@ -44,6 +45,8 @@ sky = SubResource("Sky_to7gp")
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_u0fll"]
 height = 0.28497314
 radius = 2.6171875
+
+[sub_resource type="QuadMesh" id="QuadMesh_6u1mn"]
 
 [node name="MainScene" type="Node3D" unique_id=1061094929]
 
@@ -108,5 +111,47 @@ debug_color = Color(0, 0, 0, 0.41960785)
 [node name="Sprite3D" type="Sprite3D" parent="End" unique_id=1694309282]
 transform = Transform3D(4.114039, 0, 0, 0, -1.8354736e-07, -0.9999999, 0, 4.199074, -4.3711385e-08, 0, 0, 0)
 texture = ExtResource("24_to7gp")
+
+[node name="Mountains" type="Node3D" parent="." unique_id=1856168910]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mountains" unique_id=1420931651]
+transform = Transform3D(160, 0, 0, 0, 80, 0, 0, 0, 160, 0, 40, -190)
+mesh = SubResource("QuadMesh_6u1mn")
+surface_material_override/0 = ExtResource("16_01n6w")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Mountains" unique_id=1366823266]
+transform = Transform3D(-160, 0, -1.3987645e-05, 0, 80, 0, 1.3987645e-05, 0, -160, 0, 40, 190)
+mesh = SubResource("QuadMesh_6u1mn")
+surface_material_override/0 = ExtResource("16_01n6w")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mountains" unique_id=641438728]
+transform = Transform3D(110.308655, 0, 113.137085, 0, 80, 0, -110.308655, 0, 113.137085, -135, 40, -135)
+mesh = SubResource("QuadMesh_6u1mn")
+surface_material_override/0 = ExtResource("16_01n6w")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Mountains" unique_id=1714952330]
+transform = Transform3D(-110.308655, 0, 113.137085, 0, 80, 0, -110.308655, 0, -113.137085, -135, 40, 135)
+mesh = SubResource("QuadMesh_6u1mn")
+surface_material_override/0 = ExtResource("16_01n6w")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Mountains" unique_id=1511972372]
+transform = Transform3D(-110.308655, 0, -113.137085, 0, 80, 0, 110.308655, 0, -113.137085, 135, 40, 135)
+mesh = SubResource("QuadMesh_6u1mn")
+surface_material_override/0 = ExtResource("16_01n6w")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Mountains" unique_id=1440910358]
+transform = Transform3D(110.308655, 0, -113.137085, 0, 80, 0, 110.308655, 0, 113.137085, 135, 40, -135)
+mesh = SubResource("QuadMesh_6u1mn")
+surface_material_override/0 = ExtResource("16_01n6w")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Mountains" unique_id=1069754581]
+transform = Transform3D(-6.9938224e-06, 0, 160, 0, 80, 0, -160, 0, -6.9938224e-06, -190, 40, 0)
+mesh = SubResource("QuadMesh_6u1mn")
+surface_material_override/0 = ExtResource("16_01n6w")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Mountains" unique_id=92565568]
+transform = Transform3D(-6.9938224e-06, 0, -160, 0, 80, 0, 160, 0, -6.9938224e-06, 190, 40, 0)
+mesh = SubResource("QuadMesh_6u1mn")
+surface_material_override/0 = ExtResource("16_01n6w")
 
 [connection signal="body_entered" from="End" to="player" method="_on_end_body_entered"]

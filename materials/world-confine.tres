@@ -1,4 +1,9 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://s0v6ewgcb1qk"]
 
+[ext_resource type="Texture2D" uid="uid://cbihrlavqurgu" path="res://textures/Hills.png" id="1_ck0r2"]
+
 [resource]
-albedo_color = Color(0.5176471, 0.3254902, 0.5411765, 1)
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_ck0r2")
