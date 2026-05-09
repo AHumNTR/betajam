@@ -72,7 +72,7 @@ public class Map
 
                 if (!overlappedOnce)
                 {
-                    singleObjects.Add(new SingleObject(pos));
+                    singleObjects.Add(new SingleObject(pos, random.Next() % 3));
                 }
             }
         }
@@ -103,7 +103,7 @@ public class Map
                 var selectedPosition = candidateObjectPositions[randomIndex];
                 candidateObjectPositions.RemoveAt(randomIndex);
 
-                singleObjects.Add(new SingleObject(selectedPosition));
+                singleObjects.Add(new SingleObject(selectedPosition, random.Next() % 3));
             }
         }
 
@@ -151,18 +151,19 @@ public class Map
     public class SingleObject
     {
         public Vector2 Position;
-        public int objectType;
+        public int ObjectType;
 
-        public SingleObject(Vector2 position)
+        public SingleObject(Vector2 position, int type)
         {
             Position = position;
+            ObjectType = type;
         }
     }
 
     public class Objective
     {
         public Vector2 Position;
-        public int objectType;
+        public int ObjectType;
 
         public Objective(Vector2 position)
         {

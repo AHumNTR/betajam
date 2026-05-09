@@ -12,13 +12,13 @@ public partial class Spawner : Node3D
 	{
 		Map m=Map.CreateMap(Seed.seed);
 		foreach(Map.SingleObject o in m.SingleObjects){
-			Node3D obj=(Node3D)singleObjects[o.objectType].Instantiate();
+			Node3D obj=(Node3D)singleObjects[o.ObjectType].Instantiate();
 			this.AddChild(obj);	
 			obj.Position=new Vector3(o.Position.X,0,o.Position.Y);
 
 		}
 		foreach(Map.Objective o in m.Objectives){
-			Node3D obj=(Node3D)singleObjects[o.objectType].Instantiate();
+			Node3D obj=(Node3D)singleObjects[o.ObjectType].Instantiate();
 			this.AddChild(obj);	
 			obj.Position=new Vector3(o.Position.X,0,o.Position.Y);
 		}
