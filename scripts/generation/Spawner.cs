@@ -10,44 +10,71 @@ public partial class Spawner : Node3D
 	[Export]
 	public PackedScene[] objectiveScenes;
 	[Export]
+	public PackedScene grassObject;
+	[Export]
 	public BaseMaterial3D.BillboardModeEnum bilboard;
 	[Export] public Material PathDitherMaterial;
 	public override void _Ready()
 	{
+		// Since Godot uses right-hand coordinate system, we gotta take -Y for Z conversion!
+
 		Map m = Map.CreateMap(Seed.seed);
-		foreach (Map.SingleObject o in m.SingleObjects)
-		{
-			Node3D obj = (Node3D)singleObjects[o.ObjectType].Instantiate();
-			obj.GetNode<Sprite3D>("Sprite3D").Billboard = bilboard;
-			this.AddChild(obj);
-			obj.Position = new Vector3(o.Position.X, 0, o.Position.Y);
 
-		}
-		foreach (Map.Objective o in m.Objectives)
+		for (var i = 0; i < 2; i++)
 		{
-			Node3D obj = (Node3D)singleObjects[o.ObjectType].Instantiate();
-			this.AddChild(obj);
-			obj.Position = new Vector3(o.Position.X, 0, o.Position.Y);
-		}
+			for (var j = 0; j < 2; j++)
+			{
+				foreach (Vector2 pos in m.GrassPositions)
+				{
+					Node3D obj = (Node3D)grassObject.Instantiate();
+					obj.GetNode<Sprite3D>("Sprite3D").Billboard = bilboard;
+					this.AddChild(obj);
+					obj.Position = new Vector3(pos.X - i * Map.MAP_SIZE, 0, -pos.Y + j * Map.MAP_SIZE);
 
-		CreatePaths(m.SafeLines);
+				}
+
+				foreach (Map.SingleObject o in m.SingleObjects)
+				{
+					Node3D obj = (Node3D)singleObjects[o.ObjectType].Instantiate();
+					obj.GetNode<Sprite3D>("Sprite3D").Billboard = bilboard;
+					this.AddChild(obj);
+					obj.Position = new Vector3(o.Position.X - i * Map.MAP_SIZE, 0, -o.Position.Y + j * Map.MAP_SIZE);
+
+				}
+
+				foreach (Map.Objective o in m.Objectives)
+				{
+					Node3D obj = (Node3D)singleObjects[o.ObjectType].Instantiate();
+					this.AddChild(obj);
+					obj.Position = new Vector3(o.Position.X - i * Map.MAP_SIZE, 0, -o.Position.Y + j * Map.MAP_SIZE);
+				}
+
+				CreatePaths(m.SafeLines, new Vector3(-i * Map.MAP_SIZE, 0, j * Map.MAP_SIZE));
+
+			}
+		}
 	}
 
-	public void CreatePaths(List<Map.SafeLine> lines)
+	/* private void FillLongObject(Map.LongObject)
+	{
+		
+	} */
+
+	private void CreatePaths(List<Map.SafeLine> lines, Vector3 offset)
 	{
 		SurfaceTool st = new SurfaceTool();
 		st.Begin(Mesh.PrimitiveType.Triangles);
 
 		foreach (var line in lines)
 		{
-			Vector3 start = new Vector3(line.Start.X, 0, line.Start.Y);
-			Vector3 end = new Vector3(line.End.X, 0, line.End.Y);
+			Vector3 start = new Vector3(line.Start.X, 0, -line.Start.Y) + offset;
+			Vector3 end = new Vector3(line.End.X, 0, -line.End.Y) + offset;
 
-			Vector3 offset = new(0, -0.95f, 0);
+			Vector3 extraHeight = new(0, 0.01f, 0);
 			const float width = 2f;
 
-			start += offset;
-			end += offset;
+			start += extraHeight;
+			end += extraHeight;
 
 			Vector3 dir = (end - start).Normalized();
 			Vector3 normal = new Vector3(-dir.Z, 0, dir.X) * width;
@@ -60,7 +87,7 @@ public partial class Spawner : Node3D
 			var colorOpaque = new Color(1, 1, 1, 1);
 			var colorTransparent = new Color(1, 1, 1, 0);
 
-			int[] vertexArray = [	2, 4, 0, 4, 1, 0, 
+			int[] vertexArray = [   2, 4, 0, 4, 1, 0,
 									0, 1, 3, 1, 5, 3,
 									4, 6, 1, 6, 7, 1, 1, 7, 5,
 									2, 0, 8, 8, 0, 9, 0, 3, 9];
@@ -84,10 +111,10 @@ public partial class Spawner : Node3D
 					3 => startRight,
 					4 => endLeft,
 					5 => endRight,
-					6 => 0.5f * (endLeft + end) + dir,	
-					7 => 0.5f * (endRight + end) + dir,	
-					8 => 0.5f * (startLeft + start) - dir,	
-					9 => 0.5f * (startRight + start) - dir,	
+					6 => 0.5f * (endLeft + end) + dir,
+					7 => 0.5f * (endRight + end) + dir,
+					8 => 0.5f * (startLeft + start) - dir,
+					9 => 0.5f * (startRight + start) - dir,
 					_ => Vector3.Zero,
 				};
 				st.AddVertex(vertex);

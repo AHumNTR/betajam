@@ -111,6 +111,25 @@ public partial class Player : CharacterBody3D
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
 		}
 
+		// Teleport player back to keep in confines
+		if (GlobalPosition.X > Map.MAP_SIZE / 2)
+		{
+			GlobalPosition -= new Vector3(Map.MAP_SIZE, 0, 0);
+		}
+		else if (GlobalPosition.X < -Map.MAP_SIZE / 2)
+		{
+			GlobalPosition += new Vector3(Map.MAP_SIZE, 0, 0);
+		}
+		
+		if (GlobalPosition.Z > Map.MAP_SIZE / 2)
+		{
+			GlobalPosition -= new Vector3(0, 0, Map.MAP_SIZE);
+		}
+		else if (GlobalPosition.Z < -Map.MAP_SIZE / 2)
+		{
+			GlobalPosition += new Vector3(0, 0, Map.MAP_SIZE);
+		}
+
 		Velocity = velocity;
 		MoveAndSlide();
 	}

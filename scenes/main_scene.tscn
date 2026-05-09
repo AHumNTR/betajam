@@ -8,23 +8,28 @@
 [ext_resource type="Material" uid="uid://kk2hk0qaha2o" path="res://materials/world-floor.tres" id="5_6u1mn"]
 [ext_resource type="PackedScene" uid="uid://bd47imoeup3ax" path="res://scenes/Objects/Tree1.tscn" id="5_c16ls"]
 [ext_resource type="PackedScene" uid="uid://canpkcgnyuoy" path="res://scenes/Objects/Tree2.tscn" id="6_18nlu"]
-[ext_resource type="Material" uid="uid://s0v6ewgcb1qk" path="res://materials/world-confine.tres" id="6_bcnxi"]
 [ext_resource type="PackedScene" uid="uid://5io7dag3rn7n" path="res://scenes/visualiser.tscn" id="8_18nlu"]
 [ext_resource type="PackedScene" uid="uid://c3actfht73mhd" path="res://scenes/Objects/Tree3.tscn" id="8_e1cbu"]
 [ext_resource type="PackedScene" uid="uid://dc41yrltbmxym" path="res://scenes/Objects/Mushroom.tscn" id="9_mngbo"]
 [ext_resource type="PackedScene" uid="uid://bqxtmwiq3ivo6" path="res://scenes/Objects/Bush.tscn" id="10_01n6w"]
 [ext_resource type="PackedScene" uid="uid://cuc2hv013ugaf" path="res://scenes/Objects/BushWithFlowers.tscn" id="11_6u1mn"]
-[ext_resource type="PackedScene" path="res://scenes/Objects/Crystal1.tscn" id="12_bcnxi"]
+[ext_resource type="PackedScene" uid="uid://c7ti5b3fh723n" path="res://scenes/Objects/Crystal1.tscn" id="12_bcnxi"]
 [ext_resource type="PackedScene" uid="uid://dswhx4a1v2576" path="res://scenes/Objects/Crystal2.tscn" id="13_7nt27"]
 [ext_resource type="PackedScene" uid="uid://cug3vrs4hiy7a" path="res://scenes/Objects/Crystal3.tscn" id="14_k6f3i"]
 [ext_resource type="PackedScene" uid="uid://cpi4r3xpmf6if" path="res://scenes/Objects/Mushroom2.tscn" id="15_xdqt8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6u1mn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcnxi"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_bcnxi"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_7nt27"]
+
+[sub_resource type="Environment" id="Environment_bcnxi"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_7nt27"]
+
+[sub_resource type="Compositor" id="Compositor_k6f3i"]
 
 [node name="MainScene" type="Node3D" unique_id=1061094929]
 
@@ -51,34 +56,10 @@ modulate = Color(0.5147154, 4.793823e-05, 0.43245617, 1)
 texture = ExtResource("4_c16ls")
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=1545465834]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -1.5, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
-size = Vector3(220, 1, 220)
+size = Vector3(500, 1, 500)
 material = ExtResource("5_6u1mn")
-
-[node name="Confine0" type="CSGBox3D" parent="." unique_id=2056488560]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120, 1, -10)
-use_collision = true
-size = Vector3(1, 6, 220)
-material = ExtResource("6_bcnxi")
-
-[node name="Confine1" type="CSGBox3D" parent="." unique_id=798584686]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 1, -10)
-use_collision = true
-size = Vector3(1, 6, 220)
-material = ExtResource("6_bcnxi")
-
-[node name="Confine2" type="CSGBox3D" parent="." unique_id=1854060132]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 100)
-use_collision = true
-size = Vector3(220, 6, 1)
-material = ExtResource("6_bcnxi")
-
-[node name="Confine3" type="CSGBox3D" parent="." unique_id=273942725]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, -120)
-use_collision = true
-size = Vector3(220, 6, 1)
-material = ExtResource("6_bcnxi")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=487306256]
 transform = Transform3D(1, 0, 0, 0, 0.27857205, 0.9604153, 0, -0.9604153, 0.27857205, 0, 7.5507007, 0)
@@ -89,5 +70,10 @@ bilboard = 2
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
 visible = false
-material_override = SubResource("StandardMaterial3D_6u1mn")
-mesh = SubResource("ImmediateMesh_bcnxi")
+material_override = SubResource("StandardMaterial3D_bcnxi")
+mesh = SubResource("ImmediateMesh_7nt27")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1315559398]
+environment = SubResource("Environment_bcnxi")
+camera_attributes = SubResource("CameraAttributesPractical_7nt27")
+compositor = SubResource("Compositor_k6f3i")

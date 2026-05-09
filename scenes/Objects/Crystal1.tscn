@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dwtj4hyhto0g8"]
+[gd_scene format=3 uid="uid://c7ti5b3fh723n"]
 
 [ext_resource type="Texture2D" uid="uid://b8yus1na6qaq7" path="res://textures/Crystal1.png" id="1_8va75"]
 
@@ -9,11 +9,11 @@ radius = 0.25830078
 [node name="SingleObject" type="StaticBody3D" unique_id=234590250]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1052088263]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24925232, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57270384, 0)
 shape = SubResource("CylinderShape3D_56mcx")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=611015191]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.46668118, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.45863473, 0)
 pixel_size = 0.002
 billboard = 2
 texture = ExtResource("1_8va75")

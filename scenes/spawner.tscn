@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://c3actfht73mhd" path="res://scenes/Objects/Tree3.tscn" id="4_p5s3f"]
 [ext_resource type="PackedScene" uid="uid://dc41yrltbmxym" path="res://scenes/Objects/Mushroom.tscn" id="5_e3f8v"]
 [ext_resource type="Material" uid="uid://urnf3rkwq2qx" path="res://materials/path-dither.tres" id="6_4wbs5"]
+[ext_resource type="PackedScene" uid="uid://bry7ltlh57tk1" path="res://scenes/Objects/Grass.tscn" id="6_30a77"]
 
 [node name="Spawner" type="Node3D" unique_id=566857934]
 script = ExtResource("1_cmhla")
 singleObjects = Array[PackedScene]([ExtResource("2_4wbs5"), ExtResource("3_30a77"), ExtResource("4_p5s3f"), ExtResource("5_e3f8v")])
+grassObject = ExtResource("6_30a77")
 PathDitherMaterial = ExtResource("6_4wbs5")

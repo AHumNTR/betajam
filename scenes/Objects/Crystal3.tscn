@@ -9,11 +9,11 @@ radius = 0.25830078
 [node name="SingleObject" type="StaticBody3D" unique_id=234590250]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1052088263]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24925232, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5542894, 0)
 shape = SubResource("CylinderShape3D_56mcx")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=611015191]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.46668118, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.41721487, 0)
 pixel_size = 0.002
 billboard = 2
 texture = ExtResource("1_2ba4n")

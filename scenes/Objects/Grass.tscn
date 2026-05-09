@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bry7ltlh57tk1"]
+
+[ext_resource type="Texture2D" uid="uid://bby0eiup6rf0s" path="res://textures/Grass.png" id="1_hly1q"]
+
+[node name="SingleObject" type="Node3D" unique_id=470652518]
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=611015191]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.22142929, 0)
+pixel_size = 0.002
+billboard = 2
+texture = ExtResource("1_hly1q")

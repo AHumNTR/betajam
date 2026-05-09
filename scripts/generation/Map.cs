@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using Microsoft.Win32.SafeHandles;
 
 public class Map
 {
+    public List<Vector2> GrassPositions;
     public List<SingleObject> SingleObjects;
     public List<LongObject> LongObjects;
     public List<Objective> Objectives;
     public List<SafeLine> SafeLines;    // TODO: Keep until testing
     public List<RestrictedTriangle> RestrictedTriangles;
 
-    private const float MapSize = 100f;
+    public const float MAP_SIZE = 100f;
 
     /*public void AddSingleObject(SingleObject obj)
     {
@@ -31,10 +33,24 @@ public class Map
         {
             for (var j = 0; j < safePivotDimension; j++)
             {
-                var x = (random.NextSingle() * 2 - 1 + i * 2 - safePivotDimension) * MapSize / safePivotDimension;
-                var y = (random.NextSingle() * 2 - 1 + j * 2 - safePivotDimension) * MapSize / safePivotDimension;
+                var x = (random.NextSingle() + i) * MAP_SIZE / safePivotDimension * .95f;   // fixed multiplier is for giving
+                var y = (random.NextSingle() + j) * MAP_SIZE / safePivotDimension * .95f;   // space to other objects
                 safePivots.Add(new Vector2(x, y));
             }
+        }
+
+        // Add mirrored pivots on the edges to ensure
+        for (var i = 0; i < 4; i++)
+        {
+            var x = random.NextSingle() * MAP_SIZE;
+            safePivots.Add(new Vector2(x, MAP_SIZE));
+            safePivots.Add(new Vector2(x, 0));
+        }
+        for (var j = 0; j < 4; j++)
+        {
+            var y = random.NextSingle() * MAP_SIZE;
+            safePivots.Add(new Vector2(0, y));
+            safePivots.Add(new Vector2(MAP_SIZE, y));
         }
 
         var triangulationResult = Triangulator.Triangulate(safePivots);
@@ -46,20 +62,65 @@ public class Map
             safeLines.RemoveAt(random.Next() % safeLines.Count);
         }
 
+        // Remove safe lines on the edge
+        List<int> lineIndicesToDelete = new();
+        for (var i = 0; i < safeLines.Count; i++)
+        {
+            var line = safeLines[i];
+            if (
+                (Mathf.IsZeroApprox(line.Start.X) && Mathf.IsZeroApprox(line.End.X)) ||
+                (Mathf.IsZeroApprox(line.Start.Y) && Mathf.IsZeroApprox(line.End.Y)) ||
+                (Mathf.IsEqualApprox(line.Start.X, MAP_SIZE) && Mathf.IsEqualApprox(line.End.X, MAP_SIZE)) ||
+                (Mathf.IsEqualApprox(line.Start.Y, MAP_SIZE) && Mathf.IsEqualApprox(line.End.Y, MAP_SIZE))
+                )
+            {
+                lineIndicesToDelete.Add(i);
+            }
+        }
+        for (var i = lineIndicesToDelete.Count - 1; i >= 0; i--)
+        {
+            safeLines.RemoveAt(lineIndicesToDelete[i]);
+        }
+
         map.SafeLines = safeLines;
 
-        // TODO: (Maybe) Generate random rivers, add bridges where they meet safe lines
-
-        // Add Single Objects ???
+        // Add Grass
         const float objectLineDistance = 2f;
-        const int objectDimension = 30;
-        List<SingleObject> singleObjects = new();
-        for (var i = 0; i < objectDimension; i++)
+        const int grassFrequency = 20;
+        List<Vector2> grassPositions = new();
+        for (var i = 0; i < grassFrequency; i++)
         {
-            for (var j = 0; j < objectDimension; j++)
+            for (var j = 0; j < grassFrequency; j++)
             {
-                var x = (random.NextSingle() * 2 - 1 + i * 2 - objectDimension) * MapSize / objectDimension;
-                var y = (random.NextSingle() * 2 - 1 + j * 2 - objectDimension) * MapSize / objectDimension;
+                var x = (random.NextSingle() + i) * MAP_SIZE / grassFrequency;
+                var y = (random.NextSingle() + j) * MAP_SIZE / grassFrequency;
+                var pos = new Vector2(x, y);
+                var overlappedOnce = false;
+                foreach (var safeLine in safeLines)
+                {
+                    if (safeLine.Overlaps(pos, objectLineDistance))
+                    {
+                        overlappedOnce = true;
+                    }
+                }
+
+                if (!overlappedOnce)
+                {
+                    grassPositions.Add(new Vector2(x, y));
+                }
+            }
+        }
+        map.GrassPositions = grassPositions;
+
+        // Add Single Objects
+        const int objectFrequency = 40;
+        List<SingleObject> singleObjects = new();
+        for (var i = 0; i < objectFrequency; i++)
+        {
+            for (var j = 0; j < objectFrequency; j++)
+            {
+                var x = (random.NextSingle() + i) * MAP_SIZE / objectFrequency;
+                var y = (random.NextSingle() + j) * MAP_SIZE / objectFrequency;
                 var pos = new Vector2(x, y);
                 var overlappedOnce = false;
                 foreach (var safeLine in safeLines)
@@ -178,8 +239,8 @@ public class Map
         new(0), // Tree1
         new(1), // Tree2
         new(2), // Tree3
-        new(4), // Bush
-        new(5), // BushWithFlowers
+        /*new(4), // Bush
+        new(5), // BushWithFlowers*/
         ];
     private static readonly SparseObjectDefinition[] _sparseObjects = [
         new(3), // Mushroom
