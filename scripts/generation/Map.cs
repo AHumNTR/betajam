@@ -22,62 +22,34 @@ public class Map
 
         var map = new Map();
 
-        const int safePivotCount = 50;
-        List<Vector2> safePivots = new(safePivotCount);
+        const int safePivotDimension = 10;
+        List<Vector2> safePivots = new(safePivotDimension * safePivotDimension);
 
         // Generate safe pivots
-        for (var i = 0; i < safePivotCount; i++)
+        for (var i = 0; i < safePivotDimension; i++)
         {
-            var x = (random.NextSingle() * 2 - 1) * MapSize;
-            var y = (random.NextSingle() * 2 - 1) * MapSize;
-            safePivots.Add( new Vector2(x, y));
+            for (var j = 0; j < safePivotDimension; j++)
+            {
+                var x = (random.NextSingle() * 2 - 1 + i * 2 - safePivotDimension) * MapSize / safePivotDimension;
+                var y = (random.NextSingle() * 2 - 1 + j * 2 - safePivotDimension) * MapSize / safePivotDimension;
+                safePivots.Add(new Vector2(x, y));
+            }
         }
 
-        List<SafeLine> safeLines = new();
-        int[] safePivotConnectionCounts = new int[safePivotCount];
+        List<SafeLine> safeLines = Triangulator.Triangulate(safePivots);
 
-        // Generate the safe lines between safe pivots
-        for (var i = 0; i < safePivotCount; i++)
+        for (var i = 0; i < safeLines.Count / 2; i++)
         {
-            const int maxPivotConnections = 2;
-            List<int> candidatePivotIndices = new();
-            for (var pivotIndex = 0; pivotIndex < safePivotCount; pivotIndex++)
-            {
-                if (safePivotConnectionCounts[pivotIndex] < maxPivotConnections)
-                {
-                    candidatePivotIndices.Add(pivotIndex);
-                }
-            }
-
-            for (var j = safePivotConnectionCounts[i]; j < maxPivotConnections; j++)
-            {
-                if (candidatePivotIndices.Count > 0)
-                {
-                    var selectedPivotIndex = candidatePivotIndices[0];
-                    var bestDistanceSqr = float.MaxValue;
-                    foreach (var candidatePivotIndex in candidatePivotIndices)
-                    {
-                        var newDistanceSqr = safePivots[candidatePivotIndex].DistanceSquaredTo(safePivots[i]);
-                        if (newDistanceSqr < bestDistanceSqr)
-                        {
-                            bestDistanceSqr = newDistanceSqr;
-                            selectedPivotIndex = candidatePivotIndex;
-                        }
-                    }
-                    candidatePivotIndices.Remove(selectedPivotIndex);
-                    safePivotConnectionCounts[selectedPivotIndex]++;
-
-                    var pivot0 = safePivots[i];
-                    var pivot1 = safePivots[selectedPivotIndex];
-                    var line = new SafeLine(pivot0, pivot1);
-                    safeLines.Add(line);
-                }
-            }
-
+            safeLines.RemoveAt(random.Next() % safeLines.Count);
         }
 
         map.SafeLines = safeLines;
         return map;
+
+        // TODO: Generate sparse rare objects at some radius away from safe line
+        // TODO: Generate more dense objects at some further radius away from safe line
+        // TODO: (Maybe) Generate random rivers, add bridges where they meet safe lines
+        // TODO: Add objectives on map
     }
 
     /// <summary>
@@ -102,6 +74,82 @@ public class Map
         public SingleObject(Vector2 position)
         {
             Position = position;
+        }
+    }
+
+    private class Triangulator
+    {
+        public static List<SafeLine> Triangulate(List<Vector2> safePivots)
+        {
+            List<SafeLine> safeLines = new List<SafeLine>();
+            int n = safePivots.Count;
+
+            if (n < 3) return safeLines;
+
+            HashSet<(int, int)> uniqueEdges = new HashSet<(int, int)>();
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = i + 1; j < n; j++)
+                {
+                    for (int k = j + 1; k < n; k++)
+                    {
+                        Vector2 p1 = safePivots[i];
+                        Vector2 p2 = safePivots[j];
+                        Vector2 p3 = safePivots[k];
+
+                        Vector2 center;
+                        float radiusSq;
+                        GetCircumcircle(p1, p2, p3, out center, out radiusSq);
+
+                        bool isDelaunay = true;
+                        for (int m = 0; m < n; m++)
+                        {
+                            if (m == i || m == j || m == k) continue;
+
+                            if (center.DistanceSquaredTo(safePivots[m]) < radiusSq - 0.001f)
+                            {
+                                isDelaunay = false;
+                                break;
+                            }
+                        }
+
+                        if (isDelaunay)
+                        {
+                            AddEdge(uniqueEdges, safeLines, i, j, p1, p2);
+                            AddEdge(uniqueEdges, safeLines, j, k, p2, p3);
+                            AddEdge(uniqueEdges, safeLines, k, i, p3, p1);
+                        }
+                    }
+                }
+            }
+
+            return safeLines;
+        }
+
+        private static void GetCircumcircle(Vector2 p1, Vector2 p2, Vector2 p3, out Vector2 center, out float radiusSq)
+        {
+            float x1 = p1.X, y1 = p1.Y;
+            float x2 = p2.X, y2 = p2.Y;
+            float x3 = p3.X, y3 = p3.Y;
+
+            float D = 2 * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));
+
+            float centerX = ((x1 * x1 + y1 * y1) * (y2 - y3) + (x2 * x2 + y2 * y2) * (y3 - y1) + (x3 * x3 + y3 * y3) * (y1 - y2)) / D;
+            float centerY = ((x1 * x1 + y1 * y1) * (x3 - x2) + (x2 * x2 + y2 * y2) * (x1 - x3) + (x3 * x3 + y3 * y3) * (x2 - x1)) / D;
+
+            center = new Vector2(centerX, centerY);
+            radiusSq = p1.DistanceSquaredTo(center);
+        }
+
+        private static void AddEdge(HashSet<(int, int)> edges, List<SafeLine> lines, int i1, int i2, Vector2 v1, Vector2 v2)
+        {
+            int min = Math.Min(i1, i2);
+            int max = Math.Max(i1, i2);
+            if (edges.Add((min, max)))
+            {
+                lines.Add(new SafeLine(v1, v2));
+            }
         }
     }
 
