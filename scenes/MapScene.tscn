@@ -16,11 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://bcv2m1d2anoi5" path="res://scenes/ObjectsIcons/Crystal3.tscn" id="12_pfmqr"]
 [ext_resource type="PackedScene" uid="uid://ddmskcmsnhynv" path="res://scenes/ObjectsIcons/Mushroom2.tscn" id="13_5rwvw"]
 [ext_resource type="PackedScene" uid="uid://cs7bk0ue6jsvj" path="res://scenes/Objects/Well.tscn" id="16_s6fll"]
+[ext_resource type="Material" uid="uid://vx1tegotaekp" path="res://materials/map-background.tres" id="17_xxjsi"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rx4pi"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2h434"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_1e82v"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_op04c"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_iq58l"]
 
 [node name="MapScene" type="Node3D" unique_id=1830204928]
 
@@ -35,11 +38,16 @@ MinSize = 50.0
 MaxSize = 1000.0
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("1_er4uf")]
-transform = Transform3D(-2.7347633e-09, 0.998041, 0.06256409, 4.3625757e-08, 0.06256409, -0.998041, -1, 0, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 0, 0)
 visible = false
-material_override = SubResource("StandardMaterial3D_rx4pi")
-mesh = SubResource("ImmediateMesh_1e82v")
+material_override = SubResource("StandardMaterial3D_2h434")
+mesh = SubResource("ImmediateMesh_op04c")
 
 [node name="Spawner" parent="." unique_id=566857934 instance=ExtResource("3_wikxs")]
 singleObjects = Array[PackedScene]([ExtResource("4_mvot7"), ExtResource("5_60j6u"), ExtResource("6_60j6u"), ExtResource("5_jylts"), ExtResource("8_2h434"), ExtResource("9_op04c"), ExtResource("10_iq58l"), ExtResource("7_s6fll"), ExtResource("13_5rwvw"), ExtResource("10_op04c"), ExtResource("11_iq58l"), ExtResource("12_pfmqr"), ExtResource("16_s6fll")])
 bilboard = 1
+
+[node name="Background" type="MeshInstance3D" parent="." unique_id=1687506463]
+transform = Transform3D(100, 0, 0, 0, -4.371139e-06, 100, 0, -100, -4.371139e-06, 50, -5, -50)
+mesh = SubResource("QuadMesh_iq58l")
+surface_material_override/0 = ExtResource("17_xxjsi")

@@ -12,7 +12,7 @@ public class Map
     public List<SafeLine> SafeLines;    // TODO: Keep until testing
     public List<RestrictedTriangle> RestrictedTriangles;
 
-    public const float MAP_SIZE = 100f;
+    public const float MAP_SIZE = 250f;
 
     public static Map CreateMap(int seed)
     {
@@ -20,7 +20,7 @@ public class Map
 
         var map = new Map();
 
-        const int safePivotDimension = 10;
+        const int safePivotDimension = 15;
         List<Vector2> safePivots = new(safePivotDimension * safePivotDimension);
 
         // Generate safe pivots and safe lines to ensure objectives are reachable
@@ -108,7 +108,7 @@ public class Map
         map.GrassPositions = grassPositions;
 
         // Add Single Objects
-        const int objectFrequency = 40;
+        const int objectFrequency = 60;
         List<SingleObject> singleObjects = new();
         for (var i = 0; i < objectFrequency; i++)
         {
@@ -233,16 +233,16 @@ public class Map
         new(2), // Rock
         ];
     private static readonly SparseObjectDefinition[] _sparseObjects = [
-        new(3, 6), // Tree2
-        new(4, 6), // Tree3
-        new(5, 6), // TreeRed
-        new(6, 6), // TreeYellow
-        new(7, 15), // Mushroom
-        new(8, 15), // Mushroom2
-        new(9, 12), // Crystal1
-        new(10, 12), // Crystal2
-        new(11, 12), // Crystal3
-        new(12, 3), // Well
+        new(3, 12), // Tree2
+        new(4, 12), // Tree3
+        new(5, 12), // TreeRed
+        new(6, 12), // TreeYellow
+        new(7, 25), // Mushroom
+        new(8, 25), // Mushroom2
+        new(9,  20), // Crystal1
+        new(10, 20), // Crystal2
+        new(11, 20), // Crystal3
+        new(12, 12), // Well
         ];
     private static readonly LongObjectDefinition[] _longObjects = [
         new(0),
