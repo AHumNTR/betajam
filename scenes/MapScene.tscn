@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cerxvfwk8s5i5"]
+
+[ext_resource type="PackedScene" uid="uid://5io7dag3rn7n" path="res://scenes/visualiser.tscn" id="1_er4uf"]
+[ext_resource type="Script" uid="uid://xabhxir7pcia" path="res://scripts/Player/MapCamera.cs" id="1_y2hrc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2hrc"]
+shading_mode = 0
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_wikxs"]
+
+[node name="MapScene" type="Node3D" unique_id=1830204928]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2072540392]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 143.75174, 0)
+projection = 1
+size = 100.0
+script = ExtResource("1_y2hrc")
+DragSensitivity = 0.5
+ZoomSpeed = 15.0
+MinSize = 50.0
+MaxSize = 1000.0
+
+[node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("1_er4uf")]
+transform = Transform3D(-2.7347633e-09, 0.998041, 0.06256409, 4.3625757e-08, 0.06256409, -0.998041, -1, 0, -4.371139e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_y2hrc")
+mesh = SubResource("ImmediateMesh_wikxs")

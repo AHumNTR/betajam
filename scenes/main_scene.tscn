@@ -33,7 +33,7 @@ modulate = Color(0.5147154, 4.793823e-05, 0.43245617, 1)
 texture = ExtResource("2_pw63i")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1545465834]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5533142, -2.22301, -6.0608826)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5533142, -1.2025971, -6.0608826)
 use_collision = true
 size = Vector3(17.907166, 1, 20.861755)
 
@@ -42,6 +42,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7097101, -3.5677876)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Collectable" unique_id=902298713]
 shape = SubResource("BoxShape3D_7ykc4")
+
+[node name="Sprite3D" type="Sprite3D" parent="Collectable" unique_id=1595281900]
+billboard = 2
+texture = ExtResource("2_pw63i")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=487306256]
 transform = Transform3D(1, 0, 0, 0, 0.27857205, 0.9604153, 0, -0.9604153, 0.27857205, 0, 7.5507007, 0)
