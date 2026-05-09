@@ -120,6 +120,7 @@ public class Map
     public class SingleObject
     {
         public Vector2 Position;
+        public int objectType;
 
         public SingleObject(Vector2 position)
         {
@@ -130,6 +131,7 @@ public class Map
     public class Objective
     {
         public Vector2 Position;
+        public int objectType;
 
         public Objective(Vector2 position)
         {

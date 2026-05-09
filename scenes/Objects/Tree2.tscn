@@ -1,14 +1,14 @@
-[gd_scene format=3 uid="uid://bdu7iodehpfvt"]
+[gd_scene format=3 uid="uid://canpkcgnyuoy"]
 
-[ext_resource type="Texture2D" uid="uid://ys4t1llnl1ht" path="res://icon.svg" id="1_7ukg5"]
+[ext_resource type="Texture2D" uid="uid://ys4t1llnl1ht" path="res://icon.svg" id="1_ee4u4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pu3yx"]
 
-[node name="Obstacle" type="StaticBody3D" unique_id=234590250]
+[node name="SingleObject" type="StaticBody3D" unique_id=234590250]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1052088263]
 shape = SubResource("BoxShape3D_pu3yx")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=611015191]
 billboard = 2
-texture = ExtResource("1_7ukg5")
+texture = ExtResource("1_ee4u4")
