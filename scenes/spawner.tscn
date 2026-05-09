@@ -1,11 +1,13 @@
-[gd_scene format=3 uid="uid://cj7tg1257jl31"]
+[gd_scene format=3 uid="uid://bcvi6fpdb80dn"]
 
 [ext_resource type="Script" uid="uid://c8nqqe0sx30lu" path="res://scripts/generation/Spawner.cs" id="1_cmhla"]
 [ext_resource type="PackedScene" uid="uid://bd47imoeup3ax" path="res://scenes/Objects/Tree1.tscn" id="2_4wbs5"]
 [ext_resource type="PackedScene" uid="uid://canpkcgnyuoy" path="res://scenes/Objects/Tree2.tscn" id="3_30a77"]
-[ext_resource type="PackedScene" uid="uid://dqn76mihusr0k" path="res://scenes/Objects/Rock.tscn" id="4_p5s3f"]
+[ext_resource type="PackedScene" uid="uid://c3actfht73mhd" path="res://scenes/Objects/Tree3.tscn" id="4_p5s3f"]
 [ext_resource type="PackedScene" uid="uid://dc41yrltbmxym" path="res://scenes/Objects/Mushroom.tscn" id="5_e3f8v"]
+[ext_resource type="Material" uid="uid://urnf3rkwq2qx" path="res://materials/path-dither.tres" id="6_4wbs5"]
 
 [node name="Spawner" type="Node3D" unique_id=566857934]
 script = ExtResource("1_cmhla")
 singleObjects = Array[PackedScene]([ExtResource("2_4wbs5"), ExtResource("3_30a77"), ExtResource("4_p5s3f"), ExtResource("5_e3f8v")])
+PathDitherMaterial = ExtResource("6_4wbs5")

@@ -4,9 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://bueuyseh2y8fm" path="res://textures/Compass.png" id="2_rt2n2"]
 [ext_resource type="Script" uid="uid://cp6i17sx4f2c3" path="res://scripts/Player/Compass.cs" id="3_7ykc4"]
 [ext_resource type="Texture2D" uid="uid://dx0mheem8v8xt" path="res://textures/CompassArrow.png" id="4_c16ls"]
-[ext_resource type="PackedScene" path="res://scenes/spawner.tscn" id="4_gubc5"]
+[ext_resource type="PackedScene" uid="uid://bcvi6fpdb80dn" path="res://scenes/spawner.tscn" id="4_gubc5"]
+[ext_resource type="Material" uid="uid://kk2hk0qaha2o" path="res://materials/world-floor.tres" id="5_6u1mn"]
 [ext_resource type="PackedScene" uid="uid://bd47imoeup3ax" path="res://scenes/Objects/Tree1.tscn" id="5_c16ls"]
 [ext_resource type="PackedScene" uid="uid://canpkcgnyuoy" path="res://scenes/Objects/Tree2.tscn" id="6_18nlu"]
+[ext_resource type="Material" uid="uid://s0v6ewgcb1qk" path="res://materials/world-confine.tres" id="6_bcnxi"]
 [ext_resource type="PackedScene" uid="uid://5io7dag3rn7n" path="res://scenes/visualiser.tscn" id="8_18nlu"]
 [ext_resource type="PackedScene" uid="uid://c3actfht73mhd" path="res://scenes/Objects/Tree3.tscn" id="8_e1cbu"]
 [ext_resource type="PackedScene" uid="uid://dc41yrltbmxym" path="res://scenes/Objects/Mushroom.tscn" id="9_mngbo"]
@@ -19,10 +21,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01n6w"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6u1mn"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_6u1mn"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_bcnxi"]
 
 [node name="MainScene" type="Node3D" unique_id=1061094929]
 
@@ -48,10 +50,35 @@ transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1
 modulate = Color(0.5147154, 4.793823e-05, 0.43245617, 1)
 texture = ExtResource("4_c16ls")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1545465834]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+[node name="Floor" type="CSGBox3D" parent="." unique_id=1545465834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -1.5, -10)
 use_collision = true
-size = Vector3(200, 1, 200)
+size = Vector3(220, 1, 220)
+material = ExtResource("5_6u1mn")
+
+[node name="Confine0" type="CSGBox3D" parent="." unique_id=2056488560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120, 1, -10)
+use_collision = true
+size = Vector3(1, 6, 220)
+material = ExtResource("6_bcnxi")
+
+[node name="Confine1" type="CSGBox3D" parent="." unique_id=798584686]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 1, -10)
+use_collision = true
+size = Vector3(1, 6, 220)
+material = ExtResource("6_bcnxi")
+
+[node name="Confine2" type="CSGBox3D" parent="." unique_id=1854060132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 100)
+use_collision = true
+size = Vector3(220, 6, 1)
+material = ExtResource("6_bcnxi")
+
+[node name="Confine3" type="CSGBox3D" parent="." unique_id=273942725]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, -120)
+use_collision = true
+size = Vector3(220, 6, 1)
+material = ExtResource("6_bcnxi")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=487306256]
 transform = Transform3D(1, 0, 0, 0, 0.27857205, 0.9604153, 0, -0.9604153, 0.27857205, 0, 7.5507007, 0)
@@ -62,5 +89,5 @@ bilboard = 2
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
 visible = false
-material_override = SubResource("StandardMaterial3D_01n6w")
-mesh = SubResource("ImmediateMesh_6u1mn")
+material_override = SubResource("StandardMaterial3D_6u1mn")
+mesh = SubResource("ImmediateMesh_bcnxi")
