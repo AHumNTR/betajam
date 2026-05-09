@@ -186,6 +186,6 @@ public partial class Player : CharacterBody3D
 	}
 	
 	public void _on_end_body_entered(Node3D node){
-		if(node==(Node3D)this)GD.Print("dasds");
+		if(node==(Node3D)this&&End.RemainingItems==0)GetTree().ChangeSceneToFile("res://scenes/win_cutscene.tscn");
 	}
 }

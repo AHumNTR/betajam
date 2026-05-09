@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://q2dpwvkoc5w0"]
+
+[ext_resource type="Texture2D" uid="uid://dp800dyfmuj2x" path="res://textures/Icons/IMG_2305.png" id="1_7nbao"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ee4u4"]
+height = 2.7153683
+radius = 0.78759766
+
+[node name="SingleObject" type="StaticBody3D" unique_id=234590250]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1052088263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.353095, 0)
+shape = SubResource("CylinderShape3D_ee4u4")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=611015191]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 3.1173496, 0)
+billboard = 2
+texture = ExtResource("1_7nbao")

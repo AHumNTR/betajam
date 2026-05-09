@@ -2,17 +2,20 @@
 
 [ext_resource type="PackedScene" uid="uid://5io7dag3rn7n" path="res://scenes/visualiser.tscn" id="1_er4uf"]
 [ext_resource type="Script" uid="uid://xabhxir7pcia" path="res://scripts/Player/MapCamera.cs" id="1_y2hrc"]
-[ext_resource type="PackedScene" uid="uid://cj7tg1257jl31" path="res://scenes/spawner.tscn" id="3_wikxs"]
-[ext_resource type="PackedScene" uid="uid://bd47imoeup3ax" path="res://scenes/Objects/Tree1.tscn" id="4_mvot7"]
-[ext_resource type="PackedScene" uid="uid://canpkcgnyuoy" path="res://scenes/Objects/Tree2.tscn" id="5_jylts"]
-[ext_resource type="PackedScene" uid="uid://dqn76mihusr0k" path="res://scenes/Objects/Rock.tscn" id="6_60j6u"]
-[ext_resource type="PackedScene" uid="uid://dc41yrltbmxym" path="res://scenes/Objects/Mushroom.tscn" id="7_s6fll"]
-[ext_resource type="PackedScene" uid="uid://bqxtmwiq3ivo6" path="res://scenes/Objects/Bush.tscn" id="8_xxjsi"]
-[ext_resource type="PackedScene" uid="uid://cuc2hv013ugaf" path="res://scenes/Objects/BushWithFlowers.tscn" id="9_2h434"]
-[ext_resource type="PackedScene" uid="uid://dwtj4hyhto0g8" path="res://scenes/Objects/Crystal1.tscn" id="10_op04c"]
-[ext_resource type="PackedScene" uid="uid://dswhx4a1v2576" path="res://scenes/Objects/Crystal2.tscn" id="11_iq58l"]
-[ext_resource type="PackedScene" uid="uid://cug3vrs4hiy7a" path="res://scenes/Objects/Crystal3.tscn" id="12_pfmqr"]
-[ext_resource type="PackedScene" uid="uid://cpi4r3xpmf6if" path="res://scenes/Objects/Mushroom2.tscn" id="13_5rwvw"]
+[ext_resource type="PackedScene" uid="uid://bcvi6fpdb80dn" path="res://scenes/spawner.tscn" id="3_wikxs"]
+[ext_resource type="PackedScene" uid="uid://brbdyks5x0gol" path="res://scenes/ObjectsIcons/Tree1.tscn" id="4_mvot7"]
+[ext_resource type="PackedScene" uid="uid://c40n4e61o5oi1" path="res://scenes/ObjectsIcons/TreePine.tscn" id="5_60j6u"]
+[ext_resource type="PackedScene" uid="uid://d1dk1labp5uhg" path="res://scenes/ObjectsIcons/Tree2.tscn" id="5_jylts"]
+[ext_resource type="PackedScene" uid="uid://bamf5o5xxohsh" path="res://scenes/ObjectsIcons/Rock.tscn" id="6_60j6u"]
+[ext_resource type="PackedScene" uid="uid://cbrcboky8kqe6" path="res://scenes/ObjectsIcons/Mushroom.tscn" id="7_s6fll"]
+[ext_resource type="PackedScene" uid="uid://q2dpwvkoc5w0" path="res://scenes/ObjectsIcons/Tree3.tscn" id="8_2h434"]
+[ext_resource type="PackedScene" uid="uid://ci27t2f6ifb6x" path="res://scenes/ObjectsIcons/TreeRed.tscn" id="9_op04c"]
+[ext_resource type="PackedScene" uid="uid://dfucth8jmu1nk" path="res://scenes/ObjectsIcons/TreeYellow.tscn" id="10_iq58l"]
+[ext_resource type="PackedScene" uid="uid://dosspjn0rqiws" path="res://scenes/ObjectsIcons/Crystal1.tscn" id="10_op04c"]
+[ext_resource type="PackedScene" uid="uid://kukf4bcaf233" path="res://scenes/ObjectsIcons/Crystal2.tscn" id="11_iq58l"]
+[ext_resource type="PackedScene" uid="uid://bcv2m1d2anoi5" path="res://scenes/ObjectsIcons/Crystal3.tscn" id="12_pfmqr"]
+[ext_resource type="PackedScene" uid="uid://ddmskcmsnhynv" path="res://scenes/ObjectsIcons/Mushroom2.tscn" id="13_5rwvw"]
+[ext_resource type="PackedScene" uid="uid://cs7bk0ue6jsvj" path="res://scenes/Objects/Well.tscn" id="16_s6fll"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rx4pi"]
 shading_mode = 0
@@ -38,5 +41,5 @@ material_override = SubResource("StandardMaterial3D_rx4pi")
 mesh = SubResource("ImmediateMesh_1e82v")
 
 [node name="Spawner" parent="." unique_id=566857934 instance=ExtResource("3_wikxs")]
-singleObjects = Array[PackedScene]([ExtResource("4_mvot7"), ExtResource("5_jylts"), ExtResource("6_60j6u"), ExtResource("7_s6fll"), ExtResource("8_xxjsi"), ExtResource("9_2h434"), ExtResource("10_op04c"), ExtResource("11_iq58l"), ExtResource("12_pfmqr"), ExtResource("13_5rwvw")])
+singleObjects = Array[PackedScene]([ExtResource("4_mvot7"), ExtResource("5_60j6u"), ExtResource("6_60j6u"), ExtResource("5_jylts"), ExtResource("8_2h434"), ExtResource("9_op04c"), ExtResource("10_iq58l"), ExtResource("7_s6fll"), ExtResource("13_5rwvw"), ExtResource("10_op04c"), ExtResource("11_iq58l"), ExtResource("12_pfmqr"), ExtResource("16_s6fll")])
 bilboard = 1

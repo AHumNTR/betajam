@@ -55,7 +55,7 @@ public partial class Spawner : Node3D
 			}
 		}
 
-		player.Init(m.SafeLines);
+		if(player!=null)player.Init(m.SafeLines);
 	}
 
 	/* private void FillLongObject(Map.LongObject)
