@@ -14,16 +14,17 @@
 [ext_resource type="AudioStream" uid="uid://cec4veu8v6f67" path="res://sounds/step_dirt3.ogg" id="7_k3g67"]
 [ext_resource type="PackedScene" uid="uid://5io7dag3rn7n" path="res://scenes/visualiser.tscn" id="8_18nlu"]
 [ext_resource type="Material" uid="uid://s0v6ewgcb1qk" path="res://materials/world-confine.tres" id="16_01n6w"]
+[ext_resource type="Script" uid="uid://bkwyv632n0hcs" path="res://scripts/FollowingMountain.cs" id="16_bcnxi"]
 [ext_resource type="PackedScene" uid="uid://cfjdg8f5qgcna" path="res://scenes/Objects/Objectives/objective1.tscn" id="17_6u1mn"]
 [ext_resource type="Texture2D" uid="uid://ys4t1llnl1ht" path="res://icon.svg" id="24_to7gp"]
 [ext_resource type="Script" uid="uid://tbnh26h3nlou" path="res://scripts/Player/End.cs" id="24_u0fll"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01n6w"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7nt27"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_6u1mn"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_k6f3i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_58gk3"]
 sky_top_color = Color(0.6680412, 0.25197867, 0.6435261, 1)
@@ -92,8 +93,8 @@ player = NodePath("../player")
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
 visible = false
-material_override = SubResource("StandardMaterial3D_01n6w")
-mesh = SubResource("ImmediateMesh_6u1mn")
+material_override = SubResource("StandardMaterial3D_7nt27")
+mesh = SubResource("ImmediateMesh_k6f3i")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1315559398]
 environment = SubResource("Environment_bcnxi")
@@ -113,7 +114,9 @@ debug_color = Color(0, 0, 0, 0.41960785)
 transform = Transform3D(4.114039, 0, 0, 0, -1.8354736e-07, -0.9999999, 0, 4.199074, -4.3711385e-08, 0, 0, 0)
 texture = ExtResource("24_to7gp")
 
-[node name="Mountains" type="Node3D" parent="." unique_id=1856168910]
+[node name="Mountains" type="Node3D" parent="." unique_id=1856168910 node_paths=PackedStringArray("player")]
+script = ExtResource("16_bcnxi")
+player = NodePath("../player")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mountains" unique_id=1420931651]
 transform = Transform3D(160, 0, 0, 0, 80, 0, 0, 0, 160, 0, 40, -190)
