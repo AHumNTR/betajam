@@ -26,7 +26,7 @@ public partial class Player : CharacterBody3D
 		var random = new RandomNumberGenerator();
 		var selectedPath = dirtPaths[random.RandiRange(0, dirtPaths.Count - 1)];
 		var centerPosition = 0.5f * (selectedPath.Start + selectedPath.End);
-		GlobalPosition = new Vector3(centerPosition.X, 0.1f, centerPosition.Y);
+		//GlobalPosition = new Vector3(centerPosition.X, 0.1f, centerPosition.Y);
 	}
 
 	public override void _Ready()
@@ -153,6 +153,23 @@ public partial class Player : CharacterBody3D
 		else if (GlobalPosition.Z < -Map.MAP_SIZE / 2)
 		{
 			GlobalPosition += new Vector3(0, 0, Map.MAP_SIZE);
+		}
+		//check for collecting
+		if (Input.IsActionJustPressed("Interact"))
+		{
+			var spaceState = GetWorld3D().DirectSpaceState;
+
+			Vector3 forward = -cam.GlobalTransform.Basis.Z;
+			Vector3 end = cam.GlobalPosition + (forward * 50.0f);
+			
+			var query = PhysicsRayQueryParameters3D.Create(cam.GlobalPosition, end,2);
+			var result = spaceState.IntersectRay(query);
+			if (result.Count > 0)
+			{
+				((Node)result["collider"]).QueueFree();
+				End.RemainingItems--;
+				GD.Print(End.RemainingItems);
+			}
 		}
 
 		Velocity = velocity;

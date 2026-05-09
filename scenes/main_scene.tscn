@@ -14,15 +14,16 @@
 [ext_resource type="AudioStream" uid="uid://cec4veu8v6f67" path="res://sounds/step_dirt3.ogg" id="7_k3g67"]
 [ext_resource type="PackedScene" uid="uid://5io7dag3rn7n" path="res://scenes/visualiser.tscn" id="8_18nlu"]
 [ext_resource type="Material" uid="uid://s0v6ewgcb1qk" path="res://materials/world-confine.tres" id="16_01n6w"]
+[ext_resource type="PackedScene" uid="uid://cfjdg8f5qgcna" path="res://scenes/Objects/Objectives/objective1.tscn" id="17_6u1mn"]
 [ext_resource type="Texture2D" uid="uid://ys4t1llnl1ht" path="res://icon.svg" id="24_to7gp"]
 [ext_resource type="Script" uid="uid://tbnh26h3nlou" path="res://scripts/Player/End.cs" id="24_u0fll"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01n6w"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcnxi"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_6u1mn"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_7nt27"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_58gk3"]
 sky_top_color = Color(0.6680412, 0.25197867, 0.6435261, 1)
@@ -91,8 +92,8 @@ player = NodePath("../player")
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
 visible = false
-material_override = SubResource("StandardMaterial3D_01n6w")
-mesh = SubResource("ImmediateMesh_6u1mn")
+material_override = SubResource("StandardMaterial3D_bcnxi")
+mesh = SubResource("ImmediateMesh_7nt27")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1315559398]
 environment = SubResource("Environment_bcnxi")
@@ -154,6 +155,19 @@ transform = Transform3D(-6.9938224e-06, 0, -160, 0, 80, 0, 160, 0, -6.9938224e-0
 mesh = SubResource("QuadMesh_6u1mn")
 surface_material_override/0 = ExtResource("16_01n6w")
 
-[node name="Objective" type="Node3D" parent="." unique_id=627335377]
+[node name="Objective" parent="." unique_id=800861428 instance=ExtResource("17_6u1mn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6746788, 2.0480006, 5.02431)
+
+[node name="Objective2" parent="." unique_id=236381354 instance=ExtResource("17_6u1mn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6746788, 2.0480006, 5.02431)
+
+[node name="Objective3" parent="." unique_id=1246094192 instance=ExtResource("17_6u1mn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6746788, 2.0480006, 5.02431)
+
+[node name="Objective4" parent="." unique_id=817952962 instance=ExtResource("17_6u1mn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6746788, 2.0480006, 5.02431)
+
+[node name="Objective5" parent="." unique_id=777515261 instance=ExtResource("17_6u1mn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6746788, 2.0480006, 5.02431)
 
 [connection signal="body_entered" from="End" to="player" method="_on_end_body_entered"]
