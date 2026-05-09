@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://dswhx4a1v2576" path="res://scenes/Objects/Crystal2.tscn" id="13_7nt27"]
 [ext_resource type="PackedScene" uid="uid://cug3vrs4hiy7a" path="res://scenes/Objects/Crystal3.tscn" id="14_k6f3i"]
 [ext_resource type="PackedScene" uid="uid://cpi4r3xpmf6if" path="res://scenes/Objects/Mushroom2.tscn" id="15_xdqt8"]
+[ext_resource type="Texture2D" uid="uid://ys4t1llnl1ht" path="res://icon.svg" id="24_to7gp"]
+[ext_resource type="Script" uid="uid://tbnh26h3nlou" path="res://scripts/Player/End.cs" id="24_u0fll"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
@@ -48,6 +50,10 @@ sky = SubResource("Sky_to7gp")
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_7nt27"]
 
 [sub_resource type="Compositor" id="Compositor_k6f3i"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u0fll"]
+height = 0.28497314
+radius = 2.6171875
 
 [node name="MainScene" type="Node3D" unique_id=1061094929]
 
@@ -99,3 +105,18 @@ mesh = SubResource("ImmediateMesh_bcnxi")
 environment = SubResource("Environment_bcnxi")
 camera_attributes = SubResource("CameraAttributesPractical_7nt27")
 compositor = SubResource("Compositor_k6f3i")
+
+[node name="End" type="Area3D" parent="." unique_id=2030952780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.120334, 0.9566717, 0)
+script = ExtResource("24_u0fll")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="End" unique_id=1656111737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09927368, 0)
+shape = SubResource("CylinderShape3D_u0fll")
+debug_color = Color(0, 0, 0, 0.41960785)
+
+[node name="Sprite3D" type="Sprite3D" parent="End" unique_id=1694309282]
+transform = Transform3D(4.114039, 0, 0, 0, -1.8354736e-07, -0.9999999, 0, 4.199074, -4.3711385e-08, 0, 0, 0)
+texture = ExtResource("24_to7gp")
+
+[connection signal="body_entered" from="End" to="player" method="_on_end_body_entered"]

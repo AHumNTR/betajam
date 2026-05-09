@@ -157,4 +157,7 @@ public partial class Player : CharacterBody3D
 		audioPlayer.Stream = selectedSoundPool[selectedSoundIndex];
 		audioPlayer.Play();
 	}
+	public void _on_end_body_entered(Node3D node){
+		if(node==(Node3D)this)GD.Print("dasds");
+	}
 }
