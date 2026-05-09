@@ -52,7 +52,7 @@ public class Map
 
         // Add Single Objects ???
         const float objectLineDistance = 2f;
-        const int objectDimension = 30;
+        const int objectDimension = 50;
         List<SingleObject> singleObjects = new();
         for (var i = 0; i < objectDimension; i++)
         {
@@ -109,8 +109,10 @@ public class Map
         public bool Overlaps(Vector2 point, float thickness)
         {
             var diff = End - Start;
-            var val1 = Mathf.Pow(diff.Y * point.X - diff.X * point.Y + End.X * Start.Y - Start.X * End.Y, 2);
+            float x=(point -  Start).Project(diff).Dot(diff);
             var val2 = diff.LengthSquared();
+            if(x<0 || x>val2)return false;
+            var val1 = Mathf.Pow(diff.Y * point.X - diff.X * point.Y + End.X * Start.Y - Start.X * End.Y, 2);
             return (thickness * thickness > val1 / val2);
         }
     }
