@@ -1,10 +1,10 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://urnf3rkwq2qx"]
 
 [ext_resource type="Shader" uid="uid://btxesuop7qrni" path="res://shaders/path-dither.gdshader" id="1_8vxba"]
-[ext_resource type="Texture2D" uid="uid://ys4t1llnl1ht" path="res://icon.svg" id="2_4xwnk"]
+[ext_resource type="Texture2D" uid="uid://dhq7mok2yoked" path="res://textures/FloorPath.png" id="2_8vxba"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_8vxba")
-shader_parameter/main_texture = ExtResource("2_4xwnk")
-shader_parameter/texture_scale = 1.0
+shader_parameter/main_texture = ExtResource("2_8vxba")
+shader_parameter/texture_scale = 0.5
