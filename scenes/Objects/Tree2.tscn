@@ -1,14 +1,18 @@
 [gd_scene format=3 uid="uid://canpkcgnyuoy"]
 
-[ext_resource type="Texture2D" uid="uid://ys4t1llnl1ht" path="res://icon.svg" id="1_ee4u4"]
+[ext_resource type="Texture2D" uid="uid://bdaihe4lskrgi" path="res://textures/Tree2.png" id="1_ee4u4"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_pu3yx"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ee4u4"]
+height = 9.637985
+radius = 1.0
 
 [node name="SingleObject" type="StaticBody3D" unique_id=234590250]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1052088263]
-shape = SubResource("BoxShape3D_pu3yx")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.706764, 0)
+shape = SubResource("CylinderShape3D_ee4u4")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=611015191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8292894, 0)
 billboard = 2
 texture = ExtResource("1_ee4u4")

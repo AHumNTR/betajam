@@ -54,7 +54,7 @@ public class Map
 
         // Add Single Objects ???
         const float objectLineDistance = 2f;
-        const int objectDimension = 50;
+        const int objectDimension = 30;
         List<SingleObject> singleObjects = new();
         for (var i = 0; i < objectDimension; i++)
         {
@@ -74,7 +74,7 @@ public class Map
 
                 if (!overlappedOnce)
                 {
-                    singleObjects.Add(new SingleObject(pos, random.Next() % 3));
+                    singleObjects.Add(new SingleObject(pos, random.Next() % 5));
                 }
             }
         }
@@ -105,7 +105,7 @@ public class Map
                 var selectedPosition = candidateObjectPositions[randomIndex];
                 candidateObjectPositions.RemoveAt(randomIndex);
 
-                singleObjects.Add(new SingleObject(selectedPosition, random.Next() % 3));
+                singleObjects.Add(new SingleObject(selectedPosition, 3));
             }
         }
 

@@ -1,22 +1,23 @@
 [gd_scene format=3 uid="uid://dlap2yyye0gto"]
 
 [ext_resource type="Script" uid="uid://b8nw850oh8vk8" path="res://scripts/Player.cs" id="1_w2twt"]
-[ext_resource type="Texture2D" uid="uid://ys4t1llnl1ht" path="res://icon.svg" id="2_pw63i"]
+[ext_resource type="Texture2D" uid="uid://bueuyseh2y8fm" path="res://textures/Compass.png" id="2_rt2n2"]
 [ext_resource type="Script" uid="uid://cp6i17sx4f2c3" path="res://scripts/Player/Compass.cs" id="3_7ykc4"]
-[ext_resource type="Script" uid="uid://c8nqqe0sx30lu" path="res://scripts/generation/Spawner.cs" id="4_pu3yx"]
+[ext_resource type="Texture2D" uid="uid://dx0mheem8v8xt" path="res://textures/CompassArrow.png" id="4_c16ls"]
+[ext_resource type="PackedScene" uid="uid://cj7tg1257jl31" path="res://scenes/spawner.tscn" id="4_gubc5"]
 [ext_resource type="PackedScene" uid="uid://bd47imoeup3ax" path="res://scenes/Objects/Tree1.tscn" id="5_c16ls"]
 [ext_resource type="PackedScene" uid="uid://canpkcgnyuoy" path="res://scenes/Objects/Tree2.tscn" id="6_18nlu"]
-[ext_resource type="PackedScene" uid="uid://dqn76mihusr0k" path="res://scenes/Objects/Tree3.tscn" id="7_c1pb6"]
+[ext_resource type="PackedScene" uid="uid://c3actfht73mhd" path="res://scenes/Objects/Tree3.tscn" id="7_c1pb6"]
 [ext_resource type="PackedScene" uid="uid://5io7dag3rn7n" path="res://scenes/visualiser.tscn" id="8_18nlu"]
+[ext_resource type="PackedScene" uid="uid://dqn76mihusr0k" path="res://scenes/Objects/Rock.tscn" id="8_e1cbu"]
+[ext_resource type="PackedScene" uid="uid://dc41yrltbmxym" path="res://scenes/Objects/Mushroom.tscn" id="9_mngbo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7ykc4"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1pb6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18nlu"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_6wevv"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_c1pb6"]
 
 [node name="MainScene" type="Node3D" unique_id=1061094929]
 
@@ -30,40 +31,31 @@ shape = SubResource("CapsuleShape3D_pw63i")
 [node name="Camera3D" type="Camera3D" parent="player" unique_id=871754816]
 
 [node name="Compass" type="Sprite3D" parent="player" unique_id=1108458534]
-transform = Transform3D(0.48, 0, 0, 0, -2.0981464e-08, 0.48000008, 0, -0.47999993, -2.0981469e-08, -0.5681751, -0.80461323, -0.55436885)
-texture = ExtResource("2_pw63i")
+transform = Transform3D(0.14, 0, 0, 0, -6.119594e-09, 0.14, 0, -0.14, -6.119594e-09, -0.5681751, -0.80461323, -0.55436885)
+texture = ExtResource("2_rt2n2")
 
 [node name="arrowBase" type="Node3D" parent="player/Compass" unique_id=1801319309]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(1.9106855e-15, -4.3711385e-08, -0.9999999, -0.9999999, -4.3711374e-08, -4.2351647e-22, -4.371138e-08, 1, -4.3711385e-08, 0, 0, -0.01598382)
 script = ExtResource("3_7ykc4")
 
 [node name="arrow" type="Sprite3D" parent="player/Compass/arrowBase" unique_id=194079833]
-transform = Transform3D(-2.185568e-08, -0.49999967, 2.1855694e-08, 0, -2.185568e-08, -0.5, 0.49999967, -2.185568e-08, 9.553427e-16, 0, 0.018475652, 0)
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 0, 0.018475652, 0)
 modulate = Color(0.5147154, 4.793823e-05, 0.43245617, 1)
-texture = ExtResource("2_pw63i")
+texture = ExtResource("4_c16ls")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1545465834]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5533142, -1.2025971, -6.0608826)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.304256, -1.2025952, -89.459785)
 use_collision = true
-size = Vector3(17.907166, 1, 20.861755)
-
-[node name="Collectable" type="StaticBody3D" parent="." unique_id=1020910888]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7097101, -3.5677876)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Collectable" unique_id=902298713]
-shape = SubResource("BoxShape3D_7ykc4")
-
-[node name="Sprite3D" type="Sprite3D" parent="Collectable" unique_id=1595281900]
-billboard = 2
-texture = ExtResource("2_pw63i")
+size = Vector3(302.02368, 1, 290.92975)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=487306256]
 transform = Transform3D(1, 0, 0, 0, 0.27857205, 0.9604153, 0, -0.9604153, 0.27857205, 0, 7.5507007, 0)
 
-[node name="Spawner" type="Node3D" parent="." unique_id=1441525861]
-script = ExtResource("4_pu3yx")
-singleObjects = Array[PackedScene]([ExtResource("5_c16ls"), ExtResource("6_18nlu"), ExtResource("7_c1pb6")])
+[node name="Spawner" parent="." unique_id=566857934 instance=ExtResource("4_gubc5")]
+singleObjects = Array[PackedScene]([ExtResource("5_c16ls"), ExtResource("6_18nlu"), ExtResource("8_e1cbu"), ExtResource("9_mngbo"), ExtResource("7_c1pb6")])
+bilboard = 2
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
-material_override = SubResource("StandardMaterial3D_c1pb6")
-mesh = SubResource("ImmediateMesh_6wevv")
+visible = false
+material_override = SubResource("StandardMaterial3D_18nlu")
+mesh = SubResource("ImmediateMesh_c1pb6")

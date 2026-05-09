@@ -8,11 +8,14 @@ public partial class Spawner : Node3D
 	public PackedScene[] singleObjects;
 	[Export]
 	public PackedScene[] objectiveScenes;
+	[Export]
+	public BaseMaterial3D.BillboardModeEnum bilboard;
 	public override void _Ready()
 	{
 		Map m=Map.CreateMap(Seed.seed);
 		foreach(Map.SingleObject o in m.SingleObjects){
 			Node3D obj=(Node3D)singleObjects[o.ObjectType].Instantiate();
+			obj.GetNode<Sprite3D>("Sprite3D").Billboard=bilboard;
 			this.AddChild(obj);	
 			obj.Position=new Vector3(o.Position.X,0,o.Position.Y);
 
