@@ -170,6 +170,7 @@ public partial class Player : CharacterBody3D
 		audioPlayer.Play();
 	}
 
+
 	private bool IsOnDirtPath()
 	{
 		var pos = new Vector2(GlobalPosition.X, -GlobalPosition.Z);
@@ -182,5 +183,9 @@ public partial class Player : CharacterBody3D
 		}
 
 		return false;
+    }
+    
+	public void _on_end_body_entered(Node3D node){
+		if(node==(Node3D)this)GD.Print("dasds");
 	}
 }
