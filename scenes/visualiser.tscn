@@ -2,13 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bmu5c71rcmv3k" path="res://scripts/generation/Visualiser.cs" id="1_lgw6t"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_lgw6t"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgw6t"]
+shading_mode = 0
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_apjv7"]
 
 [node name="Visualiser" type="MeshInstance3D" unique_id=1051115179]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("BoxMesh_lgw6t")
+material_override = SubResource("StandardMaterial3D_lgw6t")
+mesh = SubResource("ImmediateMesh_apjv7")
 script = ExtResource("1_lgw6t")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=745405571]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0912634, 3.8534746, 13.591196)
-current = true
+seed = 4

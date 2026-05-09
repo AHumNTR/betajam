@@ -9,6 +9,8 @@ public partial class Visualiser : MeshInstance3D
 	public float Thickness { get; set; } = 0.5f;
 
 	[Export]
+	public int seed  ;
+	[Export]
 	public bool GenerateMap
 	{
 		get => false;
@@ -31,7 +33,7 @@ public partial class Visualiser : MeshInstance3D
 	{
 		// 1. Create/Refresh Map Data
 		// Assuming Map.CreateMap(0) handles its own randomness or logic
-		m = Map.CreateMap(0);
+		m = Map.CreateMap(seed);
 
 		var immediateMesh = new ImmediateMesh();
 		this.Mesh = immediateMesh;
