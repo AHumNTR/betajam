@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dc41yrltbmxym"]
 
-[ext_resource type="Texture2D" uid="uid://cp48u2c4uoa73" path="res://textures/Mantar.png" id="1_56mcx"]
+[ext_resource type="Texture2D" uid="uid://cp48u2c4uoa73" path="res://textures/Mushroom.png" id="1_56mcx"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_56mcx"]
 height = 1.1388512

@@ -17,10 +17,8 @@ public class Map
         SingleObjects.Add(obj);
     }*/
 
-    public static Map CreateMap(int seed, float newMapSize = 100f)
+    public static Map CreateMap(int seed)
     {
-        float MapSize = newMapSize; // TODO: REMOVE THIS WHEN DECIDED
-
         var random = new Random(seed);
 
         var map = new Map();
