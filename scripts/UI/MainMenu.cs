@@ -15,6 +15,7 @@ public partial class MainMenu : Control
 	}
 	public void _on_start_button_pressed(){
 		
+		End.RemainingItems=End.MaxRemainingItems;
 		GetTree().ChangeSceneToFile("res://scenes/main_scene.tscn");
 	}
 	public void _on_seed_edit_text_changed(string newText){

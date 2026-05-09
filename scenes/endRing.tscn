@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://ch1tyxa22vkto"]
+
+[ext_resource type="Script" uid="uid://tbnh26h3nlou" path="res://scripts/Player/End.cs" id="1_6fs4b"]
+[ext_resource type="Texture2D" uid="uid://cp48u2c4uoa73" path="res://textures/Mushroom.png" id="2_3f0qd"]
+[ext_resource type="Texture2D" uid="uid://qrk4iku47u1g" path="res://textures/Mushroom2.png" id="3_8e6xm"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u0fll"]
+height = 0.28497314
+radius = 2.6171875
+
+[node name="End" type="Area3D" unique_id=19486707]
+script = ExtResource("1_6fs4b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=489816591]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09927368, 0)
+shape = SubResource("CylinderShape3D_u0fll")
+debug_color = Color(0, 0, 0, 0.41960785)
+
+[node name="sprites" type="Node3D" parent="." unique_id=2097783087]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.5350981, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="sprites" unique_id=1884933265]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 3.4716759, -0.33476895, 0.55433047)
+billboard = 1
+texture = ExtResource("2_3f0qd")
+
+[node name="Sprite3D2" type="Sprite3D" parent="sprites" unique_id=2113735303]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 2.329298, -0.33476895, 0.97331375)
+billboard = 1
+texture = ExtResource("3_8e6xm")
+
+[node name="Sprite3D3" type="Sprite3D" parent="sprites" unique_id=2088830512]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 1.1806269, -0.33476898, 2.2367232)
+billboard = 1
+texture = ExtResource("2_3f0qd")
+
+[node name="Sprite3D4" type="Sprite3D" parent="sprites" unique_id=1191018437]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 0.50646544, -0.33476898, 3.6798966)
+billboard = 1
+texture = ExtResource("3_8e6xm")
+
+[node name="Sprite3D5" type="Sprite3D" parent="sprites" unique_id=163526494]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 0.506464, -0.33476898, 5.472657)
+billboard = 1
+texture = ExtResource("2_3f0qd")
+
+[node name="Sprite3D6" type="Sprite3D" parent="sprites" unique_id=1750060118]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 1.5751162, -0.33476898, 6.6262183)
+billboard = 1
+texture = ExtResource("2_3f0qd")
+
+[node name="Sprite3D7" type="Sprite3D" parent="sprites" unique_id=387195574]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 2.783598, -0.33476898, 8.284434)
+billboard = 1
+texture = ExtResource("2_3f0qd")
+
+[node name="Sprite3D8" type="Sprite3D" parent="sprites" unique_id=957971474]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 4.4815054, -0.33476898, 8.888676)
+billboard = 1
+texture = ExtResource("3_8e6xm")
+
+[node name="Sprite3D9" type="Sprite3D" parent="sprites" unique_id=1627153163]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 6.5140076, -0.33476898, 9.093379)
+billboard = 1
+texture = ExtResource("2_3f0qd")
+
+[node name="Sprite3D10" type="Sprite3D" parent="sprites" unique_id=131196196]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 7.9645243, -0.33476898, 8.394043)
+billboard = 1
+texture = ExtResource("3_8e6xm")
+
+[node name="Sprite3D11" type="Sprite3D" parent="sprites" unique_id=451923306]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 9.248059, -0.33476898, 7.5899897)
+billboard = 1
+texture = ExtResource("3_8e6xm")
+
+[node name="Sprite3D12" type="Sprite3D" parent="sprites" unique_id=186871891]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 9.9822, -0.33476898, 6.631188)
+billboard = 1
+texture = ExtResource("2_3f0qd")
+
+[node name="Sprite3D13" type="Sprite3D" parent="sprites" unique_id=1411359178]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 10.526546, -0.33476898, 5.6124115)
+billboard = 1
+texture = ExtResource("3_8e6xm")
+
+[node name="Sprite3D14" type="Sprite3D" parent="sprites" unique_id=1061365035]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 10.40154, -0.33476898, 4.553703)
+billboard = 1
+texture = ExtResource("2_3f0qd")
+
+[node name="Sprite3D15" type="Sprite3D" parent="sprites" unique_id=1433791729]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 9.90202, -0.33476898, 3.4150574)
+billboard = 1
+texture = ExtResource("3_8e6xm")
+
+[node name="Sprite3D16" type="Sprite3D" parent="sprites" unique_id=1023808861]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 9.392634, -0.33476898, 2.6111639)
+billboard = 1
+texture = ExtResource("3_8e6xm")
+
+[node name="Sprite3D17" type="Sprite3D" parent="sprites" unique_id=1765858394]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 8.538547, -0.33476898, 1.967071)
+billboard = 1
+texture = ExtResource("2_3f0qd")
+
+[node name="Sprite3D18" type="Sprite3D" parent="sprites" unique_id=121247317]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 7.874505, -0.33476895, 1.4479145)
+billboard = 1
+texture = ExtResource("3_8e6xm")
+
+[node name="Sprite3D19" type="Sprite3D" parent="sprites" unique_id=2142356132]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 7.0502634, -0.33476898, 1.0578023)
+billboard = 1
+texture = ExtResource("3_8e6xm")
+
+[node name="Sprite3D20" type="Sprite3D" parent="sprites" unique_id=1363614202]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 6.3085604, -0.33476898, 0.8366286)
+billboard = 1
+texture = ExtResource("2_3f0qd")
+
+[node name="Sprite3D21" type="Sprite3D" parent="sprites" unique_id=1541729631]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 5.3562374, -0.33476898, 0.4610394)
+billboard = 1
+texture = ExtResource("3_8e6xm")
+
+[node name="Sprite3D22" type="Sprite3D" parent="sprites" unique_id=1846055682]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 4.43044, -0.33476898, 0.29468036)
+billboard = 1
+texture = ExtResource("2_3f0qd")

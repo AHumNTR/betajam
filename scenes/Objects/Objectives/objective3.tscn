@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dv36w8kv3kshf"]
+[gd_scene format=3 uid="uid://b0wx25gnhnfad"]
 
-[ext_resource type="Texture2D" uid="uid://cp48u2c4uoa73" path="res://textures/Mushroom.png" id="1_4nk72"]
+[ext_resource type="Texture2D" uid="uid://cp48u2c4uoa73" path="res://textures/Mushroom.png" id="1_o5pw5"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_k6f3i"]
 height = 2.4403076
@@ -15,4 +15,5 @@ shape = SubResource("CylinderShape3D_k6f3i")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=2087179713]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -1.1963379, 0)
-texture = ExtResource("1_4nk72")
+modulate = Color(0.99607843, 0.7137255, 0.8156863, 0.7294118)
+texture = ExtResource("1_o5pw5")

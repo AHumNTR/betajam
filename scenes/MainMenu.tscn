@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://drvfgc8s2n3x8"]
 
 [ext_resource type="Script" uid="uid://baxwx1pttgckw" path="res://scripts/UI/MainMenu.cs" id="1_yqorp"]
+[ext_resource type="Texture2D" uid="uid://cp48u2c4uoa73" path="res://textures/Mushroom.png" id="2_2wh52"]
+[ext_resource type="Texture2D" uid="uid://dcy45bx6vpaqk" path="res://textures/FloorGrass.png" id="2_ucygd"]
+[ext_resource type="Texture2D" uid="uid://qrk4iku47u1g" path="res://textures/Mushroom2.png" id="3_ow34m"]
 
 [node name="MainMenu" type="Control" unique_id=427978892]
 layout_mode = 3
@@ -89,6 +92,128 @@ grow_horizontal = 2
 text = "Seed"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="sprites" type="Node3D" parent="." unique_id=1555804092]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.5350981, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="sprites" unique_id=108013543]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 3.4716759, -0.33476895, 0.55433047)
+billboard = 1
+texture = ExtResource("2_2wh52")
+
+[node name="Sprite3D2" type="Sprite3D" parent="sprites" unique_id=521254416]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 2.329298, -0.33476895, 0.97331375)
+billboard = 1
+texture = ExtResource("3_ow34m")
+
+[node name="Sprite3D3" type="Sprite3D" parent="sprites" unique_id=991790792]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 1.1806269, -0.33476898, 2.2367232)
+billboard = 1
+texture = ExtResource("2_2wh52")
+
+[node name="Sprite3D4" type="Sprite3D" parent="sprites" unique_id=1047807539]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 0.50646544, -0.33476898, 3.6798966)
+billboard = 1
+texture = ExtResource("3_ow34m")
+
+[node name="Sprite3D5" type="Sprite3D" parent="sprites" unique_id=1243932120]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 0.506464, -0.33476898, 5.472657)
+billboard = 1
+texture = ExtResource("2_2wh52")
+
+[node name="Sprite3D6" type="Sprite3D" parent="sprites" unique_id=2084142763]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 1.5751162, -0.33476898, 6.6262183)
+billboard = 1
+texture = ExtResource("2_2wh52")
+
+[node name="Sprite3D7" type="Sprite3D" parent="sprites" unique_id=921460612]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 2.783598, -0.33476898, 8.284434)
+billboard = 1
+texture = ExtResource("2_2wh52")
+
+[node name="Sprite3D8" type="Sprite3D" parent="sprites" unique_id=346420080]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 4.4815054, -0.33476898, 8.888676)
+billboard = 1
+texture = ExtResource("3_ow34m")
+
+[node name="Sprite3D9" type="Sprite3D" parent="sprites" unique_id=939253560]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 6.5140076, -0.33476898, 9.093379)
+billboard = 1
+texture = ExtResource("2_2wh52")
+
+[node name="Sprite3D10" type="Sprite3D" parent="sprites" unique_id=1301944103]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 7.9645243, -0.33476898, 8.394043)
+billboard = 1
+texture = ExtResource("3_ow34m")
+
+[node name="Sprite3D11" type="Sprite3D" parent="sprites" unique_id=1695878088]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 9.248059, -0.33476898, 7.5899897)
+billboard = 1
+texture = ExtResource("3_ow34m")
+
+[node name="Sprite3D12" type="Sprite3D" parent="sprites" unique_id=572228780]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 9.9822, -0.33476898, 6.631188)
+billboard = 1
+texture = ExtResource("2_2wh52")
+
+[node name="Sprite3D13" type="Sprite3D" parent="sprites" unique_id=569616761]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 10.526546, -0.33476898, 5.6124115)
+billboard = 1
+texture = ExtResource("3_ow34m")
+
+[node name="Sprite3D14" type="Sprite3D" parent="sprites" unique_id=568910609]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 10.40154, -0.33476898, 4.553703)
+billboard = 1
+texture = ExtResource("2_2wh52")
+
+[node name="Sprite3D15" type="Sprite3D" parent="sprites" unique_id=994037329]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 9.90202, -0.33476898, 3.4150574)
+billboard = 1
+texture = ExtResource("3_ow34m")
+
+[node name="Sprite3D16" type="Sprite3D" parent="sprites" unique_id=437287354]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 9.392634, -0.33476898, 2.6111639)
+billboard = 1
+texture = ExtResource("3_ow34m")
+
+[node name="Sprite3D17" type="Sprite3D" parent="sprites" unique_id=700609367]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 8.538547, -0.33476898, 1.967071)
+billboard = 1
+texture = ExtResource("2_2wh52")
+
+[node name="Sprite3D18" type="Sprite3D" parent="sprites" unique_id=749385692]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 7.874505, -0.33476895, 1.4479145)
+billboard = 1
+texture = ExtResource("3_ow34m")
+
+[node name="Sprite3D19" type="Sprite3D" parent="sprites" unique_id=1094269453]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 7.0502634, -0.33476898, 1.0578023)
+billboard = 1
+texture = ExtResource("3_ow34m")
+
+[node name="Sprite3D20" type="Sprite3D" parent="sprites" unique_id=1164041558]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 6.3085604, -0.33476898, 0.8366286)
+billboard = 1
+texture = ExtResource("2_2wh52")
+
+[node name="Sprite3D21" type="Sprite3D" parent="sprites" unique_id=856533784]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 5.3562374, -0.33476898, 0.4610394)
+billboard = 1
+texture = ExtResource("3_ow34m")
+
+[node name="Sprite3D22" type="Sprite3D" parent="sprites" unique_id=99921887]
+transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 4.43044, -0.33476898, 0.29468036)
+billboard = 1
+texture = ExtResource("2_2wh52")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=355073490]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.337385, 3.480506, 2.781604)
+projection = 1
+size = 8.453
+
+[node name="Ground" type="Sprite3D" parent="." unique_id=730575467]
+transform = Transform3D(0.99999994, 0, 0, 0, -4.371139e-08, 0.99999994, 0, -0.99999994, -4.371139e-08, 3.337385, -0.8857951, 2.7816038)
+texture = ExtResource("2_ucygd")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="text_changed" from="SeedEdit" to="." method="_on_seed_edit_text_changed"]

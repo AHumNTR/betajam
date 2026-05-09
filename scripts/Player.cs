@@ -53,7 +53,11 @@ public partial class Player : CharacterBody3D
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
-
+		if (@event.IsActionPressed("Interact")){
+			if (Input.MouseMode == Input.MouseModeEnum.Visible){
+			    Input.MouseMode = Input.MouseModeEnum.Captured;
+			}
+		}
 	}
 
 	public override void _Process(double delta)
@@ -168,7 +172,6 @@ public partial class Player : CharacterBody3D
 			{
 				((Node)result["collider"]).QueueFree();
 				End.RemainingItems--;
-				GD.Print(End.RemainingItems);
 			}
 		}
 
@@ -203,6 +206,10 @@ public partial class Player : CharacterBody3D
 	}
 	
 	public void _on_end_body_entered(Node3D node){
-		if(node==(Node3D)this&&End.RemainingItems==0)GetTree().ChangeSceneToFile("res://scenes/win_cutscene.tscn");
+		if(node==(Node3D)this&&End.RemainingItems==0){
+			Input.MouseMode=Input.MouseModeEnum.Visible;
+			GetTree().ChangeSceneToFile("res://scenes/win_cutscene.tscn");
+
+		}
 	}
 }
