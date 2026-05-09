@@ -11,6 +11,7 @@ public class Map
     public List<Objective> Objectives;
     public List<SafeLine> SafeLines;    // TODO: Keep until testing
     public List<RestrictedTriangle> RestrictedTriangles;
+    public Vector2 CircleOfMushroomsPosition;
 
     public const float MAP_SIZE = 250f;
 
@@ -216,6 +217,8 @@ public class Map
             }
         }
         map.Objectives = objectives;
+
+        map.CircleOfMushroomsPosition = new Vector2(random.NextSingle() * 100f, random.NextSingle() * 100f);
 
         return map;
     }

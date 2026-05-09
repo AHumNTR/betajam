@@ -15,6 +15,7 @@ public partial class Spawner : Node3D
 	public BaseMaterial3D.BillboardModeEnum bilboard;
 	[Export] public Material PathDitherMaterial;
 	[Export] public Player player;
+	[Export] public End CircleOfMushrooms;
 	public override void _Ready()
 	{
 		// Since Godot uses right-hand coordinate system, we gotta take -Y for Z conversion!
@@ -55,13 +56,10 @@ public partial class Spawner : Node3D
 			}
 		}
 
+		CircleOfMushrooms.GlobalPosition = new Vector3(m.CircleOfMushroomsPosition.X, 0.957f, -m.CircleOfMushroomsPosition.Y);
+
 		if(player!=null)player.Init(m.SafeLines);
 	}
-
-	/* private void FillLongObject(Map.LongObject)
-	{
-		
-	} */
 
 	private void CreatePaths(List<Map.SafeLine> lines, Vector3 offset)
 	{
