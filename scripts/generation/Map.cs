@@ -4,9 +4,11 @@ using Godot;
 
 public class Map
 {
-    public List<SingleObject> SingleObjects = new();
+    public List<SingleObject> SingleObjects;
+    public List<LongObject> LongObjects;
     public List<Objective> Objectives;
     public List<SafeLine> SafeLines;    // TODO: Keep until testing
+    public List<RestrictedTriangle> RestrictedTriangles;
 
     private const float MapSize = 100f;
 
@@ -37,7 +39,9 @@ public class Map
             }
         }
 
-        List<SafeLine> safeLines = Triangulator.Triangulate(safePivots);
+        var triangulationResult = Triangulator.Triangulate(safePivots);
+        List<SafeLine> safeLines = triangulationResult.Lines;
+        List<RestrictedTriangle> restrictTriangles = triangulationResult.Triangles;
 
         for (var i = 0; i < safeLines.Count / 2; i++)
         {
@@ -46,8 +50,6 @@ public class Map
 
         map.SafeLines = safeLines;
 
-        // TODO: Generate sparse rare objects at some radius away from safe line
-        // TODO: Generate more dense objects at some further radius away from safe line
         // TODO: (Maybe) Generate random rivers, add bridges where they meet safe lines
 
         // Add Single Objects ???
@@ -109,6 +111,22 @@ public class Map
 
         map.SingleObjects = singleObjects;
 
+        // Add long objects to restrict moving out of safe lines
+        List<LongObject> longObjects = new();
+        foreach (var triangle in restrictTriangles)
+        {
+            var center = (triangle.P1 + triangle.P2 + triangle.P3) / 3f;
+            var newP1 = triangle.P1 + (triangle.P1 - center).Normalized();
+            var newP2 = triangle.P2 + (triangle.P2 - center).Normalized();
+            var newP3 = triangle.P3 + (triangle.P3 - center).Normalized();
+
+            longObjects.Add(new LongObject(newP1, newP2, random.Next() % 3));
+            longObjects.Add(new LongObject(newP1, newP3, random.Next() % 3));
+            longObjects.Add(new LongObject(newP2, newP3, random.Next() % 3));
+        }
+
+        map.RestrictedTriangles = restrictTriangles;
+
         // Add Objectives
         const int objectiveCount = 5;
         List<Objective> objectives = new(objectiveCount);
@@ -160,6 +178,20 @@ public class Map
         }
     }
 
+    public class LongObject
+    {
+        public Vector2 StartPosition;
+        public Vector2 EndPosition;
+        public int ObjectType;
+
+        public LongObject(Vector2 startPosition, Vector2 endPosition, int type)
+        {
+            StartPosition = startPosition;
+            EndPosition = endPosition;
+            ObjectType = type;
+        }
+    }
+
     public class Objective
     {
         public Vector2 Position;
@@ -171,16 +203,31 @@ public class Map
         }
     }
 
+    public class RestrictedTriangle
+    {
+        public Vector2 P1;
+        public Vector2 P2;
+        public Vector2 P3;
+
+        public RestrictedTriangle(Vector2 p1, Vector2 p2, Vector2 p3)
+        {
+            P1 = p1;
+            P2 = p2;
+            P3 = p3;
+        }
+    }
+
     private class Triangulator
     {
-        public static List<SafeLine> Triangulate(List<Vector2> safePivots)
+        public static (List<SafeLine> Lines, List<RestrictedTriangle> Triangles) Triangulate(List<Vector2> safePivots)
         {
-            List<SafeLine> safeLines = new List<SafeLine>();
+            List<SafeLine> lines = new List<SafeLine>();
+            List<RestrictedTriangle> triangles = new List<RestrictedTriangle>();
             int n = safePivots.Count;
 
-            if (n < 3) return safeLines;
+            if (n < 3) return (lines, triangles);
 
-            HashSet<(int, int)> uniqueEdges = new HashSet<(int, int)>();
+            /* HashSet<(int, int)> uniqueEdges = new HashSet<(int, int)>();
 
             for (int i = 0; i < n; i++)
             {
@@ -216,9 +263,53 @@ public class Map
                         }
                     }
                 }
+            } */
+
+            // Triangle calculation
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = i + 1; j < n; j++)
+                {
+                    for (int k = j + 1; k < n; k++)
+                    {
+                        Vector2 p1 = safePivots[i];
+                        Vector2 p2 = safePivots[j];
+                        Vector2 p3 = safePivots[k];
+
+                        GetCircumcircle(p1, p2, p3, out Vector2 center, out float radiusSq);
+
+                        bool isDelaunay = true;
+                        for (int m = 0; m < n; m++)
+                        {
+                            if (m == i || m == j || m == k) continue;
+
+                            // Check if any other point is inside the circumcircle
+                            if (center.DistanceSquaredTo(safePivots[m]) < radiusSq - 0.001f)
+                            {
+                                isDelaunay = false;
+                                break;
+                            }
+                        }
+
+                        if (isDelaunay)
+                        {
+                            triangles.Add(new RestrictedTriangle(p1, p2, p3));
+                        }
+                    }
+                }
             }
 
-            return safeLines;
+            // Lines calculation
+            HashSet<(Vector2, Vector2)> uniqueEdges = new HashSet<(Vector2, Vector2)>();
+
+            foreach (var tri in triangles)
+            {
+                AddUniqueEdge(uniqueEdges, lines, tri.P1, tri.P2);
+                AddUniqueEdge(uniqueEdges, lines, tri.P2, tri.P3);
+                AddUniqueEdge(uniqueEdges, lines, tri.P3, tri.P1);
+            }
+
+            return (lines, triangles);
         }
 
         private static void GetCircumcircle(Vector2 p1, Vector2 p2, Vector2 p3, out Vector2 center, out float radiusSq)
@@ -236,13 +327,13 @@ public class Map
             radiusSq = p1.DistanceSquaredTo(center);
         }
 
-        private static void AddEdge(HashSet<(int, int)> edges, List<SafeLine> lines, int i1, int i2, Vector2 v1, Vector2 v2)
+        private static void AddUniqueEdge(HashSet<(Vector2, Vector2)> set, List<SafeLine> list, Vector2 a, Vector2 b)
         {
-            int min = Math.Min(i1, i2);
-            int max = Math.Max(i1, i2);
-            if (edges.Add((min, max)))
+            // Order points to ensure (a, b) is the same as (b, a)
+            var edge = a.X < b.X || (a.X == b.X && a.Y < b.Y) ? (a, b) : (b, a);
+            if (set.Add(edge))
             {
-                lines.Add(new SafeLine(v1, v2));
+                list.Add(new SafeLine(a, b));
             }
         }
     }
