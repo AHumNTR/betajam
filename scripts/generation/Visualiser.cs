@@ -71,6 +71,18 @@ public partial class Visualiser : MeshInstance3D
 			immediateMesh.SurfaceAddVertex(v2);
 		}
 
+		// objects
+		immediateMesh.SurfaceSetColor(new Color(0xFFFF00FF));
+		foreach (var singleObj in m.SingleObjects)
+		{
+			var v0 = new Vector3(singleObj.Position.X, singleObj.Position.Y + 1f, 0);
+			var v1 = new Vector3(singleObj.Position.X - 1f, singleObj.Position.Y, 0);
+			var v2 = new Vector3(singleObj.Position.X + 1f, singleObj.Position.Y, 0);
+			immediateMesh.SurfaceAddVertex(v0);
+			immediateMesh.SurfaceAddVertex(v1);
+			immediateMesh.SurfaceAddVertex(v2);
+		}
+
 		immediateMesh.SurfaceEnd();
 		
 		GD.Print("Map Generated!");

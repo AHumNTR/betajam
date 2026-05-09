@@ -4,7 +4,7 @@ using Godot;
 
 public class Map
 {
-    //public List<SingleObject> SingleObjects = new();
+    public List<SingleObject> SingleObjects = new();
     public List<Objective> Objectives;
     public List<SafeLine> SafeLines;    // TODO: Keep until testing
 
@@ -51,7 +51,7 @@ public class Map
         // TODO: (Maybe) Generate random rivers, add bridges where they meet safe lines
 
         // Add Single Objects ???
-        const float objectLineDistance = 1f;
+        const float objectLineDistance = 2f;
         const int objectDimension = 30;
         List<SingleObject> singleObjects = new();
         for (var i = 0; i < objectDimension; i++)
@@ -76,6 +76,7 @@ public class Map
                 }
             }
         }
+        map.SingleObjects = singleObjects;
 
         // Add Objectives
         const int objectiveCount = 5;
