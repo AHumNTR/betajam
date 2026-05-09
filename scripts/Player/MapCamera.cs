@@ -3,56 +3,115 @@ using System;
 
 public partial class MapCamera : Camera3D
 {
-    [ExportGroup("Movement Settings")]
-    [Export] public float DragSensitivity = 0.05f;
-    [Export] public Vector2 MovementLimits = new Vector2(50, 50);
+	[ExportGroup("Movement Settings")]
+	[Export] public float DragSensitivity = 0.05f;
+	[Export] public float MovementLimit = 250f;
 
-    [ExportGroup("Size (Zoom) Settings")]
-    [Export] public float ZoomSpeed = 10.0f;
-    [Export] public float MinSize = 2.0f;
-    [Export] public float MaxSize = 20.0f;
+	[ExportGroup("Size (Zoom) Settings")]
+	[Export] public float ZoomSpeed = 10.0f;
+	[Export] public float MinSize = 10.0f;
+	[Export] public float MaxSize = 300.0f;
 
-    private bool _isDragging = false;
+	private Vector3 _dragStartPoint;
+	private bool _isDragging = false;
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        // Check for Mouse Button (Left Click to drag)
-        if (@event is InputEventMouseButton mouseBtn)
-        {
-            if (mouseBtn.ButtonIndex == MouseButton.Left)
-            {
-                _isDragging = mouseBtn.Pressed;
-            }
-        }
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (@event is InputEventMouseButton mouseButton && mouseButton.ButtonIndex == MouseButton.Left)
+		{
+			if (mouseButton.Pressed)
+			{
+				_dragStartPoint = GetGroundPosition(mouseButton.Position);
+				_isDragging = true;
+			}
+			else
+			{
+				_isDragging = false;
+			}
+		}
 
-        if (_isDragging && @event is InputEventMouseMotion mouseMotion)
-        {
-            float zoomFactor = Size / MaxSize;
-            Vector3 newPos = Position;
-            newPos.X -= mouseMotion.Relative.X * DragSensitivity * zoomFactor;
-            newPos.Z -= mouseMotion.Relative.Y * DragSensitivity * zoomFactor;
-            newPos.X = Mathf.Clamp(newPos.X, -MovementLimits.X, MovementLimits.X);
-            newPos.Z = Mathf.Clamp(newPos.Z, -MovementLimits.Y, MovementLimits.Y);
-            Position = newPos;
-        }
-	if (@event is InputEventMouseButton mouseEvent)
-        {
-            if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
-            {
-                Size -= ZoomSpeed;
-            }
-            else if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
-            {
-                Size += ZoomSpeed;
-            }
+		if (@event is InputEventMouseMotion mouseMotion && _isDragging)
+		{
+			Vector3 currentGroundPoint = GetGroundPosition(mouseMotion.Position);
+			Vector3 drift = currentGroundPoint - _dragStartPoint;
 
-            Size = Mathf.Clamp(Size, MinSize, MaxSize);
-        }
-	if(@event is InputEventMagnifyGesture magnifyGesture){
-		Size*=magnifyGesture.Factor;
+			// Move the camera in the opposite direction of the mouse drift
+			// to keep the ground point under the cursor.
+			GlobalPosition -= new Vector3(drift.X, 0, drift.Z);
+		}
+
+
+		if (@event is InputEventMouseButton mouseEvent)
+		{
+			if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
+			{
+				if (Size <= ZoomSpeed)
+				{
+					Size = MinSize;
+				}
+				else
+				{
+					Size -= ZoomSpeed;
+				}
+			}
+			else if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
+			{
+				Size += ZoomSpeed;
+			}
+
+		}
+
+		if (@event is InputEventMagnifyGesture magnifyGesture)
+		{
+			if (Size * magnifyGesture.Factor < MinSize)
+			{
+				Size = MinSize;
+			}
+			else
+			{
+				Size *= magnifyGesture.Factor;
+			}
+		}
+
+		Size = Mathf.Clamp(Size, MinSize, MaxSize);
+
+		// Camera clamp
+		var limitPositive = 0.5f * (MaxSize - Size);
+		var limitNegative = 0.5f * (-MaxSize + Size);
+		if (GlobalPosition.X > limitPositive)
+		{
+			GlobalPosition = new Vector3(limitPositive, GlobalPosition.Y, GlobalPosition.Z);
+		}
+		else if (GlobalPosition.X < limitNegative)
+		{
+			GlobalPosition = new Vector3(limitNegative, GlobalPosition.Y, GlobalPosition.Z);
+		}
+
+		if (GlobalPosition.Z > limitPositive)
+		{
+			GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y, limitPositive);
+		}
+		else if (GlobalPosition.Z < limitNegative)
+		{
+			GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y, limitNegative);
+		}
 	}
-    }
 
+	private Vector3 GetGroundPosition(Vector2 mousePos)
+	{
+		Vector3 rayOrigin = ProjectRayOrigin(mousePos);
+		Vector3 rayNormal = ProjectRayNormal(mousePos);
 
-   
+		Plane groundPlane = new Plane(Vector3.Up, 0);
+
+		Vector3? intersection = groundPlane.IntersectsRay(rayOrigin, rayNormal);
+
+		if (intersection.HasValue)
+		{
+			return intersection.Value;
+		}
+
+		return Vector3.Zero;
+	}
+
 }

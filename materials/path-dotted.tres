@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bjxnd0el8qamh"]
+
+[ext_resource type="Shader" uid="uid://d3dxquakejusj" path="res://shaders/path-dotted.gdshader" id="1_1336f"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_1336f")
+shader_parameter/main_color = Vector3(0.25, 0.2, 0)
