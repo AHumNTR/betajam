@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dv1ubruxlxvx"]
 
+[ext_resource type="Script" uid="uid://cpxxxe6gqixmu" path="res://scripts/util/SceneChanger.cs" id="1_d3crx"]
 [ext_resource type="Material" uid="uid://kk2hk0qaha2o" path="res://materials/world-floor.tres" id="1_ru347"]
 [ext_resource type="PackedScene" uid="uid://bqxtmwiq3ivo6" path="res://scenes/Objects/Bush.tscn" id="2_dehoh"]
 [ext_resource type="PackedScene" uid="uid://cuc2hv013ugaf" path="res://scenes/Objects/BushWithFlowers.tscn" id="3_oq3sj"]
@@ -7,23 +8,48 @@
 [ext_resource type="PackedScene" uid="uid://b0s2okfiw8440" path="res://scenes/Objects/Rock.tscn" id="5_44mhm"]
 [ext_resource type="PackedScene" uid="uid://bd47imoeup3ax" path="res://scenes/Objects/Tree1.tscn" id="6_c05m0"]
 [ext_resource type="PackedScene" uid="uid://canpkcgnyuoy" path="res://scenes/Objects/Tree2.tscn" id="7_cby30"]
+[ext_resource type="Texture2D" uid="uid://b7nkarw8lsjvm" path="res://textures/TheHouse.png" id="8_2f1jl"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4eovj"]
 material = ExtResource("1_ru347")
 
 [sub_resource type="Animation" id="Animation_rtla8"]
-length = 4.0
+length = 6.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.3333334, 2.8666666, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1.4666667, 2.7333333, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.925, 1.132, 8.415), Vector3(-1.598, 1.132, 5.253), Vector3(0.862, 1.132, 0.578), Vector3(0.862, 1.132, -3.982)]
+"values": [Vector3(0.925, 1.132, 8.415), Vector3(-1.133, 1.132, 3.473), Vector3(0.862, 1.132, 0.578), Vector3(0.862, 1.132, -3.982), Vector3(1.317, 1.132, -6.182)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.5235988, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CanvasLayer/ColorRect:color")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(5, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_7ogav"]
@@ -47,7 +73,27 @@ _data = {
 &"WinAnimation": SubResource("Animation_7ogav")
 }
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2f1jl"]
+sky_top_color = Color(0.23033229, 0.41240177, 0.8622499, 1)
+sky_horizon_color = Color(0.47236073, 0.6821278, 0.8423017, 1)
+sky_energy_multiplier = 1.2
+ground_bottom_color = Color(0.15353057, 0.17960647, 0.18208808, 1)
+ground_horizon_color = Color(0.4454007, 0.6915227, 0.81961477, 1)
+
+[sub_resource type="Sky" id="Sky_to7gp"]
+sky_material = SubResource("ProceduralSkyMaterial_2f1jl")
+
+[sub_resource type="Environment" id="Environment_d3crx"]
+background_mode = 2
+sky = SubResource("Sky_to7gp")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gr37v"]
+
+[sub_resource type="Compositor" id="Compositor_qar22"]
+
 [node name="WinCutscene" type="Node3D" unique_id=657737791]
+script = ExtResource("1_d3crx")
+PathToScene = "res://scenes/MainMenu.tscn"
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2143414155]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.132, 8.415)
@@ -803,3 +849,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2771435, -1.9073486e-06, 7.
 
 [node name="SingleObject11" parent="Node3D/Node3D7" unique_id=1510813319 instance=ExtResource("6_c05m0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1294436, -1.9073486e-06, 9.418585)
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=785831832]
+transform = Transform3D(0.66, 0, 0, 0, 0.66, 0, 0, 0, 0.66, 1.249, 4.245, -9.246)
+texture = ExtResource("8_2f1jl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=514670570]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=906338767]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=161384239]
+transform = Transform3D(1, 0, 0, 0, 0.27857205, 0.9604153, 0, -0.9604153, 0.27857205, 0, 7.5507007, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1807697624]
+environment = SubResource("Environment_d3crx")
+camera_attributes = SubResource("CameraAttributesPractical_gr37v")
+compositor = SubResource("Compositor_qar22")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_change_scene"]

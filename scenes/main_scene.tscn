@@ -19,10 +19,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_si52b"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01n6w"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_01n6w"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_6u1mn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_58gk3"]
 sky_top_color = Color(0.6680412, 0.25197867, 0.6435261, 1)
@@ -91,8 +91,8 @@ player = NodePath("../player")
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
 visible = false
-material_override = SubResource("StandardMaterial3D_si52b")
-mesh = SubResource("ImmediateMesh_01n6w")
+material_override = SubResource("StandardMaterial3D_01n6w")
+mesh = SubResource("ImmediateMesh_6u1mn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1315559398]
 environment = SubResource("Environment_bcnxi")
@@ -153,5 +153,7 @@ surface_material_override/0 = ExtResource("16_01n6w")
 transform = Transform3D(-6.9938224e-06, 0, -160, 0, 80, 0, 160, 0, -6.9938224e-06, 190, 40, 0)
 mesh = SubResource("QuadMesh_6u1mn")
 surface_material_override/0 = ExtResource("16_01n6w")
+
+[node name="Objective" type="Node3D" parent="." unique_id=627335377]
 
 [connection signal="body_entered" from="End" to="player" method="_on_end_body_entered"]
