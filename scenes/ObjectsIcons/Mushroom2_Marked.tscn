@@ -1,11 +1,59 @@
 [gd_scene format=3 uid="uid://c8kjlhtbqs2ky"]
 
+[ext_resource type="Script" uid="uid://cvvtrf18l2olx" path="res://scripts/MushroomIcon.cs" id="1_2qg8v"]
 [ext_resource type="Texture2D" uid="uid://c1lrmivxcwh3w" path="res://textures/Icons/SafeMushroom2.png" id="1_74rdj"]
+[ext_resource type="Texture2D" uid="uid://omqhgna1cqq0" path="res://textures/Icons/PingingCircle.png" id="3_dhlod"]
+
+[sub_resource type="Animation" id="Animation_pxjrm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pingring:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rqbl5"]
+resource_name = "ping"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pingring:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l7dek"]
+_data = {
+&"RESET": SubResource("Animation_pxjrm"),
+&"ping": SubResource("Animation_rqbl5")
+}
 
 [node name="SingleObject" type="Node3D" unique_id=1657994035]
+script = ExtResource("1_2qg8v")
+harmless = true
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=611015191]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.37902462, 0)
 pixel_size = 0.002
 billboard = 2
 texture = ExtResource("1_74rdj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1662000322]
+libraries/ = SubResource("AnimationLibrary_l7dek")
+autoplay = &"ping"
+
+[node name="pingring" type="Sprite3D" parent="." unique_id=682753022]
+billboard = 1
+texture = ExtResource("3_dhlod")
