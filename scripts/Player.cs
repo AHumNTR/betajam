@@ -43,6 +43,9 @@ public partial class Player : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
+		if (!TimerManager.Instance.TimerRunsDown) return;
+
+
 		if (@event is InputEventMouseMotion mouseMotion)
 		{
 			// Horizontal rotation: Rotate the Player/Body around the Y-axis
@@ -132,6 +135,8 @@ public partial class Player : CharacterBody3D
 					TimerManager.Instance.ResetTimer();
 					End.RemainingItems--;
 
+
+					GameSfxPlayer.Instance.eatSound.Play();
 					_onSingleMushroomCollected?.Invoke();
 
 					if (End.RemainingItems <= 0)
@@ -141,6 +146,8 @@ public partial class Player : CharacterBody3D
 				}
 				else
 				{
+
+					GameSfxPlayer.Instance.vomitSound.Play();
 					TimerManager.Instance.SpeedUp();
 				}
 				o.QueueFree();
@@ -234,6 +241,7 @@ public partial class Player : CharacterBody3D
 		if (node == (Node3D)this && End.RemainingItems == 0)
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
+			GameSfxPlayer.Instance.winSound.Play();
 			TimerManager.Instance.GameFinishTask("res://scenes/win_cutscene.tscn");
 
 		}

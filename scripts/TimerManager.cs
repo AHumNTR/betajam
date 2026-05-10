@@ -39,6 +39,7 @@ public partial class TimerManager : Node3D
 		if (_remainingTime <= 0)
 		{
 			TimerRunsDown = false;
+			GameSfxPlayer.Instance.loseSound.Play();
 			GameFinishTask("res://scenes/MainMenu.tscn");
 			return;
 		}
@@ -66,7 +67,7 @@ public partial class TimerManager : Node3D
 
 	public async void GameFinishTask(string nextScene)
 	{
-		await ToSignal(GetTree().CreateTimer(1.0f), SceneTreeTimer.SignalName.Timeout);
+		await ToSignal(GetTree().CreateTimer(2.0f), SceneTreeTimer.SignalName.Timeout);
 		GetTree().ChangeSceneToFile(nextScene);
 	}
 }

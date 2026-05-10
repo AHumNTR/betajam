@@ -19,8 +19,19 @@
 [ext_resource type="Script" uid="uid://dtmyep6ffwjlj" path="res://scripts/TimerManager.cs" id="17_bcnxi"]
 [ext_resource type="PackedScene" path="res://scenes/endRing.tscn" id="18_k6f3i"]
 [ext_resource type="Script" uid="uid://c5wactx78lxxt" path="res://scripts/MushroomLabel.cs" id="19_7nt27"]
+[ext_resource type="Script" uid="uid://kpee7gf8b1tt" path="res://scripts/GameSfxPlayer.cs" id="19_adb74"]
+[ext_resource type="AudioStream" uid="uid://dylvtpv3smxh2" path="res://sounds/win.ogg" id="19_k6f3i"]
+[ext_resource type="AudioStream" uid="uid://dut4g6mojqv6m" path="res://sounds/lose.ogg" id="20_xdqt8"]
+[ext_resource type="AudioStream" uid="uid://cm7unpf4ox8vj" path="res://sounds/eat.ogg" id="22_to7gp"]
+[ext_resource type="AudioStream" uid="uid://c8uoa6enm6it2" path="res://sounds/vomit.ogg" id="23_u0fll"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
+resource_local_to_scene = false
+resource_name = ""
+custom_solver_bias = 0.0
+margin = 0.04
+radius = 0.5
+height = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58gk3"]
 shading_mode = 0
@@ -82,7 +93,49 @@ size = Vector3(500, 1, 500)
 material = ExtResource("5_6u1mn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=487306256]
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 transform = Transform3D(1, 0, 0, 0, 0.27857205, 0.9604153, 0, -0.9604153, 0.27857205, 0, 7.5507007, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+layers = 1
+light_color = Color(1, 1, 1, 1)
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_volumetric_fog_energy = 1.0
+light_angular_distance = 0.0
+light_negative = false
+light_specular = 1.0
+light_bake_mode = 2
+light_cull_mask = 4294967295
+shadow_enabled = false
+shadow_bias = 0.1
+shadow_normal_bias = 2.0
+shadow_reverse_cull_face = false
+shadow_transmittance_bias = 0.05
+shadow_opacity = 1.0
+shadow_blur = 1.0
+shadow_caster_mask = 4294967295
+editor_only = false
+directional_shadow_mode = 2
+directional_shadow_split_1 = 0.1
+directional_shadow_split_2 = 0.2
+directional_shadow_split_3 = 0.5
+directional_shadow_blend_splits = false
+directional_shadow_fade_start = 0.8
+directional_shadow_max_distance = 100.0
+directional_shadow_pancake_size = 20.0
+sky_mode = 0
+script = null
 
 [node name="Spawner" parent="." unique_id=566857934 node_paths=PackedStringArray("player", "CircleOfMushrooms", "mushroomLabel") instance=ExtResource("4_gubc5")]
 bilboard = 2
@@ -161,6 +214,29 @@ TransitionRect = NodePath("../CanvasLayer/Control/TransitionRect")
 stream = ExtResource("17_6u1mn")
 attenuation_model = 3
 autoplay = true
+
+[node name="SfxPlayer" type="Node3D" parent="." unique_id=121667493 node_paths=PackedStringArray("winSound", "loseSound", "eatSound", "vomitSound")]
+script = ExtResource("19_adb74")
+winSound = NodePath("WinSound")
+loseSound = NodePath("LoseSound")
+eatSound = NodePath("EatSound")
+vomitSound = NodePath("VomitSound")
+
+[node name="WinSound" type="AudioStreamPlayer3D" parent="SfxPlayer" unique_id=2039841400]
+stream = ExtResource("19_k6f3i")
+attenuation_model = 3
+
+[node name="LoseSound" type="AudioStreamPlayer3D" parent="SfxPlayer" unique_id=422363429]
+stream = ExtResource("20_xdqt8")
+attenuation_model = 3
+
+[node name="EatSound" type="AudioStreamPlayer3D" parent="SfxPlayer" unique_id=89990243]
+stream = ExtResource("22_to7gp")
+attenuation_model = 3
+
+[node name="VomitSound" type="AudioStreamPlayer3D" parent="SfxPlayer" unique_id=834185912]
+stream = ExtResource("23_u0fll")
+attenuation_model = 3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1523632875]
 
