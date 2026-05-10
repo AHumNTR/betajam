@@ -114,4 +114,13 @@ public partial class MapCamera : Camera3D
 		return Vector3.Zero;
 	}
 
+	public override void _Process(double delta)
+	{
+		if (Input.IsKeyPressed(Key.Escape))
+		{
+			GetTree().ChangeSceneToFile("res://scenes/MainMenu.tscn");
+		}
+	}
+
+
 }
