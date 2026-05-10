@@ -9,6 +9,7 @@ public partial class Player : CharacterBody3D
 	[Export] public float HeadBobHorizontal = 0.02f;
 	[Export] public AudioStream[] StepSoundsGrass;
 	[Export] public AudioStream[] StepSoundsDirt;
+	[Export] public PackedScene mushroomParticles;
 
 	private float yaw = 0f;
 	private float _headBobCycleValue = 0f;
@@ -135,6 +136,9 @@ public partial class Player : CharacterBody3D
 					TimerManager.Instance.ResetTimer();
 					End.RemainingItems--;
 
+					var particles = (Node3D)mushroomParticles.Instantiate();
+					GetTree().Root.AddChild(particles);
+					particles.GlobalPosition = (Vector3)result["position"];
 
 					GameSfxPlayer.Instance.eatSound.Play();
 					_onSingleMushroomCollected?.Invoke();
