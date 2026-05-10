@@ -1,10 +1,8 @@
 [gd_scene format=3 uid="uid://ddmskcmsnhynv"]
 
-[ext_resource type="Script" uid="uid://cvvtrf18l2olx" path="res://scripts/MushroomIcon.cs" id="1_7714e"]
 [ext_resource type="Texture2D" uid="uid://dgac07vmsws0l" path="res://textures/Icons/IMG_2313.png" id="1_vp2gd"]
 
 [node name="SingleObject" type="Node3D" unique_id=1657994035]
-script = ExtResource("1_7714e")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=611015191]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.37902462, 0)

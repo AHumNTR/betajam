@@ -16,19 +16,73 @@
 [ext_resource type="PackedScene" uid="uid://bcv2m1d2anoi5" path="res://scenes/ObjectsIcons/Crystal3.tscn" id="12_pfmqr"]
 [ext_resource type="PackedScene" uid="uid://ddmskcmsnhynv" path="res://scenes/ObjectsIcons/Mushroom2.tscn" id="13_5rwvw"]
 [ext_resource type="PackedScene" uid="uid://cyge0kllk6m6o" path="res://scenes/ObjectsIcons/Well.tscn" id="16_op04c"]
+[ext_resource type="Script" uid="uid://cvvtrf18l2olx" path="res://scripts/MushroomIcon.cs" id="17_kaxo8"]
 [ext_resource type="Material" uid="uid://bjxnd0el8qamh" path="res://materials/path-dotted.tres" id="17_op04c"]
-[ext_resource type="PackedScene" uid="uid://cw1giqskikdmd" path="res://scenes/ObjectsIcons/Mushroom1_Marked.tscn" id="17_pfmqr"]
 [ext_resource type="Material" uid="uid://vx1tegotaekp" path="res://materials/map-background.tres" id="17_xxjsi"]
 [ext_resource type="Material" uid="uid://dnuw830256au" path="res://materials/pitch-black.tres" id="18_2h434"]
 [ext_resource type="PackedScene" uid="uid://c8kjlhtbqs2ky" path="res://scenes/ObjectsIcons/Mushroom2_Marked.tscn" id="18_5rwvw"]
+[ext_resource type="Texture2D" uid="uid://dmkpl1ymxdug0" path="res://textures/Icons/SafeMushroom1.png" id="18_mus4m"]
 [ext_resource type="Script" uid="uid://tbnh26h3nlou" path="res://scripts/Player/End.cs" id="21_1e82v"]
 [ext_resource type="Texture2D" uid="uid://cp48u2c4uoa73" path="res://textures/Mushroom.png" id="22_62ws7"]
 [ext_resource type="Texture2D" uid="uid://qrk4iku47u1g" path="res://textures/Mushroom2.png" id="23_tm7iq"]
+[ext_resource type="Texture2D" uid="uid://omqhgna1cqq0" path="res://textures/Icons/PingingCircle.png" id="24_62ws7"]
+[ext_resource type="PackedScene" uid="uid://c8oagafpqidmx" path="res://scenes/pinging_circle.tscn" id="26_ynb6n"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rx4pi"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ydlyi"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_1e82v"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_vav1m"]
+
+[sub_resource type="Animation" id="Animation_pxjrm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pingring:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rqbl5"]
+resource_name = "ping"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pingring:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oybbm"]
+_data = {
+&"RESET": SubResource("Animation_pxjrm"),
+&"ping": SubResource("Animation_rqbl5")
+}
+
+[sub_resource type="PackedScene" id="PackedScene_8bq4s"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("SingleObject", "script", "harmless", "Node3D", "Sprite3D", "transform", "pixel_size", "billboard", "texture", "AnimationPlayer", "libraries/", "pingring"),
+"node_count": 4,
+"node_ids": PackedInt32Array(1139956512, 611015191, 1969601280, 1388328005),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 4, 4, -1, 4, 5, 2, 6, 3, 7, 4, 8, 5, 0, 0, 0, 9, 9, -1, 1, 10, 6, 0, 0, 0, 4, 11, -1, 3, 5, 7, 7, 8, 8, 9, 0),
+"variants": [ExtResource("17_kaxo8"), true, Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.32312536, 0), 0.002, 2, ExtResource("18_mus4m"), SubResource("AnimationLibrary_oybbm"), Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 1, ExtResource("24_62ws7")],
+"version": 3
+}
 
 [sub_resource type="QuadMesh" id="QuadMesh_iq58l"]
 
@@ -49,12 +103,12 @@ ZoomSpeed = 15.0
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("1_er4uf")]
 transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 0, 0)
 visible = false
-material_override = SubResource("StandardMaterial3D_rx4pi")
-mesh = SubResource("ImmediateMesh_1e82v")
+material_override = SubResource("StandardMaterial3D_ydlyi")
+mesh = SubResource("ImmediateMesh_vav1m")
 
 [node name="Spawner" parent="." unique_id=566857934 node_paths=PackedStringArray("CircleOfMushrooms") instance=ExtResource("3_wikxs")]
 singleObjects = Array[PackedScene]([ExtResource("4_mvot7"), ExtResource("5_60j6u"), ExtResource("6_60j6u"), ExtResource("5_jylts"), ExtResource("8_2h434"), ExtResource("9_op04c"), ExtResource("10_iq58l"), ExtResource("7_s6fll"), ExtResource("13_5rwvw"), ExtResource("10_op04c"), ExtResource("11_iq58l"), ExtResource("12_pfmqr"), ExtResource("16_op04c")])
-objectiveScenes = Array[PackedScene]([ExtResource("7_s6fll"), ExtResource("17_pfmqr"), ExtResource("13_5rwvw"), ExtResource("18_5rwvw")])
+objectiveScenes = Array[PackedScene]([ExtResource("7_s6fll"), SubResource("PackedScene_8bq4s"), ExtResource("13_5rwvw"), ExtResource("18_5rwvw")])
 bilboard = 1
 PathDitherMaterial = ExtResource("17_op04c")
 CircleOfMushrooms = NodePath("../End")
@@ -184,6 +238,9 @@ texture = ExtResource("23_tm7iq")
 transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 4.43044, -0.33476898, 0.29468036)
 billboard = 1
 texture = ExtResource("22_62ws7")
+
+[node name="PingingCircle" parent="End" unique_id=137216635 instance=ExtResource("26_ynb6n")]
+modulate = Color(0.3734504, 0.16879413, 4.813075e-08, 1)
 
 [node name="Mask" type="Node3D" parent="." unique_id=2022970732]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
