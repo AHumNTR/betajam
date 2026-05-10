@@ -24,10 +24,10 @@
 [ext_resource type="PackedScene" uid="uid://jyvc2mbdj0k5" path="res://scenes/Objects/Objectives/Mushroom3.tscn" id="19_62ws7"]
 [ext_resource type="PackedScene" uid="uid://dfixmvshfcbjp" path="res://scenes/Objects/Objectives/Mushroom4.tscn" id="20_tm7iq"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5rwvw"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rx4pi"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_rx4pi"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_1e82v"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_iq58l"]
 
@@ -44,8 +44,8 @@ ZoomSpeed = 15.0
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("1_er4uf")]
 transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 0, 0)
 visible = false
-material_override = SubResource("StandardMaterial3D_5rwvw")
-mesh = SubResource("ImmediateMesh_rx4pi")
+material_override = SubResource("StandardMaterial3D_rx4pi")
+mesh = SubResource("ImmediateMesh_1e82v")
 
 [node name="Spawner" parent="." unique_id=566857934 instance=ExtResource("3_wikxs")]
 singleObjects = Array[PackedScene]([ExtResource("4_mvot7"), ExtResource("5_60j6u"), ExtResource("6_60j6u"), ExtResource("5_jylts"), ExtResource("8_2h434"), ExtResource("9_op04c"), ExtResource("10_iq58l"), ExtResource("7_s6fll"), ExtResource("13_5rwvw"), ExtResource("10_op04c"), ExtResource("11_iq58l"), ExtResource("12_pfmqr"), ExtResource("16_op04c")])

@@ -59,7 +59,7 @@ public partial class Spawner : Node3D
 			}
 		}
 
-		CircleOfMushrooms.GlobalPosition = new Vector3(m.CircleOfMushroomsPosition.X, 0.957f, -m.CircleOfMushroomsPosition.Y);
+		//CircleOfMushrooms.GlobalPosition = new Vector3(m.CircleOfMushroomsPosition.X, 0.957f, -m.CircleOfMushroomsPosition.Y);
 
 		if(player!=null)player.Init(m.SafeLines);
 	}
