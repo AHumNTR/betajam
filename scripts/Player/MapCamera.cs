@@ -11,6 +11,7 @@ public partial class MapCamera : Camera3D
 	[Export] public float ZoomSpeed = 10.0f;
 	[Export] public float MinSize = 10.0f;
 	[Export] public float MaxSize = 300.0f;
+
 	private Vector3 _dragStartPoint;
 	private bool _isDragging = false;
 
@@ -75,26 +76,25 @@ public partial class MapCamera : Camera3D
 
 		Size = Mathf.Clamp(Size, MinSize, MaxSize);
 
-		// Camera clamp
-		var limitPositive = 0.5f * (MaxSize - Size);
-		var limitNegative = 0.5f * (-MaxSize + Size);
-		if (GlobalPosition.X > limitPositive)
+		// Camera jump
+		if (GlobalPosition.X > Map.MAP_SIZE/2)
 		{
-			GlobalPosition = new Vector3(limitPositive, GlobalPosition.Y, GlobalPosition.Z);
+			GlobalPosition -= new Vector3(Map.MAP_SIZE, 0, 0);
 		}
-		else if (GlobalPosition.X < limitNegative)
+		else if (GlobalPosition.X < -Map.MAP_SIZE/2)
 		{
-			GlobalPosition = new Vector3(limitNegative, GlobalPosition.Y, GlobalPosition.Z);
+			GlobalPosition += new Vector3(Map.MAP_SIZE, 0, 0);
 		}
 
-		if (GlobalPosition.Z > limitPositive)
+		if (GlobalPosition.Z > Map.MAP_SIZE/2)
 		{
-			GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y, limitPositive);
+			GlobalPosition -= new Vector3(0, 0, Map.MAP_SIZE);
 		}
-		else if (GlobalPosition.Z < limitNegative)
+		else if (GlobalPosition.Z < -Map.MAP_SIZE/2)
 		{
-			GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y, limitNegative);
+			GlobalPosition += new Vector3(0, 0, Map.MAP_SIZE);
 		}
+
 	}
 
 	private Vector3 GetGroundPosition(Vector2 mousePos)

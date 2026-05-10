@@ -26,17 +26,11 @@
 [ext_resource type="AudioStream" uid="uid://c8uoa6enm6it2" path="res://sounds/vomit.ogg" id="23_u0fll"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
-resource_local_to_scene = false
-resource_name = ""
-custom_solver_bias = 0.0
-margin = 0.04
-radius = 0.5
-height = 2.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58gk3"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_to7gp"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_to7gp"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_u0fll"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_58gk3"]
 sky_top_color = Color(0.6680412, 0.25197867, 0.6435261, 1)
@@ -93,49 +87,7 @@ size = Vector3(500, 1, 500)
 material = ExtResource("5_6u1mn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=487306256]
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
 transform = Transform3D(1, 0, 0, 0, 0.27857205, 0.9604153, 0, -0.9604153, 0.27857205, 0, 7.5507007, 0)
-rotation_edit_mode = 0
-rotation_order = 2
-top_level = false
-visible = true
-visibility_parent = NodePath("")
-layers = 1
-light_color = Color(1, 1, 1, 1)
-light_energy = 1.0
-light_indirect_energy = 1.0
-light_volumetric_fog_energy = 1.0
-light_angular_distance = 0.0
-light_negative = false
-light_specular = 1.0
-light_bake_mode = 2
-light_cull_mask = 4294967295
-shadow_enabled = false
-shadow_bias = 0.1
-shadow_normal_bias = 2.0
-shadow_reverse_cull_face = false
-shadow_transmittance_bias = 0.05
-shadow_opacity = 1.0
-shadow_blur = 1.0
-shadow_caster_mask = 4294967295
-editor_only = false
-directional_shadow_mode = 2
-directional_shadow_split_1 = 0.1
-directional_shadow_split_2 = 0.2
-directional_shadow_split_3 = 0.5
-directional_shadow_blend_splits = false
-directional_shadow_fade_start = 0.8
-directional_shadow_max_distance = 100.0
-directional_shadow_pancake_size = 20.0
-sky_mode = 0
-script = null
 
 [node name="Spawner" parent="." unique_id=566857934 node_paths=PackedStringArray("player", "CircleOfMushrooms", "mushroomLabel") instance=ExtResource("4_gubc5")]
 bilboard = 2
@@ -145,8 +97,8 @@ mushroomLabel = NodePath("../CanvasLayer/Control/MushroomLabel")
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
 visible = false
-material_override = SubResource("StandardMaterial3D_58gk3")
-mesh = SubResource("ImmediateMesh_to7gp")
+material_override = SubResource("StandardMaterial3D_to7gp")
+mesh = SubResource("ImmediateMesh_u0fll")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1315559398]
 environment = SubResource("Environment_bcnxi")
@@ -209,7 +161,6 @@ TransitionRect = NodePath("../CanvasLayer/Control/TransitionRect")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="TimeManager" unique_id=1434283430]
 stream = ExtResource("17_6u1mn")
 attenuation_model = 3
-autoplay = true
 
 [node name="SfxPlayer" type="Node3D" parent="." unique_id=121667493 node_paths=PackedStringArray("winSound", "loseSound", "eatSound", "vomitSound")]
 script = ExtResource("19_adb74")

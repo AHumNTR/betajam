@@ -17,7 +17,7 @@ public partial class TimerManager : Node3D
 	{
 		_instance = this;
 
-		_remainingTime = totalTime;
+		_remainingTime = totalTime + 60f;	// 60 seconds of extra warmup time
 		audioPlayer = (AudioStreamPlayer3D)GetNode("AudioStreamPlayer3D");
 
 		TimerRunsDown = true;
@@ -36,6 +36,11 @@ public partial class TimerManager : Node3D
 
 		_remainingTime -= (float)delta * _timeSpeed;
 
+		if (!audioPlayer.Playing && _remainingTime <= totalTime && _remainingTime > 60f)
+		{
+			audioPlayer.Play();
+		}
+
 		if (_remainingTime <= 0)
 		{
 			GameSfxPlayer.Instance.loseSound.Play();
@@ -43,10 +48,11 @@ public partial class TimerManager : Node3D
 			return;
 		}
 
-		if (_remainingTime <= 60)
+		var realRemainingTime = _remainingTime / _timeSpeed;
+		if (realRemainingTime <= 60)
 		{
 			RemainingTimeLabel.Visible = true;
-			RemainingTimeLabel.Text = $"{_remainingTime / _timeSpeed:F1}";
+			RemainingTimeLabel.Text = $"{realRemainingTime:F1}";
 		} else
 		{
 			RemainingTimeLabel.Visible = false;

@@ -26,12 +26,12 @@
 [ext_resource type="Texture2D" uid="uid://qrk4iku47u1g" path="res://textures/Mushroom2.png" id="23_tm7iq"]
 [ext_resource type="PackedScene" uid="uid://c8oagafpqidmx" path="res://scenes/pinging_circle.tscn" id="26_ynb6n"]
 
+[sub_resource type="QuadMesh" id="QuadMesh_iq58l"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62ws7"]
 shading_mode = 0
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_tm7iq"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_iq58l"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_u0fll"]
 height = 0.28497314
@@ -47,6 +47,29 @@ script = ExtResource("1_y2hrc")
 DragSensitivity = 0.5
 ZoomSpeed = 15.0
 
+[node name="Mask" type="Node3D" parent="Camera3D" unique_id=2022970732]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 6.065031e-06, -138.75174)
+
+[node name="Mask" type="MeshInstance3D" parent="Camera3D/Mask" unique_id=2064055783]
+transform = Transform3D(500, 0, 0, 0, -3.496911e-05, 500, 0, -800, -2.1855694e-05, -375, 0, 0)
+mesh = SubResource("QuadMesh_iq58l")
+surface_material_override/0 = ExtResource("18_2h434")
+
+[node name="Mask2" type="MeshInstance3D" parent="Camera3D/Mask" unique_id=313484832]
+transform = Transform3D(500, 0, 0, 0, -3.496911e-05, 500, 0, -800, -2.1855694e-05, 375, 0, 0)
+mesh = SubResource("QuadMesh_iq58l")
+surface_material_override/0 = ExtResource("18_2h434")
+
+[node name="Mask3" type="MeshInstance3D" parent="Camera3D/Mask" unique_id=786035826]
+transform = Transform3D(800, 0, 0, 0, -2.1855694e-05, 500, 0, -500, -2.1855694e-05, 0, 0, -375)
+mesh = SubResource("QuadMesh_iq58l")
+surface_material_override/0 = ExtResource("18_2h434")
+
+[node name="Mask4" type="MeshInstance3D" parent="Camera3D/Mask" unique_id=1942771338]
+transform = Transform3D(800, 0, 0, 0, -2.1855694e-05, 500, 0, -500, -2.1855694e-05, 0, 0, 375)
+mesh = SubResource("QuadMesh_iq58l")
+surface_material_override/0 = ExtResource("18_2h434")
+
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("1_er4uf")]
 transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 0, 0)
 visible = false
@@ -59,11 +82,6 @@ objectiveScenes = Array[PackedScene]([ExtResource("7_s6fll"), ExtResource("17_pf
 bilboard = 1
 PathDitherMaterial = ExtResource("17_op04c")
 CircleOfMushrooms = NodePath("../End")
-
-[node name="Background" type="MeshInstance3D" parent="." unique_id=1687506463]
-transform = Transform3D(250, 0, 0, 0, -1.0927847e-05, 250, 0, -250, -1.0927847e-05, 0, -5, 0)
-mesh = SubResource("QuadMesh_iq58l")
-surface_material_override/0 = ExtResource("17_xxjsi")
 
 [node name="End" type="Area3D" parent="." unique_id=19486707]
 script = ExtResource("21_1e82v")
@@ -189,25 +207,7 @@ texture = ExtResource("22_62ws7")
 [node name="PingingCircle" parent="End" unique_id=137216635 instance=ExtResource("26_ynb6n")]
 modulate = Color(0.3734504, 0.16879413, 4.813075e-08, 1)
 
-[node name="Mask" type="Node3D" parent="." unique_id=2022970732]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-
-[node name="Mask" type="MeshInstance3D" parent="Mask" unique_id=2064055783]
-transform = Transform3D(500, 0, 0, 0, -3.496911e-05, 500, 0, -800, -2.1855694e-05, -375, 0, 0)
+[node name="Background" type="MeshInstance3D" parent="." unique_id=1687506463]
+transform = Transform3D(500, 0, 0, 0, -2.1855694e-05, 500, 0, -500, -2.1855694e-05, 0, -5, 4.5474735e-13)
 mesh = SubResource("QuadMesh_iq58l")
-surface_material_override/0 = ExtResource("18_2h434")
-
-[node name="Mask2" type="MeshInstance3D" parent="Mask" unique_id=313484832]
-transform = Transform3D(500, 0, 0, 0, -3.496911e-05, 500, 0, -800, -2.1855694e-05, 375, 0, 0)
-mesh = SubResource("QuadMesh_iq58l")
-surface_material_override/0 = ExtResource("18_2h434")
-
-[node name="Mask3" type="MeshInstance3D" parent="Mask" unique_id=786035826]
-transform = Transform3D(800, 0, 0, 0, -2.1855694e-05, 500, 0, -500, -2.1855694e-05, 0, 0, -375)
-mesh = SubResource("QuadMesh_iq58l")
-surface_material_override/0 = ExtResource("18_2h434")
-
-[node name="Mask4" type="MeshInstance3D" parent="Mask" unique_id=1942771338]
-transform = Transform3D(800, 0, 0, 0, -2.1855694e-05, 500, 0, -500, -2.1855694e-05, 0, 0, 375)
-mesh = SubResource("QuadMesh_iq58l")
-surface_material_override/0 = ExtResource("18_2h434")
+surface_material_override/0 = ExtResource("17_xxjsi")
