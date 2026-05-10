@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cw1giqskikdmd"]
+
+[ext_resource type="Texture2D" uid="uid://dmkpl1ymxdug0" path="res://textures/Icons/SafeMushroom1.png" id="1_wunyc"]
+
+[node name="SingleObject" type="Node3D" unique_id=1139956512]
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=611015191]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.32312536, 0)
+pixel_size = 0.002
+billboard = 2
+texture = ExtResource("1_wunyc")

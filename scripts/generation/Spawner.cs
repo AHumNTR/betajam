@@ -16,6 +16,7 @@ public partial class Spawner : Node3D
 	[Export] public Material PathDitherMaterial;
 	[Export] public Player player;
 	[Export] public End CircleOfMushrooms;
+	[Export] public MushroomLabel mushroomLabel;
 	public override void _Ready()
 	{
 		// Since Godot uses right-hand coordinate system, we gotta take -Y for Z conversion!
@@ -46,8 +47,7 @@ public partial class Spawner : Node3D
 
 				foreach (Map.Objective o in m.Objectives)
 				{
-					Node3D obj = (Node3D)objectiveScenes[o.ObjectType*2+(o.Harmless? 1:0)].Instantiate();
-
+					Node3D obj = (Node3D)objectiveScenes[o.ObjectType * 2 + (o.Harmless ? 1 : 0)].Instantiate();
 
 					this.AddChild(obj);
 					obj.Position = new Vector3(o.Position.X - i * Map.MAP_SIZE, 0, -o.Position.Y + j * Map.MAP_SIZE);
@@ -59,9 +59,15 @@ public partial class Spawner : Node3D
 			}
 		}
 
-		//CircleOfMushrooms.GlobalPosition = new Vector3(m.CircleOfMushroomsPosition.X, 0.957f, -m.CircleOfMushroomsPosition.Y);
+		CircleOfMushrooms.GlobalPosition = new Vector3(m.CircleOfMushroomsPosition.X, 0.957f, -m.CircleOfMushroomsPosition.Y);
 
-		if(player!=null)player.Init(m.SafeLines);
+		if (player != null)
+		{
+			player.Init(m.SafeLines, () =>
+				{
+					CircleOfMushrooms.Visible = true;
+				}, mushroomLabel.UpdateText);
+		}
 	}
 
 	private void CreatePaths(List<Map.SafeLine> lines, Vector3 offset)

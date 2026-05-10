@@ -1,68 +1,22 @@
-[gd_scene format=3 uid="uid://dneanuvkuu08o"]
+[gd_scene format=3 uid="uid://jyvc2mbdj0k5"]
 
 [ext_resource type="Script" uid="uid://d3qvv4aioa4re" path="res://scripts/generation/Objective.cs" id="1_esot2"]
-[ext_resource type="Texture2D" uid="uid://c1lrmivxcwh3w" path="res://textures/Icons/SafeMushroom2.png" id="3_0ss8x"]
-[ext_resource type="PackedScene" uid="uid://c8oagafpqidmx" path="res://scenes/pinging_circle.tscn" id="3_5efvr"]
-[ext_resource type="Texture2D" uid="uid://omqhgna1cqq0" path="res://textures/Icons/PingingCircle.png" id="4_ktt6b"]
+[ext_resource type="Texture2D" uid="uid://qrk4iku47u1g" path="res://textures/Mushroom2.png" id="2_esot2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5efvr"]
 height = 0.5626221
 radius = 0.46191406
 
-[sub_resource type="Animation" id="Animation_4cn5l"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pinging:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_tydll"]
-resource_name = "pinging"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pinging:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.93333334),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(3, 3, 3), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hxt7b"]
-_data = {
-&"RESET": SubResource("Animation_4cn5l"),
-&"pinging": SubResource("Animation_tydll")
-}
-
 [node name="SingleObject" type="StaticBody3D" unique_id=2042386562]
+collision_layer = 2
 script = ExtResource("1_esot2")
-pingingCircle = ExtResource("3_5efvr")
-harmless = true
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=611015191]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.37902462, 0)
 pixel_size = 0.002
 billboard = 2
-texture = ExtResource("3_0ss8x")
+texture = ExtResource("2_esot2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=550749056]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41204834, 0)
 shape = SubResource("CylinderShape3D_5efvr")
-
-[node name="Pinging" type="Sprite3D" parent="." unique_id=307077603]
-billboard = 1
-texture = ExtResource("4_ktt6b")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1489049509]
-libraries/ = SubResource("AnimationLibrary_hxt7b")

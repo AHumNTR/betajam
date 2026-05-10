@@ -16,9 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://dswhx4a1v2576" path="res://scenes/Objects/Crystal2.tscn" id="12_usijh"]
 [ext_resource type="PackedScene" uid="uid://cug3vrs4hiy7a" path="res://scenes/Objects/Crystal3.tscn" id="13_3quiw"]
 [ext_resource type="PackedScene" uid="uid://cs7bk0ue6jsvj" path="res://scenes/Objects/Well.tscn" id="14_ruep2"]
+[ext_resource type="PackedScene" path="res://scenes/Objects/Objectives/Mushroom1.tscn" id="15_k5ex0"]
+[ext_resource type="PackedScene" uid="uid://d2s03ntqyjsjd" path="res://scenes/Objects/Objectives/Mushroom1_Harmless.tscn" id="16_egqqv"]
+[ext_resource type="PackedScene" uid="uid://jyvc2mbdj0k5" path="res://scenes/Objects/Objectives/Mushroom2.tscn" id="17_yu68o"]
+[ext_resource type="PackedScene" uid="uid://cglehalcx0mw1" path="res://scenes/Objects/Objectives/Mushroom2_Harmless.tscn" id="18_ij0ss"]
 
 [node name="Spawner" type="Node3D" unique_id=566857934]
 script = ExtResource("1_cmhla")
 singleObjects = Array[PackedScene]([ExtResource("2_4wbs5"), ExtResource("3_cmhla"), ExtResource("8_3rx28"), ExtResource("3_30a77"), ExtResource("4_p5s3f"), ExtResource("6_e3f8v"), ExtResource("7_3rx28"), ExtResource("5_e3f8v"), ExtResource("10_ou6h7"), ExtResource("11_ruep2"), ExtResource("12_usijh"), ExtResource("13_3quiw"), ExtResource("14_ruep2")])
+objectiveScenes = Array[PackedScene]([ExtResource("15_k5ex0"), ExtResource("16_egqqv"), ExtResource("17_yu68o"), ExtResource("18_ij0ss")])
 grassObject = ExtResource("6_30a77")
 PathDitherMaterial = ExtResource("6_4wbs5")

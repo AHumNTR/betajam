@@ -19,14 +19,19 @@ public partial class Player : CharacterBody3D
 	public Node3D cam;
 	public AudioStreamPlayer3D audioPlayer;
 
-	public void Init(List<Map.SafeLine> dirtPaths)
+	private Action _onAllMushroomsCollected;
+	private Action _onSingleMushroomCollected;
+
+	public void Init(List<Map.SafeLine> dirtPaths, Action onAllMushroomsCollected, Action onSingleMushroomCollected)
 	{
 		_dirtPaths = dirtPaths;
+		_onAllMushroomsCollected = onAllMushroomsCollected;
+		_onSingleMushroomCollected = onSingleMushroomCollected;
 
 		var random = new RandomNumberGenerator();
 		var selectedPath = dirtPaths[random.RandiRange(0, dirtPaths.Count - 1)];
 		var centerPosition = 0.5f * (selectedPath.Start + selectedPath.End);
-		//GlobalPosition = new Vector3(centerPosition.X, 0.1f, centerPosition.Y);
+		GlobalPosition = new Vector3(centerPosition.X, 0.1f, centerPosition.Y);
 	}
 
 	public override void _Ready()
@@ -53,8 +58,10 @@ public partial class Player : CharacterBody3D
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
-		if (@event.IsActionPressed("Interact")){
-			if (Input.MouseMode == Input.MouseModeEnum.Visible){
+		if (@event.IsActionPressed("Interact"))
+		{
+			if (Input.MouseMode == Input.MouseModeEnum.Visible)
+			{
 				Input.MouseMode = Input.MouseModeEnum.Captured;
 			}
 		}
@@ -104,22 +111,53 @@ public partial class Player : CharacterBody3D
 		}
 
 		cam.Position = new Vector3(Mathf.Sin((_headBobCycleValue * 2f) * Mathf.Pi * 2) * HeadBobHorizontal, Mathf.Sin(_headBobCycleValue * Mathf.Pi * 2) * HeadBobVertical, 0);
+
+		if (!TimerManager.Instance.TimerRunsDown) return;
+
+		//check for collecting
+		if (Input.IsActionJustPressed("Interact"))
+		{
+			var spaceState = GetWorld3D().DirectSpaceState;
+
+			Vector3 forward = -cam.GlobalTransform.Basis.Z;
+			Vector3 end = cam.GlobalPosition + (forward * 50.0f);
+
+			var query = PhysicsRayQueryParameters3D.Create(cam.GlobalPosition, end, 2);
+			var result = spaceState.IntersectRay(query);
+			if (result.Count > 0)
+			{
+				Objective o = (Objective)result["collider"];
+				if (o.harmless)
+				{
+					TimerManager.Instance.ResetTimer();
+					End.RemainingItems--;
+
+					_onSingleMushroomCollected?.Invoke();
+
+					if (End.RemainingItems <= 0)
+					{
+						_onAllMushroomsCollected?.Invoke();
+					}
+				}
+				else
+				{
+					TimerManager.Instance.SpeedUp();
+				}
+				o.QueueFree();
+			}
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!TimerManager.Instance.TimerRunsDown) return;
+
 		Vector3 velocity = Velocity;
 
 		if (!IsOnFloor())
 		{
 			velocity += GetGravity() * (float)delta;
 		}
-
-		// Handle Jump.
-		/* if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-		{
-			velocity.Y = JumpVelocity;
-		} */
 
 		var speedMultiplier = 1f;
 		if (Input.IsActionPressed("sprint"))
@@ -158,26 +196,6 @@ public partial class Player : CharacterBody3D
 		{
 			GlobalPosition += new Vector3(0, 0, Map.MAP_SIZE);
 		}
-		//check for collecting
-		if (Input.IsActionJustPressed("Interact"))
-		{
-			var spaceState = GetWorld3D().DirectSpaceState;
-
-			Vector3 forward = -cam.GlobalTransform.Basis.Z;
-			Vector3 end = cam.GlobalPosition + (forward * 50.0f);
-			
-			var query = PhysicsRayQueryParameters3D.Create(cam.GlobalPosition, end,2);
-			var result = spaceState.IntersectRay(query);
-			if (result.Count > 0)
-			{
-				Objective o= ((Objective)result["collider"]);
-				if(o.harmless){
-					End.RemainingItems--;
-				}
-				else; //retract hp;
-				o.QueueFree();
-			}
-		}
 
 		Velocity = velocity;
 		MoveAndSlide();
@@ -208,11 +226,15 @@ public partial class Player : CharacterBody3D
 
 		return false;
 	}
-	
-	public void _on_end_body_entered(Node3D node){
-		if(node==(Node3D)this&&End.RemainingItems==0){
-			Input.MouseMode=Input.MouseModeEnum.Visible;
-			GetTree().ChangeSceneToFile("res://scenes/win_cutscene.tscn");
+
+	public void _on_end_body_entered(Node3D node)
+	{
+		if (!TimerManager.Instance.TimerRunsDown) return;
+
+		if (node == (Node3D)this && End.RemainingItems == 0)
+		{
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+			TimerManager.Instance.GameFinishTask("res://scenes/win_cutscene.tscn");
 
 		}
 	}

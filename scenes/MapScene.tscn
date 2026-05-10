@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c40n4e61o5oi1" path="res://scenes/ObjectsIcons/TreePine.tscn" id="5_60j6u"]
 [ext_resource type="PackedScene" uid="uid://d1dk1labp5uhg" path="res://scenes/ObjectsIcons/Tree2.tscn" id="5_jylts"]
 [ext_resource type="PackedScene" uid="uid://bamf5o5xxohsh" path="res://scenes/ObjectsIcons/Rock.tscn" id="6_60j6u"]
-[ext_resource type="PackedScene" uid="uid://cbrcboky8kqe6" path="res://scenes/ObjectsIcons/Mushroom.tscn" id="7_s6fll"]
+[ext_resource type="PackedScene" uid="uid://cbrcboky8kqe6" path="res://scenes/ObjectsIcons/Mushroom1.tscn" id="7_s6fll"]
 [ext_resource type="PackedScene" uid="uid://q2dpwvkoc5w0" path="res://scenes/ObjectsIcons/Tree3.tscn" id="8_2h434"]
 [ext_resource type="PackedScene" uid="uid://ci27t2f6ifb6x" path="res://scenes/ObjectsIcons/TreeRed.tscn" id="9_op04c"]
 [ext_resource type="PackedScene" uid="uid://dfucth8jmu1nk" path="res://scenes/ObjectsIcons/TreeYellow.tscn" id="10_iq58l"]
@@ -17,12 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://ddmskcmsnhynv" path="res://scenes/ObjectsIcons/Mushroom2.tscn" id="13_5rwvw"]
 [ext_resource type="PackedScene" uid="uid://cyge0kllk6m6o" path="res://scenes/ObjectsIcons/Well.tscn" id="16_op04c"]
 [ext_resource type="Material" uid="uid://bjxnd0el8qamh" path="res://materials/path-dotted.tres" id="17_op04c"]
-[ext_resource type="PackedScene" uid="uid://bumbacf3sns70" path="res://scenes/Objects/Objectives/Mushroom1.tscn" id="17_rx4pi"]
+[ext_resource type="PackedScene" uid="uid://cw1giqskikdmd" path="res://scenes/ObjectsIcons/Mushroom1_Marked.tscn" id="17_pfmqr"]
 [ext_resource type="Material" uid="uid://vx1tegotaekp" path="res://materials/map-background.tres" id="17_xxjsi"]
-[ext_resource type="PackedScene" uid="uid://dneanuvkuu08o" path="res://scenes/Objects/Objectives/Mushroom2.tscn" id="18_1e82v"]
 [ext_resource type="Material" uid="uid://dnuw830256au" path="res://materials/pitch-black.tres" id="18_2h434"]
-[ext_resource type="PackedScene" uid="uid://jyvc2mbdj0k5" path="res://scenes/Objects/Objectives/Mushroom3.tscn" id="19_62ws7"]
-[ext_resource type="PackedScene" uid="uid://dfixmvshfcbjp" path="res://scenes/Objects/Objectives/Mushroom4.tscn" id="20_tm7iq"]
+[ext_resource type="PackedScene" uid="uid://c8kjlhtbqs2ky" path="res://scenes/ObjectsIcons/Mushroom2_Marked.tscn" id="18_5rwvw"]
+[ext_resource type="PackedScene" path="res://scenes/endRing.tscn" id="21_5rwvw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rx4pi"]
 shading_mode = 0
@@ -47,16 +46,19 @@ visible = false
 material_override = SubResource("StandardMaterial3D_rx4pi")
 mesh = SubResource("ImmediateMesh_1e82v")
 
-[node name="Spawner" parent="." unique_id=566857934 instance=ExtResource("3_wikxs")]
+[node name="Spawner" parent="." unique_id=566857934 node_paths=PackedStringArray("CircleOfMushrooms") instance=ExtResource("3_wikxs")]
 singleObjects = Array[PackedScene]([ExtResource("4_mvot7"), ExtResource("5_60j6u"), ExtResource("6_60j6u"), ExtResource("5_jylts"), ExtResource("8_2h434"), ExtResource("9_op04c"), ExtResource("10_iq58l"), ExtResource("7_s6fll"), ExtResource("13_5rwvw"), ExtResource("10_op04c"), ExtResource("11_iq58l"), ExtResource("12_pfmqr"), ExtResource("16_op04c")])
-objectiveScenes = Array[PackedScene]([ExtResource("17_rx4pi"), ExtResource("18_1e82v"), ExtResource("19_62ws7"), ExtResource("20_tm7iq")])
+objectiveScenes = Array[PackedScene]([ExtResource("7_s6fll"), ExtResource("17_pfmqr"), ExtResource("13_5rwvw"), ExtResource("18_5rwvw")])
 bilboard = 1
 PathDitherMaterial = ExtResource("17_op04c")
+CircleOfMushrooms = NodePath("../End")
 
 [node name="Background" type="MeshInstance3D" parent="." unique_id=1687506463]
 transform = Transform3D(250, 0, 0, 0, -1.0927847e-05, 250, 0, -250, -1.0927847e-05, 0, -5, 0)
 mesh = SubResource("QuadMesh_iq58l")
 surface_material_override/0 = ExtResource("17_xxjsi")
+
+[node name="End" parent="." unique_id=19486707 instance=ExtResource("21_5rwvw")]
 
 [node name="Mask" type="Node3D" parent="." unique_id=2022970732]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
