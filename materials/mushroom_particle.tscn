@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dvf7yljs082b6"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_quui2"]
+emission_shape = 3
+emission_box_extents = Vector3(0.31, 0.72, 0.4)
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 6.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_jvjkt"]
+radius = 0.035
+height = 0.07
+
+[node name="mushroomParticle" type="GPUParticles3D" unique_id=25272714]
+amount = 36
+speed_scale = 3.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_quui2")
+draw_pass_1 = SubResource("SphereMesh_jvjkt")
