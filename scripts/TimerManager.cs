@@ -25,7 +25,7 @@ public partial class TimerManager : Node3D
 
 	public override void _Process(double delta)
 	{
-		if (!TimerRunsDown) 
+		if (!TimerRunsDown)
 		{
 			if (TransitionRect.Color.A <= 1f)
 			{
@@ -38,7 +38,6 @@ public partial class TimerManager : Node3D
 
 		if (_remainingTime <= 0)
 		{
-			TimerRunsDown = false;
 			GameSfxPlayer.Instance.loseSound.Play();
 			GameFinishTask("res://scenes/MainMenu.tscn");
 			return;
@@ -67,6 +66,7 @@ public partial class TimerManager : Node3D
 
 	public async void GameFinishTask(string nextScene)
 	{
+		TimerRunsDown = false;
 		await ToSignal(GetTree().CreateTimer(2.0f), SceneTreeTimer.SignalName.Timeout);
 		GetTree().ChangeSceneToFile(nextScene);
 	}

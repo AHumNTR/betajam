@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bd47imoeup3ax" path="res://scenes/Objects/Tree1.tscn" id="6_c05m0"]
 [ext_resource type="PackedScene" uid="uid://canpkcgnyuoy" path="res://scenes/Objects/Tree2.tscn" id="7_cby30"]
 [ext_resource type="Texture2D" uid="uid://b7nkarw8lsjvm" path="res://textures/TheHouse.png" id="8_2f1jl"]
+[ext_resource type="AudioStream" uid="uid://xgk4c4mbh4om" path="res://sounds/cheer.ogg" id="10_gr37v"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4eovj"]
 material = ExtResource("1_ru347")
@@ -865,11 +866,57 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=161384239]
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 transform = Transform3D(1, 0, 0, 0, 0.27857205, 0.9604153, 0, -0.9604153, 0.27857205, 0, 7.5507007, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+layers = 1
+light_color = Color(1, 1, 1, 1)
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_volumetric_fog_energy = 1.0
+light_angular_distance = 0.0
+light_negative = false
+light_specular = 1.0
+light_bake_mode = 2
+light_cull_mask = 4294967295
+shadow_enabled = false
+shadow_bias = 0.1
+shadow_normal_bias = 2.0
+shadow_reverse_cull_face = false
+shadow_transmittance_bias = 0.05
+shadow_opacity = 1.0
+shadow_blur = 1.0
+shadow_caster_mask = 4294967295
+editor_only = false
+directional_shadow_mode = 2
+directional_shadow_split_1 = 0.1
+directional_shadow_split_2 = 0.2
+directional_shadow_split_3 = 0.5
+directional_shadow_blend_splits = false
+directional_shadow_fade_start = 0.8
+directional_shadow_max_distance = 100.0
+directional_shadow_pancake_size = 20.0
+sky_mode = 0
+script = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1807697624]
 environment = SubResource("Environment_d3crx")
 camera_attributes = SubResource("CameraAttributesPractical_gr37v")
 compositor = SubResource("Compositor_qar22")
+
+[node name="KidsCheer" type="AudioStreamPlayer3D" parent="." unique_id=2068626034]
+stream = ExtResource("10_gr37v")
+autoplay = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_change_scene"]

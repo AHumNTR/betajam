@@ -10,7 +10,10 @@ public partial class MainMenu : Control
 		var random = new RandomNumberGenerator();
 		Seed.seed = random.RandiRange(10000, 99999);
 		GetNode<LineEdit>("SeedEdit").Text=Seed.seed.ToString();
+
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
+	
 	public void _on_start_button_pressed(){
 		
 		End.RemainingItems=End.MaxRemainingItems;
