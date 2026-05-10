@@ -157,10 +157,6 @@ compositor = SubResource("Compositor_k6f3i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.120334, 0.9566717, 0)
 visible = false
 
-[node name="CSGBox3D" type="CSGBox3D" parent="End" unique_id=510326618]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50.210747, 0)
-size = Vector3(1, 101.42149, 1)
-
 [node name="Mountains" type="Node3D" parent="." unique_id=1856168910 node_paths=PackedStringArray("player")]
 script = ExtResource("16_bcnxi")
 player = NodePath("../player")
