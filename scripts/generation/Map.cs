@@ -205,7 +205,7 @@ public class Map
             }
         }
 
-        var maxHarmlessObjectiveCount = Mathf.Min(100, objectives.Count);
+        var maxHarmlessObjectiveCount = Mathf.Min(10, objectives.Count);
         var addedHarmlessObjectiveCount = 0;
         while (addedHarmlessObjectiveCount < maxHarmlessObjectiveCount)
         {

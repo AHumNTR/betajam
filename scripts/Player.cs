@@ -238,7 +238,7 @@ public partial class Player : CharacterBody3D
 	{
 		if (!TimerManager.Instance.TimerRunsDown) return;
 
-		if (node == (Node3D)this && End.RemainingItems == 0)
+		if (node == (Node3D)this && End.RemainingItems <= 0)
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 			GameSfxPlayer.Instance.winSound.Play();

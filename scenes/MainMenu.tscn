@@ -251,7 +251,49 @@ mesh = SubResource("QuadMesh_l72w3")
 surface_material_override/0 = ExtResource("4_ow34m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=730880663]
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 transform = Transform3D(1, 0, 0, 0, 0.14565139, 0.98933595, 0, -0.98933595, 0.14565139, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+layers = 1
+light_color = Color(1, 1, 1, 1)
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_volumetric_fog_energy = 1.0
+light_angular_distance = 0.0
+light_negative = false
+light_specular = 1.0
+light_bake_mode = 2
+light_cull_mask = 4294967295
+shadow_enabled = false
+shadow_bias = 0.1
+shadow_normal_bias = 2.0
+shadow_reverse_cull_face = false
+shadow_transmittance_bias = 0.05
+shadow_opacity = 1.0
+shadow_blur = 1.0
+shadow_caster_mask = 4294967295
+editor_only = false
+directional_shadow_mode = 2
+directional_shadow_split_1 = 0.1
+directional_shadow_split_2 = 0.2
+directional_shadow_split_3 = 0.5
+directional_shadow_blend_splits = false
+directional_shadow_fade_start = 0.8
+directional_shadow_max_distance = 100.0
+directional_shadow_pancake_size = 20.0
+sky_mode = 0
+script = null
 
 [connection signal="mouse_entered" from="StartButton" to="." method="_on_start_button_mouse_entered"]
 [connection signal="mouse_exited" from="StartButton" to="." method="_on_any_button_mouse_exited"]

@@ -47,6 +47,9 @@ public partial class TimerManager : Node3D
 		{
 			RemainingTimeLabel.Visible = true;
 			RemainingTimeLabel.Text = $"{_remainingTime / _timeSpeed:F1}";
+		} else
+		{
+			RemainingTimeLabel.Visible = false;
 		}
 	}
 
