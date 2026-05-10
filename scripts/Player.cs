@@ -170,8 +170,12 @@ public partial class Player : CharacterBody3D
 			var result = spaceState.IntersectRay(query);
 			if (result.Count > 0)
 			{
-				((Node)result["collider"]).QueueFree();
-				End.RemainingItems--;
+				Objective o= ((Objective)result["collider"]);
+				if(o.harmless){
+					End.RemainingItems--;
+				}
+				else; //retract hp;
+				o.QueueFree();
 			}
 		}
 

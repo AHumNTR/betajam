@@ -16,17 +16,17 @@
 [ext_resource type="PackedScene" uid="uid://cfjdg8f5qgcna" path="res://scenes/Objects/Objectives/objective2.tscn" id="14_adb74"]
 [ext_resource type="PackedScene" uid="uid://b0wx25gnhnfad" path="res://scenes/Objects/Objectives/objective3.tscn" id="15_58gk3"]
 [ext_resource type="Material" uid="uid://s0v6ewgcb1qk" path="res://materials/world-confine.tres" id="16_01n6w"]
-[ext_resource type="Script" path="res://scripts/FollowingMountain.cs" id="16_bcnxi"]
+[ext_resource type="Script" uid="uid://bkwyv632n0hcs" path="res://scripts/FollowingMountain.cs" id="16_bcnxi"]
 [ext_resource type="PackedScene" uid="uid://c6n4nmew703y3" path="res://scenes/Objects/Objectives/objective4.tscn" id="16_to7gp"]
 [ext_resource type="PackedScene" uid="uid://dv36w8kv3kshf" path="res://scenes/Objects/Objectives/objective1.tscn" id="17_6u1mn"]
-[ext_resource type="PackedScene" path="res://scenes/endRing.tscn" id="18_k6f3i"]
+[ext_resource type="PackedScene" uid="uid://ch1tyxa22vkto" path="res://scenes/endRing.tscn" id="18_k6f3i"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdqt8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k6f3i"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_adb74"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_xdqt8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_58gk3"]
 sky_top_color = Color(0.6680412, 0.25197867, 0.6435261, 1)
@@ -86,14 +86,14 @@ material = ExtResource("5_6u1mn")
 transform = Transform3D(1, 0, 0, 0, 0.27857205, 0.9604153, 0, -0.9604153, 0.27857205, 0, 7.5507007, 0)
 
 [node name="Spawner" parent="." unique_id=566857934 node_paths=PackedStringArray("player") instance=ExtResource("4_gubc5")]
-objectiveScenes = Array[PackedScene]([ExtResource("17_6u1mn"), ExtResource("14_adb74"), ExtResource("15_58gk3"), ExtResource("16_to7gp"), null])
+objectiveScenes = Array[PackedScene]([ExtResource("17_6u1mn"), ExtResource("14_adb74"), ExtResource("15_58gk3"), ExtResource("16_to7gp")])
 bilboard = 2
 player = NodePath("../player")
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
 visible = false
-material_override = SubResource("StandardMaterial3D_xdqt8")
-mesh = SubResource("ImmediateMesh_adb74")
+material_override = SubResource("StandardMaterial3D_k6f3i")
+mesh = SubResource("ImmediateMesh_xdqt8")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1315559398]
 environment = SubResource("Environment_bcnxi")
@@ -146,5 +146,32 @@ surface_material_override/0 = ExtResource("16_01n6w")
 transform = Transform3D(-6.9938224e-06, 0, -160, 0, 80, 0, 160, 0, -6.9938224e-06, 190, 40, 0)
 mesh = SubResource("QuadMesh_6u1mn")
 surface_material_override/0 = ExtResource("16_01n6w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1523632875]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1004510519]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=392757722]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -356.5
+offset_right = 356.5
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "Time Remaining:"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="End" to="player" method="_on_end_body_entered"]

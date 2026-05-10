@@ -201,7 +201,7 @@ public class Map
 
             if (!isOverlapped)
             {
-                objectives.Add(new Objective(randomPosition));
+                objectives.Add(new Objective(randomPosition,random.Next()%2));
             }
         }
 
@@ -305,10 +305,11 @@ public class Map
         public int ObjectType;
         public bool Harmless;
 
-        public Objective(Vector2 position)
+        public Objective(Vector2 position,int objectType)
         {
             Position = position;
             Harmless = false;
+            ObjectType=objectType;
         }
     }
 

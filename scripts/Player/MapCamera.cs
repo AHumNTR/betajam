@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+using System.Collections.Generic;
 public partial class MapCamera : Camera3D
 {
 	[ExportGroup("Movement Settings")]
@@ -11,7 +11,6 @@ public partial class MapCamera : Camera3D
 	[Export] public float ZoomSpeed = 10.0f;
 	[Export] public float MinSize = 10.0f;
 	[Export] public float MaxSize = 300.0f;
-
 	private Vector3 _dragStartPoint;
 	private bool _isDragging = false;
 

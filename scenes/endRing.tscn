@@ -17,7 +17,7 @@ shape = SubResource("CylinderShape3D_u0fll")
 debug_color = Color(0, 0, 0, 0.41960785)
 
 [node name="sprites" type="Node3D" parent="." unique_id=2097783087]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.5350981, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -2.9811487, -0.5350981, -3.1298046)
 
 [node name="Sprite3D" type="Sprite3D" parent="sprites" unique_id=1884933265]
 transform = Transform3D(0.06, 0, 0, 0, 0.061999995, 0, 0, 0, 0.015, 3.4716759, -0.33476895, 0.55433047)
