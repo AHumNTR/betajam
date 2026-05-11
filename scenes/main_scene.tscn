@@ -13,7 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://ofhvhwq5m3g" path="res://sounds/step_dirt2.ogg" id="6_k67gn"]
 [ext_resource type="AudioStream" uid="uid://cec4veu8v6f67" path="res://sounds/step_dirt3.ogg" id="7_k3g67"]
 [ext_resource type="PackedScene" uid="uid://5io7dag3rn7n" path="res://scenes/visualiser.tscn" id="8_18nlu"]
-[ext_resource type="PackedScene" uid="uid://de3icow41l0ud" path="res://materials/mushroom_particle.tscn" id="8_u0fll"]
+[ext_resource type="PackedScene" uid="uid://de3icow41l0ud" path="res://scenes/particle_mushroom.tscn" id="8_u0fll"]
+[ext_resource type="PackedScene" uid="uid://dkkapxy1x72sy" path="res://scenes/particle_vomit.tscn" id="9_6p3nn"]
 [ext_resource type="Material" uid="uid://s0v6ewgcb1qk" path="res://materials/world-confine.tres" id="16_01n6w"]
 [ext_resource type="Script" uid="uid://bkwyv632n0hcs" path="res://scripts/FollowingMountain.cs" id="16_bcnxi"]
 [ext_resource type="AudioStream" uid="uid://c4vne54s3t861" path="res://sounds/the_path_of_the_goblin_king.mp3" id="17_6u1mn"]
@@ -28,10 +29,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_to7gp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k67gn"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_u0fll"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_k3g67"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_58gk3"]
 sky_top_color = Color(0.6680412, 0.25197867, 0.6435261, 1)
@@ -60,7 +61,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3541285, 0)
 script = ExtResource("1_w2twt")
 StepSoundsGrass = Array[AudioStream]([ExtResource("2_58gk3"), ExtResource("3_to7gp"), ExtResource("4_u0fll")])
 StepSoundsDirt = Array[AudioStream]([ExtResource("5_6p3nn"), ExtResource("6_k67gn"), ExtResource("7_k3g67")])
-mushroomParticles = ExtResource("8_u0fll")
+ParticlesMushroom = ExtResource("8_u0fll")
+ParticlesVomit = ExtResource("9_6p3nn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=675736983]
 shape = SubResource("CapsuleShape3D_pw63i")
@@ -99,8 +101,8 @@ mushroomLabel = NodePath("../CanvasLayer/Control/MushroomLabel")
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
 visible = false
-material_override = SubResource("StandardMaterial3D_to7gp")
-mesh = SubResource("ImmediateMesh_u0fll")
+material_override = SubResource("StandardMaterial3D_k67gn")
+mesh = SubResource("ImmediateMesh_k3g67")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1315559398]
 environment = SubResource("Environment_bcnxi")
@@ -200,7 +202,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TimerLabel" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=392757722]
-visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://de3icow41l0ud"]
+[gd_scene format=3 uid="uid://dkkapxy1x72sy"]
 
-[ext_resource type="Script" uid="uid://bbpdqmqh0i3ho" path="res://scripts/AutoDeleteParticle.cs" id="1_jvjkt"]
+[ext_resource type="Script" uid="uid://bbpdqmqh0i3ho" path="res://scripts/AutoDeleteParticle.cs" id="1_qyhfq"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_quui2"]
 emission_shape = 3
@@ -9,16 +9,19 @@ direction = Vector3(0, 0, 0)
 spread = 180.0
 initial_velocity_max = 6.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyhfq"]
+albedo_color = Color(8.061901e-07, 0.3098223, 0.1730363, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_jvjkt"]
-radius = 0.035
+material = SubResource("StandardMaterial3D_qyhfq")
+radius = 0.07
 height = 0.07
 
 [node name="mushroomParticle" type="GPUParticles3D" unique_id=25272714]
-emitting = false
 amount = 36
 one_shot = true
 speed_scale = 3.0
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_quui2")
 draw_pass_1 = SubResource("SphereMesh_jvjkt")
-script = ExtResource("1_jvjkt")
+script = ExtResource("1_qyhfq")

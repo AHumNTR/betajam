@@ -9,7 +9,8 @@ public partial class Player : CharacterBody3D
 	[Export] public float HeadBobHorizontal = 0.02f;
 	[Export] public AudioStream[] StepSoundsGrass;
 	[Export] public AudioStream[] StepSoundsDirt;
-	[Export] public PackedScene mushroomParticles;
+	[Export] public PackedScene ParticlesMushroom;
+	[Export] public PackedScene ParticlesVomit;
 
 	private float yaw = 0f;
 	private float _headBobCycleValue = 0f;
@@ -130,18 +131,18 @@ public partial class Player : CharacterBody3D
 			var result = spaceState.IntersectRay(query);
 			if (result.Count > 0)
 			{
+				var selectedParticle = ParticlesVomit;
+
 				Objective o = (Objective)result["collider"];
 				if (o.harmless)
 				{
 					TimerManager.Instance.ResetTimer();
 					End.RemainingItems--;
 
-					var particles = (Node3D)mushroomParticles.Instantiate();
-					GetTree().Root.AddChild(particles);
-					particles.GlobalPosition = (Vector3)result["position"];
-
 					GameSfxPlayer.Instance.eatSound.Play();
 					_onSingleMushroomCollected?.Invoke();
+
+					selectedParticle = ParticlesMushroom;
 
 					if (End.RemainingItems <= 0)
 					{
@@ -154,6 +155,11 @@ public partial class Player : CharacterBody3D
 					GameSfxPlayer.Instance.vomitSound.Play();
 					TimerManager.Instance.SpeedUp();
 				}
+				
+				var particles = (Node3D)selectedParticle.Instantiate();
+				GetTree().CurrentScene.AddChild(particles);
+				particles.GlobalPosition = (Vector3)result["position"];
+				
 				o.QueueFree();
 			}
 		}

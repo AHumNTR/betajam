@@ -8,7 +8,6 @@ public partial class AutoDeleteParticle : GpuParticles3D
 	public override void _Ready()
 	{
 		_lifetime = 0;
-		GD.Print($"I'm created at {GlobalPosition}");
 	}
 
 	public override void _Process(double delta)

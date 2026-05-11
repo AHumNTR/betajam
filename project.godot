@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="betajam"
-run/main_scene="uid://dlap2yyye0gto"
+config/name="The Lost and The Guide"
+config/version="1.2"
+run/main_scene="uid://cv62t0q00e3b4"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+config/icon="uid://qrk4iku47u1g"
 
 [dotnet]
 
