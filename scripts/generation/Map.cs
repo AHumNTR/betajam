@@ -1,7 +1,23 @@
 using System;
 using System.Collections.Generic;
 using Godot;
-using Microsoft.Win32.SafeHandles;
+
+public static class GlobalMap
+{
+    private static Map _map = null;
+
+    public static Map GetMapOrDefault()
+    {
+        _map ??= Map.CreateMap(0);
+
+        return _map;
+    }
+
+    public static void SetMap(Map map)
+    {
+        _map = map;
+    }
+}
 
 public class Map
 {
@@ -201,7 +217,7 @@ public class Map
 
             if (!isOverlapped)
             {
-                objectives.Add(new Objective(randomPosition,random.Next()%2));
+                objectives.Add(new Objective(randomPosition, random.Next() % 2));
             }
         }
 
@@ -305,11 +321,11 @@ public class Map
         public int ObjectType;
         public bool Harmless;
 
-        public Objective(Vector2 position,int objectType)
+        public Objective(Vector2 position, int objectType)
         {
             Position = position;
             Harmless = false;
-            ObjectType=objectType;
+            ObjectType = objectType;
         }
     }
 

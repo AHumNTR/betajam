@@ -1,11 +1,13 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class MainMenu : Control
 {
 	[Export] public RichTextLabel RoleDescriptionLabel;
 	[Export] public Control LoadingScreen;
 	private bool _isLoadingAScene = false;
+	private bool _mapGenerated = false;
 	private string _loadingScenePath = "";
 
 	public override void _Ready()
@@ -17,9 +19,9 @@ public partial class MainMenu : Control
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 
-    public override void _Process(double delta)
+	public override void _Process(double delta)
 	{
-		if (_isLoadingAScene)
+		if (_isLoadingAScene && _mapGenerated)
 		{
 			var loadStatus = ResourceLoader.LoadThreadedGetStatus(_loadingScenePath);
 			if (loadStatus == ResourceLoader.ThreadLoadStatus.Loaded)
@@ -41,14 +43,24 @@ public partial class MainMenu : Control
 		ResourceLoader.LoadThreadedRequest(scenePath);
 	}
 
+	private async void RegenerateMap()
+	{
+		_mapGenerated = false;
+		await Task.Run(() => GlobalMap.SetMap(Map.CreateMap(Seed.seed)));
+		_mapGenerated = true;
+	}
+
 	public void _on_start_button_pressed()
 	{
 		End.RemainingItems = End.MaxRemainingItems;
+
+		RegenerateMap();
 		LoadSceneAsync("res://scenes/main_scene.tscn");
 	}
 
 	public void _on_map_button_pressed()
 	{
+		RegenerateMap();
 		LoadSceneAsync("res://scenes/MapScene.tscn");
 	}
 

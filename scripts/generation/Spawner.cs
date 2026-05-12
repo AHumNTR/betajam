@@ -21,7 +21,7 @@ public partial class Spawner : Node3D
 	{
 		// Since Godot uses right-hand coordinate system, we gotta take -Y for Z conversion!
 
-		Map m = Map.CreateMap(Seed.seed);
+		Map m = GlobalMap.GetMapOrDefault();	// map generation is moved to the main menu, so we just get the previously generated map here
 
 		for (var i = 0; i < 2; i++)
 		{

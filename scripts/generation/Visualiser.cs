@@ -22,9 +22,12 @@ public partial class Visualiser : MeshInstance3D
 			}
 		}
 	}
+	[Export] public bool Disabled = true;
 
 	public override void _Ready()
 	{
+		if (Disabled) return;
+
 		// Generate once on startup
 		CreateNewMap();
 	}

@@ -29,10 +29,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k67gn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6p3nn"]
 shading_mode = 0
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_k3g67"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_k67gn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_58gk3"]
 sky_top_color = Color(0.6680412, 0.25197867, 0.6435261, 1)
@@ -101,8 +101,8 @@ mushroomLabel = NodePath("../CanvasLayer/Control/MushroomLabel")
 
 [node name="Visualiser" parent="." unique_id=1051115179 instance=ExtResource("8_18nlu")]
 visible = false
-material_override = SubResource("StandardMaterial3D_k67gn")
-mesh = SubResource("ImmediateMesh_k3g67")
+material_override = SubResource("StandardMaterial3D_6p3nn")
+mesh = SubResource("ImmediateMesh_k67gn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1315559398]
 environment = SubResource("Environment_bcnxi")
