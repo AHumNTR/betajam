@@ -26,6 +26,8 @@
 [ext_resource type="AudioStream" uid="uid://dut4g6mojqv6m" path="res://sounds/lose.ogg" id="20_xdqt8"]
 [ext_resource type="AudioStream" uid="uid://cm7unpf4ox8vj" path="res://sounds/eat.ogg" id="22_to7gp"]
 [ext_resource type="AudioStream" uid="uid://c8uoa6enm6it2" path="res://sounds/vomit.ogg" id="23_u0fll"]
+[ext_resource type="Texture2D" uid="uid://bbwhsel7wug61" path="res://textures/BiteSymbol.png" id="27_k67gn"]
+[ext_resource type="Script" uid="uid://db2r85jwblkb4" path="res://scripts/TutorialLabelAutoFadeOut.cs" id="28_k3g67"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw63i"]
 
@@ -56,9 +58,10 @@ sky = SubResource("Sky_to7gp")
 
 [node name="MainScene" type="Node3D" unique_id=1061094929]
 
-[node name="player" type="CharacterBody3D" parent="." unique_id=17495642]
+[node name="player" type="CharacterBody3D" parent="." unique_id=17495642 node_paths=PackedStringArray("Crosshair")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3541285, 0)
 script = ExtResource("1_w2twt")
+Crosshair = NodePath("../CanvasLayer/Control/Crosshair")
 StepSoundsGrass = Array[AudioStream]([ExtResource("2_58gk3"), ExtResource("3_to7gp"), ExtResource("4_u0fll")])
 StepSoundsDirt = Array[AudioStream]([ExtResource("5_6p3nn"), ExtResource("6_k67gn"), ExtResource("7_k3g67")])
 ParticlesMushroom = ExtResource("8_u0fll")
@@ -196,8 +199,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 1.0
-offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -237,6 +238,24 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("19_7nt27")
 
+[node name="Crosshair" type="TextureRect" parent="CanvasLayer/Control" unique_id=1422529459]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("27_k67gn")
+
 [node name="TransitionRect" type="ColorRect" parent="CanvasLayer/Control" unique_id=1093635144]
 layout_mode = 1
 anchors_preset = 15
@@ -245,5 +264,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
+
+[node name="TutorialLabel" type="Label" parent="CanvasLayer/Control" unique_id=694593417]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "WASD to walk around
+Shift to sprint
+LMB to eat mushrooms"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("28_k3g67")
 
 [connection signal="body_entered" from="End" to="player" method="_on_end_body_entered"]

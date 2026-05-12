@@ -7,6 +7,7 @@ public partial class Player : CharacterBody3D
 	[Export] public float Sensitivity = 0.002f;
 	[Export] public float HeadBobVertical = 0.12f;
 	[Export] public float HeadBobHorizontal = 0.02f;
+	[Export] public TextureRect Crosshair;
 	[Export] public AudioStream[] StepSoundsGrass;
 	[Export] public AudioStream[] StepSoundsDirt;
 	[Export] public PackedScene ParticlesMushroom;
@@ -78,6 +79,7 @@ public partial class Player : CharacterBody3D
 
 		// Head Bob Cycle
 		var speed = Velocity.Length();
+		if (!TimerManager.Instance.TimerRunsDown) speed = 0;
 		var headBobDelta = speed * (float)delta / Speed;
 		if (speed > 0.01f)
 		{
@@ -120,16 +122,17 @@ public partial class Player : CharacterBody3D
 		if (!TimerManager.Instance.TimerRunsDown) return;
 
 		//check for collecting
-		if (Input.IsActionJustPressed("Interact"))
+		var spaceState = GetWorld3D().DirectSpaceState;
+		Vector3 forward = -cam.GlobalTransform.Basis.Z;
+		Vector3 end = cam.GlobalPosition + (forward * 5.0f);	// 5f is the hardcoded distance
+
+		var query = PhysicsRayQueryParameters3D.Create(cam.GlobalPosition, end, 2);
+		var result = spaceState.IntersectRay(query);
+		if (result.Count > 0)
 		{
-			var spaceState = GetWorld3D().DirectSpaceState;
+			Crosshair.Visible = true;
 
-			Vector3 forward = -cam.GlobalTransform.Basis.Z;
-			Vector3 end = cam.GlobalPosition + (forward * 50.0f);
-
-			var query = PhysicsRayQueryParameters3D.Create(cam.GlobalPosition, end, 2);
-			var result = spaceState.IntersectRay(query);
-			if (result.Count > 0)
+			if (Input.IsActionJustPressed("Interact"))
 			{
 				var selectedParticle = ParticlesVomit;
 
@@ -155,14 +158,18 @@ public partial class Player : CharacterBody3D
 					GameSfxPlayer.Instance.vomitSound.Play();
 					TimerManager.Instance.SpeedUp();
 				}
-				
+
 				var particles = (Node3D)selectedParticle.Instantiate();
 				GetTree().CurrentScene.AddChild(particles);
 				particles.GlobalPosition = (Vector3)result["position"];
-				
+
 				o.QueueFree();
 			}
+		} else
+		{
+			Crosshair.Visible = false;
 		}
+
 	}
 
 	public override void _PhysicsProcess(double delta)
